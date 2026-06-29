@@ -1018,7 +1018,51 @@ select.form-control {
     gap: 18px
 }
 
-.video-card {
+
+.video-thumb {
+    aspect-ratio: 9/16;
+    position: relative;
+    overflow: hidden;
+    background: #e4e4e4;
+}
+
+.video-thumb video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.play-btn {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 72px;
+    height: 72px;
+    border: none;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.9);
+    color: #d62828;
+    font-size: 30px;
+    cursor: pointer;
+    transition: .3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+}
+
+.play-btn:hover {
+    transform: translate(-50%, -50%) scale(1.08);
+    background: #fff;
+}
+
+.play-btn.hide {
+    display: none;
+}
+
+/* .video-card {
     border-radius: var(--r-lg);
     overflow: hidden;
     box-shadow: var(--shadow-md);
@@ -1062,7 +1106,7 @@ select.form-control {
     font-weight: 700;
     font-family: var(--f-head);
     margin-top: 1px
-}
+} */
 
 /* ════════════════ STEPS (Hiring Drive) ════════════════ */
 .drive-banner {
@@ -1652,33 +1696,132 @@ select.form-control {
     font-family: var(--f-body)
 }
 
-/* ════════════════ COMPANIES ════════════════ */
-.logo-grid {
-    display: grid;
-    grid-template-columns: repeat(6, 1fr);
-    gap: 14px
+/* ════════════════════════════════════════════
+   COMPANIES MARQUEE
+   ════════════════════════════════════════════ */
+.fun-fact-warp {
+    background-color: #fff;
+    padding: 80px 0;
 }
 
-.logo-cell {
-    background: #fff;
-    border: 1px solid var(--c-border);
-    border-radius: var(--r-md);
-    min-height: 72px;
+.fun-fact-warp .section-title {
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--c-primary-d);
+    margin-bottom: 16px;
+    line-height: 1.1;
+}
+
+.fun-fact-warp .highlight {
+    color: var(--c-accent-d);
+}
+
+.fun-fact-warp .section-lead {
+    color: var(--c-text-l);
+    font-size: 16px;
+    margin-bottom: 6px;
+    font-weight: 500;
+    /* max-width: 850px; */
+}
+
+.fun-fact-warp .sub-highlight {
+    color: var(--c-primary);
+    font-size: 16px;
+    font-weight: 500;
+    margin-top: 6px;
+}
+
+.marquee-wrapper {
+    overflow: hidden;
+    width: 100%;
+    margin-top: 60px;
+}
+
+.marquee-row {
+    display: flex;
+    gap: 30px;
+    width: max-content;
+}
+
+.fun-fact-item {
+    flex: 0 0 auto;
+}
+
+.fun-fact-card {
+    width: 200px;
+    height: 120px;
+    background-color: #fff;
+    padding: 20px;
+    box-shadow: var(--shadow-sm);
+    border-radius: var(--r-xl);
+    border: 1px solid rgba(81, 21, 124, 0.05);
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 14px;
-    font-family: var(--f-head);
-    font-weight: 800;
-    font-size: 13px;
-    color: var(--c-text-m);
-    text-align: center;
-    transition: all .2s
+    transition: all 0.3s ease;
 }
 
-.logo-cell:hover {
+.fun-fact-card:hover {
+    transform: translateY(-5px);
     box-shadow: var(--shadow-md);
-    transform: translateY(-2px)
+    border-color: rgba(81, 21, 124, 0.15);
+}
+
+.fun-fact-card .icon {
+    position: relative;
+    top: auto;
+    right: auto;
+    width: auto;
+    height: auto;
+    background: transparent;
+    border-radius: 0;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.fun-fact-card .icon img {
+    max-width: 140px;
+    max-height: 65px;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+}
+
+/* Scroll Right Animation (Row 1) */
+.scroll-right {
+    animation: scrollRight 40s linear infinite;
+}
+
+/* Scroll Left Animation (Row 2) */
+.scroll-left {
+    animation: scrollLeft 40s linear infinite;
+}
+
+@keyframes scrollRight {
+    0% {
+        transform: translateX(-50%);
+    }
+
+    100% {
+        transform: translateX(0);
+    }
+}
+
+@keyframes scrollLeft {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
+/* Pause on hover optional */
+.marquee-wrapper:hover .marquee-row {
+    animation-play-state: paused;
 }
 
 /* ════════════════ CAREERS ════════════════ */
