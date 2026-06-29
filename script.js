@@ -486,15 +486,33 @@ document.querySelectorAll(".video-card").forEach(card => {
     const playBtn = card.querySelector(".play-btn");
 
     playBtn.addEventListener("click", () => {
+
+        // Pause all other videos
+        document.querySelectorAll(".testimonial-video").forEach(v => {
+            if (v !== video) {
+                v.pause();
+                v.currentTime = 0;
+
+                // Show play button of the stopped video
+                const otherBtn = v.closest(".video-card").querySelector(".play-btn");
+                otherBtn.classList.remove("hide");
+            }
+        });
+
+        // Play selected video
         video.play();
         playBtn.classList.add("hide");
     });
 
-    video.addEventListener("pause", () => {
-        playBtn.classList.remove("hide");
-    });
-
     video.addEventListener("ended", () => {
         playBtn.classList.remove("hide");
+        video.currentTime = 0;
+    });
+
+    video.addEventListener("pause", () => {
+        // Show play button only if the video hasn't ended
+        if (!video.ended) {
+            playBtn.classList.remove("hide");
+        }
     });
 });
