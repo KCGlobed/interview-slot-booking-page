@@ -480,3 +480,21 @@ document.querySelectorAll('.faq-q').forEach(function (btn) {
     }, { threshold: .12 });
     document.querySelectorAll('.fade-up').forEach(function (el) { io.observe(el); });
 })();
+
+document.querySelectorAll(".video-card").forEach(card => {
+    const video = card.querySelector("video");
+    const playBtn = card.querySelector(".play-btn");
+
+    playBtn.addEventListener("click", () => {
+        video.play();
+        playBtn.classList.add("hide");
+    });
+
+    video.addEventListener("pause", () => {
+        playBtn.classList.remove("hide");
+    });
+
+    video.addEventListener("ended", () => {
+        playBtn.classList.remove("hide");
+    });
+});
