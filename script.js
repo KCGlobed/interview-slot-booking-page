@@ -1,7 +1,7 @@
-const VITE_API_BASE_URL = "https://gccwebsite-admin-backend-738131651355.asia-south1.run.app";
-// const VITE_API_PROD_URL="https://gccwebsite-admin-prod-backend-738131651355.asia-south1.run.app";
+// const VITE_API_BASE_URL = "https://gccwebsite-admin-backend-738131651355.asia-south1.run.app";
+const VITE_API_PROD_URL = "https://gccwebsite-admin-prod-backend-738131651355.asia-south1.run.app";
 
-window.GCC_Base_url = VITE_API_BASE_URL;
+window.GCC_Base_url = VITE_API_PROD_URL;
 
 /* ════════════════ CONFIG ════════════════
    Drive deadline drives every countdown on the page.
