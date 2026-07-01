@@ -53,7 +53,7 @@ var DEADLINE = new Date('2026-07-13T23:59:59+05:30').getTime();
     var activeSlotData = [];
     var activeFormElement = null;
     var activeSuccessElement = null;
-    var calendarCurrentDate = new Date(2026, 5, 22); // Start at June 2026
+    var calendarCurrentDate = new Date(2026, 6, 1); // Start at June 2026
     var selectedDateStr = null;
 
     var calModal = document.getElementById('calendar-modal');
@@ -84,17 +84,8 @@ var DEADLINE = new Date('2026-07-13T23:59:59+05:30').getTime();
             });
         }
 
-        if (activeSlotData.length > 0) {
-            var firstDateParts = activeSlotData[0].date.split('-');
-            if (firstDateParts.length === 3) {
-                var d = parseInt(firstDateParts[0], 10);
-                var m = parseInt(firstDateParts[1], 10) - 1;
-                var y = parseInt(firstDateParts[2], 10);
-                calendarCurrentDate = new Date(y, m, 1);
-            }
-        } else {
-            calendarCurrentDate = new Date(2026, 5, 1);
-        }
+        calendarCurrentDate = new Date();
+        calendarCurrentDate.setDate(1);
 
         renderCalendar();
         calModal.style.display = 'flex';
@@ -139,7 +130,10 @@ var DEADLINE = new Date('2026-07-13T23:59:59+05:30').getTime();
             var today = new Date();
             today.setHours(0, 0, 0, 0);
 
-            var isPast = cellDate < today;
+            var cutoffDate = new Date(today);
+            cutoffDate.setDate(today.getDate() + 2);
+
+            var isPast = cellDate < cutoffDate;
             var currentDayOfWeek = cellDate.getDay();
             var isWeekend = (currentDayOfWeek === 0 || currentDayOfWeek === 6);
             if (isWeekend) {
