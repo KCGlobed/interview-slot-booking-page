@@ -64,6 +64,7 @@ var DEADLINE = new Date('2026-07-13T23:59:59+05:30').getTime();
     var bookSlotBtn = document.getElementById('book-slot-btn');
     var slotsDisplay = document.getElementById('slots-count-display');
     var calCloseBtn = document.getElementById('calendar-modal-close');
+    var calDocCheckbox = document.getElementById('cal-doc-checkbox');
 
     function openCalendarPopup(leadId, slotData, form, success) {
         activeLeadId = leadId;
@@ -71,6 +72,10 @@ var DEADLINE = new Date('2026-07-13T23:59:59+05:30').getTime();
         activeFormElement = form;
         activeSuccessElement = success;
         selectedDateStr = null;
+
+        if (calDocCheckbox) {
+            calDocCheckbox.checked = false;
+        }
 
         bookSlotBtn.disabled = true;
         bookSlotBtn.textContent = 'Book Slot →';
@@ -215,7 +220,7 @@ var DEADLINE = new Date('2026-07-13T23:59:59+05:30').getTime();
                         "Selected Date : " +
                         selectedDateStr;
                     slotsDisplay.style.color = 'var(--c-green)';
-                    bookSlotBtn.disabled = false;
+                    updateBookSlotButtonState();
                 });
             }
 
@@ -244,8 +249,23 @@ var DEADLINE = new Date('2026-07-13T23:59:59+05:30').getTime();
         }
     });
 
+    if (calDocCheckbox) {
+        calDocCheckbox.addEventListener('change', function () {
+            updateBookSlotButtonState();
+        });
+    }
+
+    function updateBookSlotButtonState() {
+        if (selectedDateStr && calDocCheckbox && calDocCheckbox.checked) {
+            bookSlotBtn.disabled = false;
+        } else {
+            bookSlotBtn.disabled = true;
+        }
+    }
+
     bookSlotBtn.addEventListener('click', function () {
         if (!selectedDateStr || !activeLeadId) return;
+        if (calDocCheckbox && !calDocCheckbox.checked) return;
 
         bookSlotBtn.disabled = true;
         bookSlotBtn.textContent = 'Booking Slot...';
@@ -426,6 +446,7 @@ var DEADLINE = new Date('2026-07-13T23:59:59+05:30').getTime();
             console.error('Error loading state-city JSON:', err);
         });
 
+    window.openCalendarPopup = openCalendarPopup;
     handle('lead-form', 'form-success');
     handle('lead-form-2', 'form-success-2');
     handle('lead-form-3', 'form-success-3');
