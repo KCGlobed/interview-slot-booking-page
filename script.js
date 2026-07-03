@@ -1,7 +1,144 @@
-// const VITE_API_BASE_URL = "https://gccwebsite-admin-backend-738131651355.asia-south1.run.app";
-const VITE_API_PROD_URL = "https://gccwebsite-admin-prod-backend-738131651355.asia-south1.run.app";
+const VITE_API_BASE_URL = "https://gccwebsite-admin-backend-738131651355.asia-south1.run.app";
+// const VITE_API_PROD_URL = "https://gccwebsite-admin-prod-backend-738131651355.asia-south1.run.app";
 
-window.GCC_Base_url = VITE_API_PROD_URL;
+window.GCC_Base_url = VITE_API_BASE_URL;
+
+var TRACKING_KEYS = [
+    'utm_medium',
+    'utm_source',
+    'utm_campaign',
+    'utm_content',
+    'utm_term',
+    'utm_id',
+    'fbc_id',
+    'utm_adname',
+    'campaign_id',
+    'adset_id',
+    'fbclid',
+    'ad_source',
+    'ad_id',
+    'utm_adgroupid',
+    'utm_creativeid',
+    'utm_matchtype',
+    'utm_device',
+    'utm_network',
+    'utm_keyword',
+    'gad_source',
+    'gad_campaignid',
+    'gbraid',
+    'wbraid',
+    'gclid'
+];
+
+var TRACKING_TTL_MS = 30 * 24 * 60 * 60 * 1000; // 30 days
+var TRACKING_TS_KEY = 'gcc_utm_timestamp';
+
+function initTracking() {
+    var urlParams = new URLSearchParams(window.location.search);
+    var incoming = {};
+    var hasAnyParam = false;
+
+    TRACKING_KEYS.forEach(function (key) {
+        var val = urlParams.get(key);
+        if (val) {
+            incoming[key] = val;
+            hasAnyParam = true;
+        }
+    });
+
+    // Only touch storage if this visit actually carries tracking params.
+    // This prevents a new partial UTM set merging with old leftover values.
+    if (hasAnyParam) {
+        // Clear the previous full set first
+        TRACKING_KEYS.forEach(function (key) {
+            try {
+                sessionStorage.removeItem('gcc_' + key);
+                localStorage.removeItem('gcc_' + key);
+            } catch (e) {
+                console.warn('Storage clear error for ' + key + ':', e);
+            }
+        });
+
+        // Write the new set fresh
+        Object.keys(incoming).forEach(function (key) {
+            try {
+                sessionStorage.setItem('gcc_' + key, incoming[key]);
+                localStorage.setItem('gcc_' + key, incoming[key]);
+            } catch (e) {
+                console.warn('Storage write error for ' + key + ':', e);
+            }
+        });
+
+        try {
+            localStorage.setItem(TRACKING_TS_KEY, String(Date.now()));
+        } catch (e) {
+            console.warn('Storage write error for timestamp:', e);
+        }
+    } else {
+        // No params on this visit — check if the stored set has expired
+        try {
+            var ts = parseInt(localStorage.getItem(TRACKING_TS_KEY), 10);
+            if (ts && (Date.now() - ts > TRACKING_TTL_MS)) {
+                TRACKING_KEYS.forEach(function (key) {
+                    sessionStorage.removeItem('gcc_' + key);
+                    localStorage.removeItem('gcc_' + key);
+                });
+                localStorage.removeItem(TRACKING_TS_KEY);
+            }
+        } catch (e) {
+            console.warn('Storage expiry check error:', e);
+        }
+    }
+}
+
+function getTrackingParams() {
+    var params = {};
+    var urlParams = new URLSearchParams(window.location.search);
+
+    TRACKING_KEYS.forEach(function (key) {
+        var val = urlParams.get(key);
+        if (!val) {
+            try {
+                val = sessionStorage.getItem('gcc_' + key) || localStorage.getItem('gcc_' + key);
+            } catch (e) {
+                // Ignore storage read error
+            }
+        }
+        if (val) {
+            params[key] = val;
+        }
+    });
+
+    return params;
+}
+
+function populateFormUTMFields() {
+    var params = getTrackingParams();
+    var forms = document.querySelectorAll('form');
+    forms.forEach(function (form) {
+        Object.keys(params).forEach(function (key) {
+            var input = form.querySelector('input[name="' + key + '"]');
+            if (input) {
+                input.value = params[key];
+            } else {
+                var hiddenInput = document.createElement('input');
+                hiddenInput.type = 'hidden';
+                hiddenInput.name = key;
+                hiddenInput.value = params[key];
+                form.appendChild(hiddenInput);
+            }
+        });
+    });
+}
+
+// Run immediately
+initTracking();
+// Run on DOMContentLoaded or immediately to populate existing forms
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', populateFormUTMFields);
+} else {
+    populateFormUTMFields();
+}
 
 /* ════════════════ CONFIG ════════════════
    Drive deadline drives every countdown on the page.
@@ -282,7 +419,8 @@ var DEADLINE = new Date('2026-07-13T23:59:59+05:30').getTime();
             },
             body: JSON.stringify({
                 lid: parseInt(activeLeadId, 10),
-                interview_date: yyyymmdd
+                interview_date: yyyymmdd,
+                ...getTrackingParams()
             })
         })
             .then(function (res2) {
@@ -349,7 +487,10 @@ var DEADLINE = new Date('2026-07-13T23:59:59+05:30').getTime();
                 city: data.city,
                 degree: "Others",
                 source: 15,
+                ...getTrackingParams()
             };
+
+            console.log("FINAL PAYLOAD:", payload);
 
             var baseUrl = window.GCC_Base_url || "https://gccwebsite-admin-backend-738131651355.asia-south1.run.app";
 
