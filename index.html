@@ -145,7 +145,7 @@
                 <span class="field-error" data-for="name">Please enter your name</span>
 
                 <input class="form-control" type="tel" name="phone" placeholder="Phone / WhatsApp number"
-                  autocomplete="tel" inputmode="numeric" required>
+                  autocomplete="tel" inputmode="numeric" pattern="[0-9]{10}" minlength="10" maxlength="10" oninput="this.value = this.value.replace(/[^0-9]/g, '')" required>
                 <span class="field-error" data-for="phone">Enter a valid 10-digit number</span>
 
                 <input class="form-control" type="email" name="email" placeholder="Email address" autocomplete="email"
