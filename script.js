@@ -1,5 +1,5 @@
-// const VITE_API_BASE_URL = "https://gccwebsite-admin-backend-738131651355.asia-south1.run.app";
-const VITE_API_PROD_URL="https://gccwebsite-admin-prod-backend-738131651355.asia-south1.run.app";
+const VITE_API_BASE_URL = "https://gccwebsite-admin-backend-738131651355.asia-south1.run.app";
+// const VITE_API_PROD_URL="https://gccwebsite-admin-prod-backend-738131651355.asia-south1.run.app";
 
 // window.GCC_Base_url = VITE_API_BASE_URL;
 window.GCC_Base_url = VITE_API_PROD_URL;
@@ -480,8 +480,12 @@ var DEADLINE = new Date('2026-07-13T23:59:59+05:30').getTime();
                 phone: data.phone,
                 state: data.state,
                 city: data.city,
-                degree: "Others",
                 source: 15,
+                degree: data.degree || "",
+                age_range: data.age_range || "",
+                degree_stage: data.degree_stage || "",
+                fund_mode: data.fund_mode || "",
+                attend_from: data.attend_from || "",
                 ...getTrackingParams()
             };
 
@@ -570,17 +574,15 @@ var DEADLINE = new Date('2026-07-13T23:59:59+05:30').getTime();
         });
     }
 
-    fetch('state-city.json')
-        .then(function (res) { return res.json(); })
-        .then(function (data) {
-            stateCityData = data;
-            initializeStateCityDropdowns();
-        })
-        .catch(function (err) {
-            console.error('Error loading state-city JSON:', err);
-        });
+    if (window.STATE_CITY_DATA) {
+        stateCityData = window.STATE_CITY_DATA;
+        initializeStateCityDropdowns();
+    } else {
+        console.error("STATE_CITY_DATA is not loaded. Make sure state-city.js is included.");
+    }
 
     window.openCalendarPopup = openCalendarPopup;
+    window.initializeStateCityDropdowns = initializeStateCityDropdowns;
     handle('lead-form', 'form-success');
     handle('lead-form-2', 'form-success-2');
     handle('lead-form-3', 'form-success-3');
