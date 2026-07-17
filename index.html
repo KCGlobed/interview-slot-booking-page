@@ -2534,7 +2534,13 @@
     ═══════════════════════════════════════════════════════════════ */
     const VITE_API_BASE_URL_PROD = "https://gccwebsite-admin-prod-backend-738131651355.asia-south1.run.app";
     const VITE_API_BASE_URL_DEV = "https://gccwebsite-admin-backend-738131651355.asia-south1.run.app";
-    const VITE_API_BASE_URL = VITE_API_BASE_URL_DEV; // use dev for now
+    
+    let VITE_API_BASE_URL = VITE_API_BASE_URL_DEV;
+    if (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1") {
+      VITE_API_BASE_URL = VITE_API_BASE_URL_DEV;
+    } else if (window.location.hostname.includes("gccschool.com") || window.location.hostname.includes("gccschoool.com")) {
+      VITE_API_BASE_URL = VITE_API_BASE_URL_PROD;
+    }
 
     var CONFIG = {
       DEADLINE: '2026-07-31T23:59:59+05:30',          // drive close (IST)
