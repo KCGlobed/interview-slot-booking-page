@@ -1873,6 +1873,31 @@
         flex-direction: column;
         gap: 16px
       }
+
+      .video-grid {
+        display: flex !important;
+        flex-wrap: nowrap !important;
+        overflow-x: auto !important;
+        scroll-snap-type: x mandatory;
+        padding-bottom: 12px;
+        gap: 16px;
+        -webkit-overflow-scrolling: touch;
+      }
+
+      .video-grid::-webkit-scrollbar {
+        height: 6px;
+      }
+      
+      .video-grid::-webkit-scrollbar-thumb {
+        background-color: rgba(81, 21, 124, 0.2);
+        border-radius: 10px;
+      }
+
+      .video-grid > .video-card {
+        flex: 0 0 70% !important;
+        max-width: 70% !important;
+        scroll-snap-align: start;
+      }
     }
 
     /* Fee rows stack before label and amount collide */
