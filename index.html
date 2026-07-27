@@ -2328,7 +2328,7 @@
             </button>
           </div>
         </div>
-        <div class="video-card fade-up">
+        <!-- <div class="video-card fade-up">
           <div class="video-thumb">
             <video class="testimonial-video" preload="metadata" playsinline>
               <source src="https://storage.googleapis.com/gcc_static_files_backend/static/videos/Parents%20Merge.mp4"
@@ -2353,7 +2353,7 @@
               ▶
             </button>
           </div>
-        </div> 
+        </div>  -->
       </div>
     </div>
   </section> -->
@@ -3321,6 +3321,10 @@
         if (calModal) {
           calModal.style.display = 'flex';
           document.body.classList.add('modal-open');
+          var cardBody = calModal.querySelector('.card-body');
+          if (cardBody) {
+            cardBody.scrollTop = 0;
+          }
         }
       }
 
@@ -3542,7 +3546,7 @@
 
   <!-- ════════════════ CALENDAR MODAL ════════════════ -->
   <div class="modal" id="calendar-modal">
-    <div class="modal-card" style="max-width: 480px;">
+    <div class="modal-card" style="max-width: 480px; max-height: 90vh; display: flex; flex-direction: column;">
       <button class="modal-close" id="calendar-modal-close" aria-label="Close"
         style="color: var(--c-primary-d)">×</button>
       <div class="card-header"
@@ -3553,7 +3557,7 @@
         <h3 class="ttl" style="font-size: 20px; font-weight: 700; margin: 0; font-family: var(--f-head);">Book Your Slot
         </h3>
       </div>
-      <div class="card-body" style="padding: 20px;">
+      <div class="card-body" style="padding: 20px; overflow-y: auto; flex: 1;">
         <div class="calendar-container">
           <div class="calendar-header">
             <button type="button" id="cal-prev-btn" class="cal-nav-btn">&lt;</button>

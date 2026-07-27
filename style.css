@@ -2219,7 +2219,15 @@ select.form-control {
     overflow: hidden;
     box-shadow: var(--shadow-xl);
     position: relative;
-    animation: modal-in .3s ease
+    animation: modal-in .3s ease;
+    max-height: 90vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.modal-card .card-body {
+    overflow-y: auto;
+    flex: 1;
 }
 
 @keyframes modal-in {
