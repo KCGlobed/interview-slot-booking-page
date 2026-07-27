@@ -144,7 +144,7 @@ if (document.readyState === 'loading') {
 /* ════════════════ CONFIG ════════════════
    Drive deadline drives every countdown on the page.
    Change DEADLINE to your real cut-off (local time). */
-var DEADLINE = new Date('2026-07-13T23:59:59+05:30').getTime();
+var DEADLINE = new Date('2026-08-10T23:59:59+05:30').getTime();
 
 /* ════════════════ COUNTDOWN ════════════════ */
 (function () {
@@ -439,6 +439,14 @@ var DEADLINE = new Date('2026-07-13T23:59:59+05:30').getTime();
         if (activeFormElement && activeSuccessElement) {
             activeFormElement.style.display = 'none';
 
+            var stepContainer = activeFormElement.closest('.step');
+            if (stepContainer) {
+                var kicker = stepContainer.querySelector('.q-kicker');
+                var title = stepContainer.querySelector('.q-title');
+                if (kicker) kicker.style.display = 'none';
+                if (title) title.style.display = 'none';
+            }
+
             var successP = activeSuccessElement.querySelector('p');
             if (successP) {
                 successP.innerHTML = 'Your slot is booked for <strong>' + selectedDateStr + '</strong>. Keep your phone handy. We will call you within 24 hours to confirm your slot.';
@@ -672,4 +680,35 @@ document.querySelectorAll(".video-card").forEach(card => {
             playBtn.classList.remove("hide");
         }
     });
+});
+
+/* ════════════════ BLOG VIDEO PLAYBACK ════════════════ */
+document.querySelectorAll('.video-player-wrap').forEach(wrap => {
+    const playBtn = wrap.querySelector('.blog-play-overlay-btn');
+    const video = wrap.querySelector('.blog-inline-video');
+    const img = wrap.querySelector('.blog-video-cover');
+
+    if (playBtn && video && img) {
+        const startVideo = () => {
+            // Pause all other testimonial videos
+            document.querySelectorAll('.testimonial-video').forEach(v => {
+                v.pause();
+                v.currentTime = 0;
+                const card = v.closest('.video-card');
+                if (card) {
+                    const otherBtn = card.querySelector('.play-btn');
+                    if (otherBtn) otherBtn.classList.remove('hide');
+                }
+            });
+
+            // Play this inline video
+            img.style.display = 'none';
+            playBtn.style.display = 'none';
+            video.style.display = 'block';
+            video.play();
+        };
+
+        playBtn.addEventListener('click', startVideo);
+        img.addEventListener('click', startVideo);
+    }
 });
