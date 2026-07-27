@@ -2198,7 +2198,7 @@
   </section>
 
   <!-- ════════════════ News & Media ════════════════ -->
-  <!-- <section class="sec" id="video-insights" aria-labelledby="video-insights-h2">
+  <section class="sec" id="video-insights" aria-labelledby="video-insights-h2">
     <div class="wrap">
       <div class="sec-head">
         <h2 class="sec-title" id="video-insights-h2">News and <span class="hl">Media</span></h2>
@@ -2206,18 +2206,31 @@
 
       <style>
         .video-grid-custom {
+          display: flex;
+          flex-direction: column;
+          gap: 32px;
+          margin-top: 20px;
+        }
+        .video-top-row {
+          width: 100%;
+          margin: 0 auto;
+        }
+        .video-top-row .video-item {
+          aspect-ratio: 21 / 9;
+        }
+        .video-bottom-row {
           display: grid;
           grid-template-columns: 1fr;
           gap: 20px;
         }
         .video-item {
-          border-radius: 12px;
+          border-radius: 16px;
           overflow: hidden;
           background: #000;
           position: relative;
           width: 100%;
-          height: 100%;
-          min-height: 250px;
+          aspect-ratio: 16 / 9;
+          box-shadow: 0 10px 30px rgba(42, 11, 78, 0.08);
         }
         .video-item iframe {
           position: absolute;
@@ -2227,58 +2240,50 @@
           height: 100%;
           border: none;
         }
+        @media (min-width: 600px) {
+          .video-bottom-row {
+            grid-template-columns: repeat(2, 1fr);
+          }
+        }
         @media (min-width: 900px) {
-          .video-grid-custom {
-            grid-template-columns: 2.2fr 1fr 1fr;
-            grid-template-rows: 1fr 1fr;
-          }
-          .video-item-featured {
-            grid-column: 1 / 2;
-            grid-row: 1 / 3;
-            min-height: 400px;
-          }
-          .video-item-top1 {
-            grid-column: 2 / 3;
-            grid-row: 1 / 2;
-          }
-          .video-item-top2 {
-            grid-column: 3 / 4;
-            grid-row: 1 / 2;
-          }
-          .video-item-bottom {
-            grid-column: 2 / 4;
-            grid-row: 2 / 3;
+          .video-bottom-row {
+            grid-template-columns: repeat(4, 1fr);
           }
         }
       </style>
 
       <div class="video-grid-custom">
-        <div class="video-item video-item-featured fade-up">
-          <iframe src="https://www.youtube.com/embed/fSn3V8I1Eqw?si=60soMJcZG32cQZT8" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        <div class="video-top-row">
+          <div class="video-item fade-up">
+            <iframe src="https://www.youtube.com/embed/XHn1j1NqjdE?si=H7AbGQQAAMW8Vahc" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+          </div>
         </div>
-
-        <div class="video-item video-item-top1 fade-up">
-          <iframe src="https://www.youtube.com/embed/XHn1j1NqjdE?si=H7AbGQQAAMW8Vahc" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-        </div>
-
-        <div class="video-item video-item-top2 fade-up">
-          <iframe src="https://www.youtube.com/embed/ABVgpAj-uEM?si=dNph8e1rGOkBQmiW" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-        </div>
-
-        <div class="video-item video-item-bottom fade-up">
-          <iframe src="https://www.youtube.com/embed/S8rajo3HsOQ?si=g-wAx6I4ZcqMcl1x" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        
+        <div class="video-bottom-row">
+          <div class="video-item fade-up">
+            <iframe src="https://www.youtube.com/embed/fSn3V8I1Eqw?si=60soMJcZG32cQZT8" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+          </div>
+          <div class="video-item fade-up">
+            <iframe src="https://www.youtube.com/embed/ABVgpAj-uEM?si=dNph8e1rGOkBQmiW" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+          </div>
+          <div class="video-item fade-up">
+            <iframe src="https://www.youtube.com/embed/S8rajo3HsOQ?si=g-wAx6I4ZcqMcl1x" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+          </div>
+          <div class="video-item fade-up">
+            <iframe src="https://www.youtube.com/embed/2JvtQUkauwY" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+          </div>
         </div>
       </div>
     </div>
-  </section> -->
+  </section>
 
 
   <!-- ════════════════ Parents VIDEO TESTIMONIALS ════════════════ -->
-  <section class="section" aria-labelledby="parents-video-h2">
+  <!-- <section class="section" aria-labelledby="parents-video-h2">
     <div class="container">
       <div class="section-head">
         <span class="tag tag-accent">In Their Own Words</span>
-        <h2 class="section-title" id="parents-video-h2">Parents & Students<span class="primary"> After the Offer Letter</span></h2>
+        <h2 class="section-title" id="parents-video-h2">Parents<span class="primary"> After the Offer Letter</span></h2>
         <p class="section-lead">Hear directly from the people whose careers — and families — changed in one hiring
           drive.</p>
       </div>
@@ -2323,7 +2328,7 @@
             </button>
           </div>
         </div>
-        <!-- <div class="video-card fade-up">
+        <div class="video-card fade-up">
           <div class="video-thumb">
             <video class="testimonial-video" preload="metadata" playsinline>
               <source src="https://storage.googleapis.com/gcc_static_files_backend/static/videos/Parents%20Merge.mp4"
@@ -2348,83 +2353,58 @@
               ▶
             </button>
           </div>
-        </div> -->
+        </div> 
       </div>
     </div>
-  </section>
+  </section> -->
 
   <!-- ════════════════ Students VIDEO TESTIMONIALS ════════════════ -->
-  <!-- <section class="section" aria-labelledby="students-video-h2" style="padding: 46px 0;">
+   <section class="section" aria-labelledby="students-video-h2" style="padding: 46px 0;">
     <div class="container">
       <div class="section-head">
         <span class="tag tag-accent">In Their Own Words</span>
         <h2 class="section-title" id="students-video-h2">Students <span class="primary">After the Offer
             Letter</span></h2>
-        <p class="section-lead">Hear directly from the people whose careers — and families — changed in one hiring
+        <p class="section-lead">Hear directly from the people whose careers changed in one hiring
           drive.</p>
       </div>
 
       <div class="video-grid">
         <div class="video-card fade-up">
-          <div class="video-thumb">
-            <video class="testimonial-video" preload="metadata" playsinline>
-              <source src="https://storage.googleapis.com/gcc_static_files_backend/static/videos/student%20merge.mp4"
-                type="video/mp4">
-              Your browser does not support the video tag.
-            </video>
-
+          <div class="video-thumb" data-youtube-id="n83fF8DivYw">
+            <img src="https://img.youtube.com/vi/n83fF8DivYw/hqdefault.jpg" alt="Student testimonial thumbnail" loading="lazy">
             <button class="play-btn" aria-label="Play Video">
               ▶
             </button>
           </div>
         </div>
         <div class="video-card fade-up">
-          <div class="video-thumb">
-            <video class="testimonial-video" preload="metadata" playsinline>
-              <source src="https://storage.googleapis.com/gcc_static_files_backend/static/videos/Parents%20Single.mp4"
-                type="video/mp4">
-              Your browser does not support the video tag.
-            </video>
-
+          <div class="video-thumb" data-youtube-id="JDGF3OaamM0">
+            <img src="https://img.youtube.com/vi/JDGF3OaamM0/hqdefault.jpg" alt="Student testimonial thumbnail" loading="lazy">
             <button class="play-btn" aria-label="Play Video">
               ▶
             </button>
           </div>
         </div>
         <div class="video-card fade-up">
-          <div class="video-thumb">
-            <video class="testimonial-video" preload="metadata" playsinline>
-              <source src="https://storage.googleapis.com/gcc_static_files_backend/static/videos/Parents%20Merge.mp4"
-                type="video/mp4">
-              Your browser does not support the video tag.
-            </video>
-
+          <div class="video-thumb" data-youtube-id="CWYzQUQBqI8">
+            <img src="https://img.youtube.com/vi/CWYzQUQBqI8/hqdefault.jpg" alt="Student testimonial thumbnail" loading="lazy">
             <button class="play-btn" aria-label="Play Video">
               ▶
             </button>
           </div>
         </div>
         <div class="video-card fade-up">
-          <div class="video-thumb">
-            <video class="testimonial-video" preload="metadata" playsinline>
-              <source src="https://storage.googleapis.com/gcc_static_files_backend/static/videos/Parents%20Merge.mp4"
-                type="video/mp4">
-              Your browser does not support the video tag.
-            </video>
-
+          <div class="video-thumb" data-youtube-id="ID5ZonOLiB0">
+            <img src="https://img.youtube.com/vi/ID5ZonOLiB0/hqdefault.jpg" alt="Student testimonial thumbnail" loading="lazy">
             <button class="play-btn" aria-label="Play Video">
               ▶
             </button>
           </div>
         </div>
         <div class="video-card fade-up">
-          <div class="video-thumb">
-            <video class="testimonial-video" preload="metadata" playsinline>
-              <source src="https://storage.googleapis.com/gcc_static_files_backend/static/videos/Parents%20Merge.mp4"
-                type="video/mp4">
-              Your browser does not support the video tag.
-            </video>
-
+          <div class="video-thumb" data-youtube-id="1AD_U7WkLIw">
+            <img src="https://img.youtube.com/vi/1AD_U7WkLIw/hqdefault.jpg" alt="Student testimonial thumbnail" loading="lazy">
             <button class="play-btn" aria-label="Play Video">
               ▶
             </button>
@@ -2432,7 +2412,7 @@
         </div>
       </div>
     </div>
-  </section> -->
+  </section>
 
   <!-- ════════════════ JOURNEY / TIMELINE ════════════════ -->
   <section class="section" aria-labelledby="journey-h2">
@@ -3196,37 +3176,77 @@
     })();
 
     /* ════════════════ VIDEO PLAYBACK ════════════════ */
-    document.querySelectorAll(".video-card").forEach(card => {
-      const video = card.querySelector("video");
-      const playBtn = card.querySelector(".play-btn");
-      if (!video || !playBtn) return;
-
-      playBtn.addEventListener("click", () => {
-        // Pause all other videos
-        document.querySelectorAll(".testimonial-video").forEach(v => {
-          if (v !== video) {
-            v.pause();
-            v.currentTime = 0;
-            const otherBtn = v.closest(".video-card").querySelector(".play-btn");
-            if (otherBtn) otherBtn.classList.remove("hide");
-          }
-        });
-
-        // Play selected video
-        video.play();
-        playBtn.classList.add("hide");
-      });
-
-      video.addEventListener("ended", () => {
-        playBtn.classList.remove("hide");
-        video.currentTime = 0;
-      });
-
-      video.addEventListener("pause", () => {
-        if (!video.ended) {
-          playBtn.classList.remove("hide");
+    function stopAllTestimonialVideos() {
+      // Pause native testimonial videos
+      document.querySelectorAll(".testimonial-video").forEach(v => {
+        v.pause();
+        v.currentTime = 0;
+        const card = v.closest(".video-card");
+        if (card) {
+          const playBtn = card.querySelector(".play-btn");
+          if (playBtn) playBtn.classList.remove("hide");
         }
       });
+
+      // Remove YouTube testimonial iframes and restore their thumbnails
+      document.querySelectorAll(".video-thumb iframe").forEach(iframe => {
+        const thumb = iframe.closest(".video-thumb");
+        if (thumb) {
+          const card = thumb.closest(".video-card");
+          const playBtn = card ? card.querySelector(".play-btn") : null;
+          const img = thumb.querySelector("img");
+          if (img) img.style.display = "block";
+          if (playBtn) playBtn.classList.remove("hide");
+        }
+        iframe.remove();
+      });
+    }
+
+    document.querySelectorAll(".video-card").forEach(card => {
+      const playBtn = card.querySelector(".play-btn");
+      if (!playBtn) return;
+
+      const videoThumb = card.querySelector(".video-thumb");
+      const video = card.querySelector("video");
+      const youtubeId = videoThumb ? videoThumb.dataset.youtubeId : null;
+
+      if (video) {
+        // Native video logic
+        playBtn.addEventListener("click", () => {
+          stopAllTestimonialVideos();
+          video.play();
+          playBtn.classList.add("hide");
+        });
+
+        video.addEventListener("ended", () => {
+          playBtn.classList.remove("hide");
+          video.currentTime = 0;
+        });
+
+        video.addEventListener("pause", () => {
+          if (!video.ended) {
+            playBtn.classList.remove("hide");
+          }
+        });
+      } else if (youtubeId) {
+        // YouTube video logic
+        playBtn.addEventListener("click", () => {
+          stopAllTestimonialVideos();
+
+          // Create and append the YouTube iframe
+          const iframe = document.createElement("iframe");
+          iframe.src = `https://www.youtube.com/embed/${youtubeId}?autoplay=1&enablejsapi=1`;
+          iframe.title = "YouTube video player";
+          iframe.setAttribute("allow", "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share");
+          iframe.setAttribute("allowfullscreen", "true");
+          
+          const img = videoThumb.querySelector("img");
+          if (img) img.style.display = "none";
+          playBtn.classList.add("hide");
+          
+          videoThumb.appendChild(iframe);
+        });
+      }
     });
 
     /* ════════════════ BLOG VIDEO PLAYBACK ════════════════ */
@@ -3237,16 +3257,7 @@
 
       if (playBtn && video && img) {
         const startVideo = () => {
-          // Pause all other testimonial videos
-          document.querySelectorAll('.testimonial-video').forEach(v => {
-            v.pause();
-            v.currentTime = 0;
-            const card = v.closest('.video-card');
-            if (card) {
-              const otherBtn = card.querySelector('.play-btn');
-              if (otherBtn) otherBtn.classList.remove('hide');
-            }
-          });
+          stopAllTestimonialVideos();
 
           // Play this inline video
           img.style.display = 'none';

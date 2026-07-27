@@ -646,40 +646,77 @@ document.querySelectorAll('.faq-q').forEach(function (btn) {
     document.querySelectorAll('.fade-up').forEach(function (el) { io.observe(el); });
 })();
 
-document.querySelectorAll(".video-card").forEach(card => {
-    const video = card.querySelector("video");
-    const playBtn = card.querySelector(".play-btn");
-
-    playBtn.addEventListener("click", () => {
-
-        // Pause all other videos
-        document.querySelectorAll(".testimonial-video").forEach(v => {
-            if (v !== video) {
-                v.pause();
-                v.currentTime = 0;
-
-                // Show play button of the stopped video
-                const otherBtn = v.closest(".video-card").querySelector(".play-btn");
-                otherBtn.classList.remove("hide");
-            }
-        });
-
-        // Play selected video
-        video.play();
-        playBtn.classList.add("hide");
-    });
-
-    video.addEventListener("ended", () => {
-        playBtn.classList.remove("hide");
-        video.currentTime = 0;
-    });
-
-    video.addEventListener("pause", () => {
-        // Show play button only if the video hasn't ended
-        if (!video.ended) {
-            playBtn.classList.remove("hide");
+function stopAllTestimonialVideos() {
+    // Pause native testimonial videos
+    document.querySelectorAll(".testimonial-video").forEach(v => {
+        v.pause();
+        v.currentTime = 0;
+        const card = v.closest(".video-card");
+        if (card) {
+            const playBtn = card.querySelector(".play-btn");
+            if (playBtn) playBtn.classList.remove("hide");
         }
     });
+
+    // Remove YouTube testimonial iframes and restore their thumbnails
+    document.querySelectorAll(".video-thumb iframe").forEach(iframe => {
+        const thumb = iframe.closest(".video-thumb");
+        if (thumb) {
+            const card = thumb.closest(".video-card");
+            const playBtn = card ? card.querySelector(".play-btn") : null;
+            const img = thumb.querySelector("img");
+            if (img) img.style.display = "block";
+            if (playBtn) playBtn.classList.remove("hide");
+        }
+        iframe.remove();
+    });
+}
+
+document.querySelectorAll(".video-card").forEach(card => {
+    const playBtn = card.querySelector(".play-btn");
+    if (!playBtn) return;
+
+    const videoThumb = card.querySelector(".video-thumb");
+    const video = card.querySelector("video");
+    const youtubeId = videoThumb ? videoThumb.dataset.youtubeId : null;
+
+    if (video) {
+        // Native video logic
+        playBtn.addEventListener("click", () => {
+            stopAllTestimonialVideos();
+            video.play();
+            playBtn.classList.add("hide");
+        });
+
+        video.addEventListener("ended", () => {
+            playBtn.classList.remove("hide");
+            video.currentTime = 0;
+        });
+
+        video.addEventListener("pause", () => {
+            if (!video.ended) {
+                playBtn.classList.remove("hide");
+            }
+        });
+    } else if (youtubeId) {
+        // YouTube video logic
+        playBtn.addEventListener("click", () => {
+            stopAllTestimonialVideos();
+
+            // Create and append the YouTube iframe
+            const iframe = document.createElement("iframe");
+            iframe.src = `https://www.youtube.com/embed/${youtubeId}?autoplay=1&enablejsapi=1`;
+            iframe.title = "YouTube video player";
+            iframe.setAttribute("allow", "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share");
+            iframe.setAttribute("allowfullscreen", "true");
+            
+            const img = videoThumb.querySelector("img");
+            if (img) img.style.display = "none";
+            playBtn.classList.add("hide");
+            
+            videoThumb.appendChild(iframe);
+        });
+    }
 });
 
 /* ════════════════ BLOG VIDEO PLAYBACK ════════════════ */
@@ -690,16 +727,7 @@ document.querySelectorAll('.video-player-wrap').forEach(wrap => {
 
     if (playBtn && video && img) {
         const startVideo = () => {
-            // Pause all other testimonial videos
-            document.querySelectorAll('.testimonial-video').forEach(v => {
-                v.pause();
-                v.currentTime = 0;
-                const card = v.closest('.video-card');
-                if (card) {
-                    const otherBtn = card.querySelector('.play-btn');
-                    if (otherBtn) otherBtn.classList.remove('hide');
-                }
-            });
+            stopAllTestimonialVideos();
 
             // Play this inline video
             img.style.display = 'none';
