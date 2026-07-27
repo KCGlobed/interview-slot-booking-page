@@ -436,6 +436,28 @@
       background: rgba(255, 90, 90, .10)
     }
 
+    .htag.blink {
+      animation: htagBlinker 1.5s ease-in-out infinite;
+    }
+
+    @keyframes htagBlinker {
+
+      0%,
+      100% {
+        opacity: 1;
+        border-color: rgba(241, 166, 62, 0.8);
+        box-shadow: 0 0 15px rgba(241, 166, 62, 0.35);
+        background: rgba(241, 166, 62, 0.15);
+      }
+
+      50% {
+        opacity: 0.7;
+        border-color: rgba(241, 166, 62, 0.2);
+        box-shadow: none;
+        background: rgba(241, 166, 62, 0.05);
+      }
+    }
+
     .h1 {
       font-size: clamp(33px, 5.3vw, 56px);
       font-weight: 800;
@@ -2013,7 +2035,12 @@
       <div class="hero-in">
         <div>
           <div class="hero-tags">
-            <span class="htag">Gurugram Drive · B.Com graduates · 18–30</span>
+            <span class="htag blink" style="color: #fff;">
+              <span class="dot"
+                style="background:#F1A63E;width:7px;height:7px;border-radius:50%;display:inline-block;box-shadow:0 0 5px #F1A63E;"></span>
+              Hiring Drive <span style="color: #fff;">&bull;</span> B.Com graduates <span
+                style="color: #fff;">&bull;</span> Age 18–30
+            </span>
           </div>
           <h1 class="h1" id="hero-h1">Your <span class="gold">₹10 LPA offer<br>letter</span> comes first.<br>The <span
               class="under">training comes after.</span></h1>
@@ -2027,7 +2054,7 @@
               Interviewing Now</div>
             <div style="font-size: 16px; font-weight: 600; color: #fff; line-height: 1.5; font-family: var(--f-body);">
               BDO &bull; Baker Tilly &bull; Keysight &bull; Kreit &amp; Chiu &bull; ASA &amp; Associates <span
-                style="font-weight: 800;">+ more</span></div>
+                style="font-weight: 800;">+ many more</span></div>
           </div>
           <div class="hero-note">Application takes 60 seconds · Free to apply · Drive closes <span
               data-deadline-text>soon</span></div>
@@ -2039,7 +2066,7 @@
               one</span></div>
           <div class="app-card">
             <div class="app-head">
-              <div class="k"><span>Application · AEIAP Hiring Drive</span><span id="ref-slot">REF: OPEN</span></div>
+              <div class="k"><span>Application · AEIAP Hiring Drive</span></div>
               <div class="t">Check your eligibility &amp; book your interview</div>
             </div>
             <div class="app-body">
@@ -2530,7 +2557,7 @@
 
     var CONFIG = {
       DEADLINE: '2026-07-31T23:59:59+05:30',          // drive close (IST)
-      DEADLINE_TEXT: '31 July 2026',                   // human-readable close date
+      DEADLINE_TEXT: '10 August 2026',                   // human-readable close date
       DRIVE_LABEL: 'AEIAP Hiring Drive · July 2026',   // shown in strip & hero tag
       ENDPOINT: '',   // ← paste your Google Apps Script Web App URL (or CRM webhook). Empty = no server post.
       WHATSAPP: ''    // ← e.g. '919876543210'. Empty = WhatsApp button hidden on success screen.
@@ -2602,7 +2629,7 @@
         },
         {
           id: 'funding', kicker: 'The hire-first model', title: 'How would you fund the program fee after your offer letter?',
-          note: '<b>Sequence:</b> you receive the written <b>₹10 LPA pre-placement offer letter first — free</b>. The 1-year AEIAP fee of <b>₹12,00,000 + GST</b> is payable only after that, if you choose to enrol. Loan assistance available (HDFC Credila · Yes Bank · Avanse).<br>100% education loan by Credila and IDFC Bank</br>',
+          note: '<ul style="margin: 0; padding-left: 18px; text-align: left;"><li>Rs 10 LPA pre-placement offer letter first — free</li><li>The 1-year AEIAP fee of ₹12,00,000 + GST is payable only after that</li><li><b>100% Education loan by Credila &amp; IDFC Bank (EMI Starts after 15 months)</b></li></ul>',
           opts: [
             { v: 'Self / family funding', s: 30 },
             { v: 'Education loan — need assistance', s: 22 },
@@ -2695,7 +2722,7 @@
           + '<select class="f-in" id="f-state" name="state" required><option value="" disabled selected>State</option></select><span class="f-err" id="e-state">Please select your state</span>'
           + '<select class="f-in" id="f-city" name="city" required><option value="" disabled selected>City</option></select><span class="f-err" id="e-city">Please select your city</span>'
           + '<div class="hp-field" aria-hidden="true"><input type="text" id="f-web" tabindex="-1" autocomplete="off"></div>'
-          + '<button type="button" class="btn btn-amber" id="submit-btn" style="width:100%;margin-top:4px">Book my drive seat →</button>'
+          + '<button type="button" class="btn btn-amber" id="submit-btn" style="width:100%;margin-top:4px">Book Interview Slot →</button>'
           + '</div>'
           + '<p class="consent">By submitting, you agree to be contacted by GCC School about this drive via call, WhatsApp and email.</p>'
           + '<div class="step-foot"><button type="button" class="back-lk" id="back-btn">← Back</button><span class="secure">🔒 Your details stay private</span></div>'
@@ -2945,7 +2972,7 @@
 
         if (bookSlotBtn) {
           bookSlotBtn.disabled = true;
-          bookSlotBtn.textContent = 'Book Slot →';
+          bookSlotBtn.textContent = 'Book Interview Slot →';
         }
         if (slotsDisplay) {
           slotsDisplay.textContent = 'Please select an available slot (green) in the calendar.';
@@ -3216,7 +3243,8 @@
         <div class="calendar-consent">
           <input type="checkbox" id="cal-doc-checkbox">
           <label for="cal-doc-checkbox">
-            I will bring all required physical documents (10th & 12th marksheets, degree, Aadhaar, PAN & resume) to the
+            I will bring all required physical documents (10th & 12th marksheets, B.Com degree, Aadhaar, PAN & resume)
+            to the
             Hiring Drive.<br>
             I accept the Terms & Conditions by submitting this form.
           </label>
@@ -3225,7 +3253,7 @@
         <button type="button" id="book-slot-btn" class="btn btn-primary btn-full btn-lg"
           style="margin-top: 16px; width: 100%; display: flex; align-items: center; justify-content: center; gap: 8px;"
           disabled>
-          Book Slot →
+          Book Interview Slot →
         </button>
       </div>
     </div>
