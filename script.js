@@ -233,6 +233,10 @@ var DEADLINE = new Date('2026-08-10T23:59:59+05:30').getTime();
         renderCalendar();
         calModal.style.display = 'flex';
         document.body.classList.add('modal-open');
+        var cardBody = calModal.querySelector('.card-body');
+        if (cardBody) {
+            cardBody.scrollTop = 0;
+        }
     }
 
     function closeCalendarPopup() {
