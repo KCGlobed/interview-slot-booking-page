@@ -1009,8 +1009,8 @@ select.form-control {
 
 .video-card {
     flex: 0 1 calc(20% - 16px);
-    min-width: 180px;
-    max-width: 220px;
+    min-width: 250px;
+    max-width: 350px;
     background: #fff;
     border-radius: 16px;
     overflow: hidden;
@@ -2403,12 +2403,31 @@ body.modal-open {
     }
 
     .video-grid {
-        justify-content: center;
+        flex-wrap: nowrap;
+        justify-content: flex-start;
+        overflow-x: auto;
+        padding-bottom: 24px;
+        padding-left: 20px;
+        padding-right: 20px;
+        margin-left: -20px;
+        margin-right: -20px;
+        -webkit-overflow-scrolling: touch;
+        scroll-snap-type: x mandatory;
+        scroll-padding-left: 20px;
+    }
+
+    .video-grid::-webkit-scrollbar {
+        height: 4px;
+    }
+    .video-grid::-webkit-scrollbar-thumb {
+        background: rgba(124, 58, 237, 0.4);
+        border-radius: 4px;
     }
 
     .video-card {
-        flex: 0 1 260px;
-        max-width: 100%;
+        flex: 0 0 80%;
+        max-width: 280px;
+        scroll-snap-align: center;
     }
 
     .video-thumb {
