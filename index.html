@@ -94,6 +94,8 @@
       --sh-x: 0 28px 70px rgba(13, 4, 32, .35);
     }
 
+    .scroll-dots { display: none; }
+
     *,
     *::before,
     *::after {
@@ -342,6 +344,10 @@
       display: flex;
       align-items: center;
       gap: 11px
+    }
+
+    .brand img {
+      max-width: 220px;
     }
 
     .brand .mk {
@@ -1030,6 +1036,7 @@
       transition: transform .18s, box-shadow .18s
     }
 
+
     @media(hover:hover) {
       .logo-cell:hover {
         transform: translateY(-3px);
@@ -1515,6 +1522,7 @@
       border-bottom: 1px solid rgba(255, 255, 255, .1)
     }
 
+
     .foot .nm {
       font-family: var(--f-d);
       font-weight: 800;
@@ -1728,7 +1736,7 @@
     /* Phablet */
     @media(max-width:740px) {
       .stack-grid {
-        grid-template-columns: repeat(2, 1fr)
+        grid-template-columns: repeat(1, 1fr)
       }
     }
 
@@ -1916,10 +1924,44 @@
         max-width: 70% !important;
         scroll-snap-align: start;
       }
+
+      .scroll-dots {
+        display: flex !important;
+        justify-content: center;
+        align-items: center;
+        gap: 8px;
+        margin-top: 16px;
+      }
+
+      .scroll-dots .dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background-color: rgba(81, 21, 124, 0.2);
+        transition: background-color 0.3s ease;
+      }
+
+      .scroll-dots .dot.active {
+        background-color: var(--amber, #f1a63e);
+      }
     }
 
     /* Fee rows stack before label and amount collide */
     @media(max-width:430px) {
+
+      .app-head .t  {
+        padding-right: 30px;
+      }
+
+      .app-head .k {
+        padding-right: 30px;
+      }
+
+      .nav .start-btn {
+        font-size: 10px;
+        padding: 8px 14px;
+      }
+
       .fee-card {
         padding: 20px 18px
       }
@@ -1938,6 +1980,7 @@
 
     /* Small phone (≤380px) */
     @media(max-width:380px) {
+
       .wrap {
         padding: 0 16px
       }
@@ -1987,12 +2030,33 @@
       .fee-copy h2 {
         font-size: 23px
       }
+
+      .foot-top {
+        width: 200px;
+        height: auto;
+      }
+    }
+
+    @media(max-width:380px) {
+      .nav .start-btn {
+        font-size: 8px;
+        padding: 8px 14px;
+      } 
+
+      .app-head .k{
+        font-size: 10px;
+
+      }
     }
 
     /* Short landscape phones: let the card size to content */
     @media(max-height:560px) and (max-width:912px) {
       .app-body {
         min-height: 0
+      }
+
+      .brand img {
+        max-width: 113px;
       }
 
       .hero {
@@ -2023,9 +2087,9 @@
       <a class="brand" href="https://gccschool.com" aria-label="GCC School home">
         <img
           src="https://storage.googleapis.com/gcc_static_files_backend/static/images/GCC%20School%20logo%20Transparent.png"
-          alt="GCC School logo" style="max-height: 48px; width: auto;">
+          alt="GCC School logo">
       </a>
-      <a href="#apply" class="btn btn-amber">Start my application</a>
+      <a href="#apply" class="btn btn-amber start-btn">Start my application</a>
     </div>
   </nav>
 
@@ -2071,7 +2135,7 @@
             </div>
             <div class="app-body">
               <div class="prog" id="prog-row">
-                <span class="tick mono" id="prog-tick">STEP 01 / 06</span>
+                <span class="tick mono" id="prog-tick">STEP 01 / 05</span>
                 <div class="rail">
                   <div class="fill" id="prog-fill"></div>
                 </div>
@@ -2137,7 +2201,7 @@
             alt="Tamanna receiving her offer letter" class="proof-img" loading="lazy"
             style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 20%">
           <div class="proof-overlay">
-            <!-- <span class="proof-badge">✅ ₹10 LPA offer issued</span> -->
+            <span class="proof-badge">✅ ₹10 LPA offer issued</span>
             <div class="proof-name">Tamanna</div>
             <div class="proof-edu">B.Com · University of Delhi</div>
           </div>
@@ -2148,7 +2212,7 @@
             alt="Devesh Sharma receiving his offer letter" class="proof-img" loading="lazy"
             style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 20%">
           <div class="proof-overlay">
-            <!-- <span class="proof-badge">✅ Hired by a Big-4 GCC</span> -->
+            <span class="proof-badge">✅ ₹10 LPA offer issued</span>
             <div class="proof-name">Devesh Sharma</div>
             <div class="proof-edu">B.Com · Banaras Hindu University</div>
           </div>
@@ -2159,7 +2223,7 @@
             alt="Ridhi Kalra receiving her offer letter" class="proof-img" loading="lazy"
             style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 20%">
           <div class="proof-overlay">
-            <!-- <span class="proof-badge">✅ Pre-placement offer</span> -->
+            <span class="proof-badge">✅ ₹10 LPA offer issued</span>
             <div class="proof-name">Ridhi Kalra</div>
             <div class="proof-edu">B.Com · Droan College, Uttarakhand</div>
           </div>
@@ -2170,7 +2234,7 @@
             alt="Sumukh receiving his offer letter" class="proof-img" loading="lazy"
             style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 20%">
           <div class="proof-overlay">
-            <!-- <span class="proof-badge">✅ ₹9.5 LPA offer issued</span> -->
+            <span class="proof-badge">✅ ₹10 LPA offer issued</span>
             <div class="proof-name">Sumukh</div>
             <div class="proof-edu">B.Com · Kumaun University</div>
           </div>
@@ -2181,7 +2245,7 @@
             alt="Honey Goswami receiving her offer letter" class="proof-img" loading="lazy"
             style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 20%">
           <div class="proof-overlay">
-            <!-- <span class="proof-badge">✅ Hired before training</span> -->
+            <span class="proof-badge">✅ ₹10 LPA offer issued</span>
             <div class="proof-name">Honey Goswami</div>
             <div class="proof-edu">CCS University, Meerut</div>
           </div>
@@ -2192,14 +2256,14 @@
             alt="Kavya receiving his offer letter" class="proof-img" loading="lazy"
             style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 20%">
           <div class="proof-overlay">
-            <!-- <span class="proof-badge">✅ ₹10 LPA offer issued</span> -->
+            <span class="proof-badge">✅ ₹10 LPA offer issued</span>
             <div class="proof-name">Kavya</div>
             <div class="proof-edu">B.com · Maharaja Agrasen Himalayan Garhwal University</div>
           </div>
         </div>
       </div>
       <div class="proof-bottom-text">
-        <a href="#apply" class="btn btn-purple btn-lg">I Want That Offer — Register Free →</a>
+        <a href="#apply" class="btn btn-purple btn-lg start-btn">I Want That Offer — Register Free →</a>
       </div>
     </div>
   </section>
@@ -2208,7 +2272,8 @@
   <section class="sec" id="video-insights" aria-labelledby="video-insights-h2">
     <div class="wrap">
       <div class="sec-head">
-        <h2 class="sec-title" id="video-insights-h2">GCC School in the <span style="color: #f3a531;">Spotlight</span></h2>
+        <h2 class="sec-title" id="video-insights-h2">GCC School in the <span style="color: #f3a531;">Spotlight</span>
+        </h2>
       </div>
 
       <style>
@@ -2253,7 +2318,15 @@
           border: none;
         }
 
-        @media (min-width: 600px) {
+        @media (max-width: 600px) {
+          .brand img {
+            max-width: 136px;
+          }
+
+          .start-btn {
+            font-size: 8px;
+          }
+
           .video-bottom-row {
             grid-template-columns: repeat(2, 1fr);
           }
@@ -2263,8 +2336,19 @@
           .video-bottom-row {
             grid-template-columns: repeat(4, 1fr);
           }
+
           .video-top-row .video-item {
             aspect-ratio: 21 / 9;
+          }
+        }
+
+        @media(max-width: 350px) {
+          .start-btn {
+            font-size: 8px;
+          }
+
+          .brand img {
+            max-width: 136px;
           }
         }
       </style>
@@ -2306,7 +2390,7 @@
 
 
   <!-- ════════════════ Parents VIDEO TESTIMONIALS ════════════════ -->
-<section class="section" aria-labelledby="parents-video-h2">
+  <section class="section" aria-labelledby="parents-video-h2">
     <div class="container">
       <div class="section-head">
         <span class="tag tag-accent">In Their Own Words</span>
@@ -2361,6 +2445,11 @@
             </button>
           </div>
         </div>
+      </div>
+      <div class="scroll-dots" aria-hidden="true">
+        <span class="dot active"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
       </div>
     </div>
   </section>
@@ -2422,6 +2511,11 @@
             </button>
           </div>
         </div>
+      </div>
+      <div class="scroll-dots" aria-hidden="true">
+        <span class="dot active"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
       </div>
     </div>
   </section>
@@ -2677,7 +2771,7 @@
         wait.</h2>
       <p>Six questions. Sixty seconds. If you're a B.Com graduate aged 18–30, your ₹10 LPA pre-placement offer letter
         starts here — before any fee, before any class.</p>
-      <a href="#apply" class="btn btn-amber" style="padding:18px 38px;font-size:16.5px">Start my application →</a>
+      <a href="#apply" class="btn btn-amber start-btn">Start my application →</a>
       <div class="mono-note">Free to apply · Offer letter before payment · DLF Cyber City, Gurugram</div>
     </div>
   </section>
@@ -2687,7 +2781,7 @@
     <div class="wrap">
       <div class="foot-top">
         <img src="./images/gcc-logo.jpeg" alt="GCC School logo"
-          style="max-height: 52px; width: auto; border-radius: 4px;">
+          style="max-height: 84px; width: auto; border-radius: 4px;">
         <div style="max-width:360px;line-height:1.65">9B, DLF Cyber City, Gurugram, Haryana.<br>India's first hire-first
           finance institution — AEIAP: ACCA · British Council · AI in Accounting · SAP · AICTE-approved PGCM by AIMA.
         </div>
@@ -2802,14 +2896,6 @@
             { v: 'Self / family funding', s: 30 },
             { v: 'Education loan — need assistance', s: 22 },
             { v: "I can't invest in a paid program", dq: 'funding' }
-          ]
-        },
-        {
-          id: 'attend', kicker: 'The drive is in person', title: 'Can you attend the hiring drive at DLF Cyber City, Gurugram?',
-          opts: [
-            { v: 'Yes — I live in Delhi NCR', s: 15 },
-            { v: 'Yes — I will travel to Gurugram', s: 10 },
-            { v: 'No — I need an online option', s: 0, tag: 'online_only' }
           ]
         }
       ];
@@ -3056,7 +3142,7 @@
         state.submitted = true;
         document.getElementById('submit-btn').textContent = 'Booking your seat…';
 
-        var grade = state.score >= 95 ? 'A' : (state.score >= 75 ? 'B' : 'C');
+        var grade = state.score >= 80 ? 'A' : (state.score >= 60 ? 'B' : 'C');
         var leadId = 'AEIAP-' + Date.now().toString(36).toUpperCase() + Math.random().toString(36).slice(2, 5).toUpperCase();
         var u = new URLSearchParams(location.search);
         var payload = {
@@ -3173,6 +3259,30 @@
         btn.setAttribute('aria-expanded', open ? 'true' : 'false');
         a.style.maxHeight = open ? a.scrollHeight + 'px' : '0';
       });
+    });
+
+    /* ════════════════ VIDEO GRID SCROLL INDICATOR ════════════════ */
+    document.querySelectorAll('.video-grid').forEach(function (grid) {
+      var dotsContainer = grid.nextElementSibling;
+      if (dotsContainer && dotsContainer.classList.contains('scroll-dots')) {
+        var dots = dotsContainer.querySelectorAll('.dot');
+        grid.addEventListener('scroll', function () {
+          var maxScroll = grid.scrollWidth - grid.clientWidth;
+          if (maxScroll <= 0) return;
+          var scrollFraction = grid.scrollLeft / maxScroll;
+          var activeIndex = Math.min(
+            dots.length - 1,
+            Math.max(0, Math.round(scrollFraction * (dots.length - 1)))
+          );
+          dots.forEach(function (dot, i) {
+            if (i === activeIndex) {
+              dot.classList.add('active');
+            } else {
+              dot.classList.remove('active');
+            }
+          });
+        });
+      }
     });
 
     /* ════════════════ FADE-IN + STICKY BAR ════════════════ */
