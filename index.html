@@ -3135,7 +3135,7 @@
         });
 
         // OTP Logic
-        state.isPhoneVerified = true; // Temporarily disabled OTP
+        state.isPhoneVerified = false; // Temporarily disabled OTP
         var sendOtpBtn = document.getElementById('send-otp-btn');
         var verifyOtpBtn = document.getElementById('verify-otp-btn');
         var otpSection = document.getElementById('otp-section');
@@ -3149,7 +3149,7 @@
             document.getElementById('e-phone').textContent = "Enter a valid 10-digit mobile number to send OTP";
             return;
           }
-          sendOtpBtn.disabled = true;
+          sendOtpBtn.disabled = false;
           sendOtpBtn.textContent = 'Sending...';
 
           try {
