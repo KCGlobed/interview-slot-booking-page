@@ -277,10 +277,12 @@ var DEADLINE = new Date('2026-08-10T23:59:59+05:30').getTime();
             var today = new Date();
             today.setHours(0, 0, 0, 0);
 
-            var cutoffDate = new Date(today);
-            cutoffDate.setDate(today.getDate() + 2);
+            var isPast = cellDate < today;
 
-            var isPast = cellDate < cutoffDate;
+            var maxDate = new Date(2026, 7, 18); // August 18, 2026
+            maxDate.setHours(0, 0, 0, 0);
+            var isAfterMax = cellDate > maxDate;
+
             var currentDayOfWeek = cellDate.getDay();
             var isWeekend = (currentDayOfWeek === 0 || currentDayOfWeek === 6);
             if (isWeekend) {
@@ -309,6 +311,10 @@ var DEADLINE = new Date('2026-08-10T23:59:59+05:30').getTime();
                 dayCell.classList.add("unavailable");
                 dayCell.disabled = true;
             } else if (isWeekend) {
+                slotsSpan.textContent = "-";
+                dayCell.classList.add("unavailable");
+                dayCell.disabled = true;
+            } else if (isAfterMax) {
                 slotsSpan.textContent = "-";
                 dayCell.classList.add("unavailable");
                 dayCell.disabled = true;
