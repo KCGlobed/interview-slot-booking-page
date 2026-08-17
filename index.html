@@ -3153,7 +3153,7 @@
           sendOtpBtn.textContent = 'Sending...';
 
           try {
-            var res = await fetch('https://www.gccschool.com/api/otp/send', {
+            var res = await fetch('https://gccschool.com/api/otp/send', {
               method: 'POST',
               headers: { 'Content-Type': 'application/json' },
               body: JSON.stringify({ mobile: mobile })
