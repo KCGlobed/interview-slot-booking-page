@@ -2522,9 +2522,9 @@
 
   <!-- ════════════════ INSTAGRAM TESTIMONIALS ════════════════ -->
   <style>
-    .section-instagram {
-      /* background-color: #300241; */
-    }
+    /* .section-instagram {
+      background-color: #300241;
+    } */
 
     .video-testimonials-wrapper {
       background-color: #ffffff;
@@ -2919,8 +2919,8 @@
     }
 
     var CONFIG = {
-      DEADLINE: '2026-08-10T23:59:59+05:30',          // drive close (IST)
-      DEADLINE_TEXT: '10 August 2026',                   // human-readable close date
+      DEADLINE: '2026-08-18T23:59:59+05:30',          // drive close (IST)
+      DEADLINE_TEXT: '18 August 2026',                   // human-readable close date
       DRIVE_LABEL: 'AEIAP Hiring Drive · August 2026',   // shown in strip & hero tag
       ENDPOINT: '',   // ← paste your Google Apps Script Web App URL (or CRM webhook). Empty = no server post.
       WHATSAPP: ''    // ← e.g. '919876543210'. Empty = WhatsApp button hidden on success screen.
@@ -2954,7 +2954,7 @@
         if (window.dataLayer) { window.dataLayer.push(Object.assign({ event: ev }, params || {})); }
       } catch (e) { }
     }
-
+                  
     /* ════════════════ MULTI-STEP APPLICATION ENGINE ════════════════ */
     (function () {
       var host = document.getElementById('step-host');
@@ -2963,8 +2963,8 @@
       var progRow = document.getElementById('prog-row');
       var refSlot = document.getElementById('ref-slot');
 
-      var QUESTIONS = [
-        {
+      var QUESTIONS = [  
+        {                           
           id: 'education', kicker: 'Eligibility check 1 of 2', title: 'What is your highest education?',
           opts: [
             { v: 'B.Com — completed', s: 30 },
