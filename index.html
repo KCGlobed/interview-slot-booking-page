@@ -94,7 +94,9 @@
       --sh-x: 0 28px 70px rgba(13, 4, 32, .35);
     }
 
-    .scroll-dots { display: none; }
+    .scroll-dots {
+      display: none;
+    }
 
     *,
     *::before,
@@ -1949,7 +1951,7 @@
     /* Fee rows stack before label and amount collide */
     @media(max-width:430px) {
 
-      .app-head .t  {
+      .app-head .t {
         padding-right: 30px;
       }
 
@@ -2041,9 +2043,9 @@
       .nav .start-btn {
         font-size: 8px;
         padding: 8px 14px;
-      } 
+      }
 
-      .app-head .k{
+      .app-head .k {
         font-size: 10px;
 
       }
@@ -2593,27 +2595,32 @@
         <div class="video-grid">
           <div class="video-card fade-up">
             <div class="video-thumb-ig">
-              <iframe src="https://www.instagram.com/reel/DZQO4pNBcBg/embed/?hidecaption=true" width="100%" height="100%" frameborder="0" scrolling="no" allowtransparency="true"></iframe>
+              <iframe src="https://www.instagram.com/reel/DZQO4pNBcBg/embed/?hidecaption=true" width="100%"
+                height="100%" frameborder="0" scrolling="no" allowtransparency="true"></iframe>
             </div>
           </div>
           <div class="video-card fade-up">
             <div class="video-thumb-ig">
-              <iframe src="https://www.instagram.com/reel/DYXdh98OZxo/embed/?hidecaption=true" width="100%" height="100%" frameborder="0" scrolling="no" allowtransparency="true"></iframe>
+              <iframe src="https://www.instagram.com/reel/DYXdh98OZxo/embed/?hidecaption=true" width="100%"
+                height="100%" frameborder="0" scrolling="no" allowtransparency="true"></iframe>
             </div>
           </div>
           <div class="video-card fade-up">
             <div class="video-thumb-ig">
-              <iframe src="https://www.instagram.com/reel/DYwdj3ZuMTp/embed/?hidecaption=true" width="100%" height="100%" frameborder="0" scrolling="no" allowtransparency="true"></iframe>
+              <iframe src="https://www.instagram.com/reel/DYwdj3ZuMTp/embed/?hidecaption=true" width="100%"
+                height="100%" frameborder="0" scrolling="no" allowtransparency="true"></iframe>
             </div>
           </div>
           <div class="video-card fade-up">
             <div class="video-thumb-ig">
-              <iframe src="https://www.instagram.com/reel/DYNNiqtut3a/embed/?hidecaption=true" width="100%" height="100%" frameborder="0" scrolling="no" allowtransparency="true"></iframe>
+              <iframe src="https://www.instagram.com/reel/DYNNiqtut3a/embed/?hidecaption=true" width="100%"
+                height="100%" frameborder="0" scrolling="no" allowtransparency="true"></iframe>
             </div>
           </div>
           <div class="video-card fade-up">
             <div class="video-thumb-ig">
-              <iframe src="https://www.instagram.com/reel/DaPPmbsJxAl/embed/?hidecaption=true" width="100%" height="100%" frameborder="0" scrolling="no" allowtransparency="true"></iframe>
+              <iframe src="https://www.instagram.com/reel/DaPPmbsJxAl/embed/?hidecaption=true" width="100%"
+                height="100%" frameborder="0" scrolling="no" allowtransparency="true"></iframe>
             </div>
           </div>
         </div>
@@ -2954,7 +2961,7 @@
         if (window.dataLayer) { window.dataLayer.push(Object.assign({ event: ev }, params || {})); }
       } catch (e) { }
     }
-                  
+
     /* ════════════════ MULTI-STEP APPLICATION ENGINE ════════════════ */
     (function () {
       var host = document.getElementById('step-host');
@@ -2963,8 +2970,8 @@
       var progRow = document.getElementById('prog-row');
       var refSlot = document.getElementById('ref-slot');
 
-      var QUESTIONS = [  
-        {                           
+      var QUESTIONS = [
+        {
           id: 'education', kicker: 'Eligibility check 1 of 2', title: 'What is your highest education?',
           opts: [
             { v: 'B.Com — completed', s: 30 },
@@ -3182,7 +3189,7 @@
           verifyOtpBtn.textContent = 'Verifying...';
 
           try {
-            var res = await fetch('https://www.gccschool.com/api/otp/verify', {
+            var res = await fetch('https://gccschool.com/api/otp/verify', {
               method: 'POST',
               headers: { 'Content-Type': 'application/json' },
               body: JSON.stringify({ mobile: mobile, otp: otp })
