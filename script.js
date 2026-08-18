@@ -144,7 +144,7 @@ if (document.readyState === 'loading') {
 /* ════════════════ CONFIG ════════════════
    Drive deadline drives every countdown on the page.
    Change DEADLINE to your real cut-off (local time). */
-var DEADLINE = new Date('2026-08-10T23:59:59+05:30').getTime();
+var DEADLINE = new Date('2026-08-31T23:59:59+05:30').getTime();
 
 /* ════════════════ COUNTDOWN ════════════════ */
 (function () {
@@ -279,7 +279,7 @@ var DEADLINE = new Date('2026-08-10T23:59:59+05:30').getTime();
 
             var isPast = cellDate < today;
 
-            var maxDate = new Date(2026, 7, 18); // August 18, 2026
+            var maxDate = new Date(2026, 7, 31); // August 31, 2026
             maxDate.setHours(0, 0, 0, 0);
             var isAfterMax = cellDate > maxDate;
 
