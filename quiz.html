@@ -1,0 +1,1272 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!--
+  ═══════════════════════════════════════════════════════════════════════════
+   GCC SCHOOL · APPLICATION FOR HIRING DRIVE SLOT BOOKING (full-screen quiz)
+  ═══════════════════════════════════════════════════════════════════════════
+   Reached from index-v2.html after the visitor registers (name, phone, city…).
+   Lead details arrive via sessionStorage["gcc_lead"] (set by index-v2.html).
+   Open this page with ?demo=1 to preview without registering first.
+
+   • One question per screen, tap-to-advance (Coursiv-style), progress bar, back.
+   • Answers auto-save to localStorage so a refresh never loses progress.
+   • On completion: answers are POSTed (see CONFIG.QUIZ_ENDPOINT), then the
+     interview-slot calendar appears, then the confirmation screen.
+   • Edit QUESTIONS below to add / remove / reorder questions.
+  ═══════════════════════════════════════════════════════════════════════════
+  -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#ffffff">
+  <meta name="robots" content="noindex">
+  <title>Application for Hiring Drive Slot Booking | GCC School</title>
+  <link rel="shortcut icon" href="https://storage.googleapis.com/static_files_backend/media/images/image.png">
+
+  <!-- ════════════════ TRACKING (same IDs as the landing page) ════════════════ -->
+  <script>
+    !function (f, b, e, v, n, t, s) {
+      if (f.fbq) return; n = f.fbq = function () { n.callMethod ? n.callMethod.apply(n, arguments) : n.queue.push(arguments) };
+      if (!f._fbq) f._fbq = n; n.push = n; n.loaded = !0; n.version = '2.0'; n.queue = []; t = b.createElement(e); t.async = !0;
+      t.src = v; s = b.getElementsByTagName(e)[0]; s.parentNode.insertBefore(t, s)
+    }(window, document, 'script', 'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '1308129784468579'); fbq('track', 'PageView');
+  </script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-B2ETHYM6MN"></script>
+  <script>window.dataLayer = window.dataLayer || []; function gtag() { dataLayer.push(arguments); } gtag('js', new Date()); gtag('config', 'G-B2ETHYM6MN');</script>
+  <script>(function (w, d, s, l, i) { w[l] = w[l] || []; w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' }); var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f); })(window, document, 'script', 'dataLayer', 'GTM-5NVDGXLR');</script>
+  <script>(function (c, l, a, r, i, t, y) { c[a] = c[a] || function () { (c[a].q = c[a].q || []).push(arguments) }; t = l.createElement(r); t.async = 1; t.src = "https://www.clarity.ms/tag/" + i; y = l.getElementsByTagName(r)[0]; y.parentNode.insertBefore(t, y); })(window, document, "clarity", "script", "wtdnppatos");</script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Sora:wght@700;800&family=Figtree:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
+
+  <style>
+    :root {
+      --ink: #14101F;
+      --ink-2: #4A4458;
+      --ink-3: #7E7891;
+      --purple: #51157C;
+      --purple-2: #6A22A0;
+      --purple-soft: #F3EEFA;
+      --amber: #F1A63E;
+      --amber-d: #C77E14;
+      --tile: #F4F5F7;
+      --tile-line: #E9E9EE;
+      --line: #ECECF1;
+      --green: #16A34A;
+      --green-soft: #EAF7EF;
+      --red: #DC2626;
+      --f-d: 'Sora', 'Segoe UI', sans-serif;
+      --f-b: 'Figtree', 'Segoe UI', sans-serif;
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0
+    }
+
+    html {
+      -webkit-text-size-adjust: 100%
+    }
+
+    body {
+      font-family: var(--f-b);
+      color: var(--ink);
+      background: #fff;
+      line-height: 1.5;
+      min-height: 100vh;
+      min-height: 100dvh;
+      display: flex;
+      flex-direction: column;
+      -webkit-tap-highlight-color: transparent
+    }
+
+    button {
+      font-family: inherit;
+      cursor: pointer;
+      border: none;
+      background: none;
+      color: inherit;
+      touch-action: manipulation
+    }
+
+    input,
+    select,
+    textarea {
+      font-family: inherit;
+      font-size: 16px;
+      color: var(--ink)
+    }
+
+    h1,
+    h2 {
+      font-family: var(--f-d);
+      letter-spacing: -.02em;
+      line-height: 1.2
+    }
+
+    /* ── top bar ── */
+    .top {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: #fff
+    }
+
+    .top-in {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 12px 16px 10px;
+      display: grid;
+      grid-template-columns: 44px 1fr 44px;
+      align-items: center
+    }
+
+    .back {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      color: var(--ink);
+      visibility: hidden
+    }
+
+    .back.on {
+      visibility: visible
+    }
+
+    .back:hover {
+      background: var(--tile)
+    }
+
+    .brand {
+      text-align: center
+    }
+
+    .brand img {
+      height: 36px;
+      width: auto;
+      display: inline-block
+    }
+
+    .count {
+      text-align: right;
+      font-family: var(--f-d);
+      font-weight: 700;
+      font-size: 13px;
+      color: var(--ink-3)
+    }
+
+    .count b {
+      color: var(--purple)
+    }
+
+    .rail {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 0 16px 10px
+    }
+
+    .rail .bar {
+      height: 4px;
+      border-radius: 999px;
+      background: var(--tile);
+      overflow: hidden
+    }
+
+    .rail .fill {
+      height: 100%;
+      width: 0;
+      background: linear-gradient(90deg, var(--purple), var(--purple-2));
+      border-radius: 999px;
+      transition: width .35s ease
+    }
+
+    .app-title {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 0 16px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--ink-3);
+      text-align: center
+    }
+
+    /* ── stage ── */
+    .stage {
+      flex: 1;
+      width: 100%;
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 22px 16px 120px
+    }
+
+    .screen {
+      animation: in .28s ease
+    }
+
+    .screen.out {
+      animation: out .18s ease forwards
+    }
+
+    @keyframes in {
+      from {
+        opacity: 0;
+        transform: translateX(24px)
+      }
+
+      to {
+        opacity: 1;
+        transform: none
+      }
+    }
+
+    @keyframes out {
+      to {
+        opacity: 0;
+        transform: translateX(-24px)
+      }
+    }
+
+    .q-title {
+      font-size: clamp(22px, 5.6vw, 28px);
+      font-weight: 800;
+      text-align: center;
+      color: var(--ink)
+    }
+
+    .q-sub {
+      text-align: center;
+      color: var(--ink-2);
+      font-size: 15.5px;
+      margin-top: 8px
+    }
+
+    .q-sub b {
+      color: var(--ink)
+    }
+
+    .opts {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 24px
+    }
+
+    .opts.grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr
+    }
+
+    .tile {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      width: 100%;
+      min-height: 68px;
+      padding: 14px 16px;
+      text-align: left;
+      background: var(--tile);
+      border: 1px solid var(--tile-line);
+      border-radius: 12px;
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--ink);
+      transition: transform .12s, background .15s, border-color .15s, box-shadow .15s
+    }
+
+    .tile .em {
+      font-size: 26px;
+      line-height: 1;
+      width: 34px;
+      text-align: center;
+      flex: none
+    }
+
+    .tile .lb {
+      flex: 1;
+      line-height: 1.3
+    }
+
+    .tile .lb small {
+      display: block;
+      font-weight: 500;
+      font-size: 13px;
+      color: var(--ink-3);
+      margin-top: 2px
+    }
+
+    .tile .tick {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      border: 2px solid #CFCBD9;
+      flex: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      color: #fff
+    }
+
+    .tile.box .tick {
+      border-radius: 6px
+    }
+
+    .tile:hover {
+      border-color: var(--purple);
+      background: #fff
+    }
+
+    .tile:active {
+      transform: scale(.985)
+    }
+
+    .tile.sel {
+      background: var(--purple-soft);
+      border-color: var(--purple);
+      box-shadow: 0 0 0 3px rgba(81, 21, 124, .12)
+    }
+
+    .tile.sel .tick {
+      background: var(--purple);
+      border-color: var(--purple)
+    }
+
+    .tile.sel .tick::after {
+      content: "✓"
+    }
+
+    .opts.grid .tile {
+      flex-direction: column;
+      text-align: center;
+      padding: 20px 12px;
+      gap: 10px
+    }
+
+    .opts.grid .tile .em {
+      width: auto;
+      font-size: 34px
+    }
+
+    .opts.grid .tile .tick {
+      display: none
+    }
+
+    /* fields */
+    .fields {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      margin-top: 24px
+    }
+
+    .fld {
+      display: flex;
+      flex-direction: column;
+      gap: 6px
+    }
+
+    .fld>span {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--ink-2)
+    }
+
+    .fld>span i {
+      font-style: normal;
+      font-weight: 500;
+      color: var(--ink-3)
+    }
+
+    .in {
+      width: 100%;
+      min-height: 54px;
+      border: 1.5px solid var(--tile-line);
+      border-radius: 12px;
+      padding: 14px 16px;
+      background: var(--tile);
+      outline: none;
+      transition: border-color .15s, background .15s, box-shadow .15s
+    }
+
+    .in:focus {
+      border-color: var(--purple);
+      background: #fff;
+      box-shadow: 0 0 0 3px rgba(81, 21, 124, .12)
+    }
+
+    textarea.in {
+      min-height: 110px;
+      resize: vertical;
+      line-height: 1.5
+    }
+
+    .in::placeholder {
+      color: #A9A3B8
+    }
+
+    .fld.err .in {
+      border-color: var(--red)
+    }
+
+    .fld .fe {
+      display: none;
+      font-size: 12.5px;
+      font-weight: 600;
+      color: var(--red)
+    }
+
+    .fld.err .fe {
+      display: block
+    }
+
+    .row2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px
+    }
+
+    .hint {
+      font-size: 12.5px;
+      color: var(--ink-3);
+      margin-top: 6px
+    }
+
+    /* interstitial */
+    .inter {
+      text-align: center;
+      padding-top: 12px
+    }
+
+    .inter .big {
+      font-family: var(--f-d);
+      font-weight: 800;
+      font-size: clamp(26px, 6.4vw, 34px);
+      color: var(--purple);
+      line-height: 1.15
+    }
+
+    .inter .big .g {
+      color: var(--amber-d)
+    }
+
+    .inter p {
+      color: var(--ink-2);
+      font-size: 16px;
+      margin-top: 12px;
+      max-width: 480px;
+      margin-left: auto;
+      margin-right: auto
+    }
+
+    .inter .art {
+      margin: 26px auto 0;
+      max-width: 440px;
+      border-radius: 18px;
+      background: linear-gradient(160deg, #2A0B4E, #51157C);
+      color: #fff;
+      padding: 22px 20px;
+      text-align: left;
+      box-shadow: 0 18px 50px rgba(42, 11, 78, .18)
+    }
+
+    .inter .art .k {
+      font-size: 11px;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--amber);
+      font-weight: 700;
+      font-family: var(--f-d)
+    }
+
+    .inter .art .v {
+      font-family: var(--f-d);
+      font-weight: 800;
+      font-size: 24px;
+      margin-top: 6px
+    }
+
+    .inter .art .s {
+      font-size: 13.5px;
+      color: rgba(255, 255, 255, .8);
+      margin-top: 6px;
+      line-height: 1.5
+    }
+
+    .inter .art ul {
+      list-style: none;
+      margin-top: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      font-size: 14px
+    }
+
+    .inter .art li::before {
+      content: "✓";
+      color: var(--amber);
+      font-weight: 800;
+      margin-right: 8px
+    }
+
+    /* bottom CTA */
+    .cta {
+      position: fixed;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 9;
+      background: linear-gradient(to top, #fff 70%, rgba(255, 255, 255, 0));
+      padding: 18px 16px calc(16px + env(safe-area-inset-bottom))
+    }
+
+    .cta-in {
+      max-width: 720px;
+      margin: 0 auto
+    }
+
+    .btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      width: 100%;
+      min-height: 56px;
+      border-radius: 12px;
+      background: var(--purple);
+      color: #fff;
+      font-family: var(--f-d);
+      font-weight: 700;
+      font-size: 15.5px;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+      box-shadow: 0 8px 24px rgba(81, 21, 124, .28);
+      transition: transform .15s, background .15s, opacity .15s
+    }
+
+    .btn:hover {
+      background: var(--purple-2);
+      transform: translateY(-1px)
+    }
+
+    .btn[disabled] {
+      opacity: .45;
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none
+    }
+
+    .btn.amber {
+      background: var(--amber);
+      color: #2A0B4E;
+      box-shadow: 0 8px 24px rgba(241, 166, 62, .35)
+    }
+
+    .btn.amber:hover {
+      background: #F6B95F
+    }
+
+    .cta .skip {
+      display: block;
+      text-align: center;
+      margin-top: 10px;
+      font-size: 13.5px;
+      font-weight: 600;
+      color: var(--ink-3);
+      text-decoration: underline;
+      text-underline-offset: 3px
+    }
+
+    .cta[hidden],
+    .cta .skip[hidden] {
+      display: none
+    }
+
+    /* calendar */
+    .cal {
+      margin-top: 22px;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 16px
+    }
+
+    .cal-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 10px
+    }
+
+    .cal-head b {
+      font-family: var(--f-d);
+      font-size: 16px
+    }
+
+    .cal-nav {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      border: 1.5px solid var(--tile-line);
+      font-size: 18px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center
+    }
+
+    .cal-wd {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--ink-3);
+      text-align: center;
+      margin-bottom: 4px
+    }
+
+    .cal-days {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 5px
+    }
+
+    .cd {
+      min-height: 50px;
+      border-radius: 9px;
+      border: 1.5px solid var(--tile-line);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-size: 13.5px;
+      font-weight: 700;
+      color: var(--ink);
+      background: #fff;
+      padding: 3px 0
+    }
+
+    .cd small {
+      font-size: 9px;
+      font-weight: 600;
+      color: var(--ink-3);
+      line-height: 1.1;
+      margin-top: 2px
+    }
+
+    .cd.avail {
+      border-color: rgba(22, 163, 74, .45);
+      background: var(--green-soft);
+      cursor: pointer
+    }
+
+    .cd.avail small {
+      color: var(--green)
+    }
+
+    .cd.low {
+      border-color: rgba(220, 38, 38, .45);
+      background: #FEF2F2
+    }
+
+    .cd.low small {
+      color: var(--red)
+    }
+
+    .cd.sel {
+      background: var(--purple);
+      border-color: var(--purple);
+      color: #fff
+    }
+
+    .cd.sel small {
+      color: #fff
+    }
+
+    .cd.off {
+      opacity: .35;
+      cursor: not-allowed
+    }
+
+    .cd.empty {
+      border: none;
+      background: transparent
+    }
+
+    .cal-info {
+      font-size: 14px;
+      font-weight: 600;
+      text-align: center;
+      color: var(--ink-2);
+      margin-top: 12px;
+      min-height: 20px
+    }
+
+    .chk {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      font-size: 13.5px;
+      color: var(--ink-2);
+      line-height: 1.45;
+      margin-top: 12px
+    }
+
+    .chk input {
+      width: 18px;
+      height: 18px;
+      margin-top: 2px;
+      accent-color: var(--purple);
+      flex: none
+    }
+
+    /* done */
+    .done {
+      text-align: center;
+      padding-top: 20px
+    }
+
+    .done-ic {
+      width: 74px;
+      height: 74px;
+      border-radius: 50%;
+      background: var(--green);
+      color: #fff;
+      font-size: 34px;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 16px;
+      box-shadow: 0 12px 30px rgba(22, 163, 74, .3)
+    }
+
+    .done h1 {
+      font-size: 26px
+    }
+
+    .done p {
+      color: var(--ink-2);
+      margin-top: 10px;
+      font-size: 15.5px
+    }
+
+    .ref {
+      display: inline-block;
+      margin-top: 14px;
+      font-size: 12.5px;
+      font-weight: 700;
+      letter-spacing: .06em;
+      padding: 7px 14px;
+      border-radius: 999px;
+      background: var(--purple-soft);
+      color: var(--purple)
+    }
+
+    .next {
+      text-align: left;
+      margin: 22px auto 0;
+      max-width: 460px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px
+    }
+
+    .next .n {
+      display: flex;
+      gap: 12px;
+      font-size: 14.5px;
+      color: var(--ink-2);
+      line-height: 1.5
+    }
+
+    .next .n .d {
+      flex: none;
+      width: 38px;
+      height: 38px;
+      border-radius: 10px;
+      background: #FDF3E3;
+      color: var(--amber-d);
+      font-family: var(--f-d);
+      font-weight: 800;
+      font-size: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center
+    }
+
+    .wa {
+      margin-top: 22px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      min-height: 54px;
+      border-radius: 12px;
+      background: #25D366;
+      color: #fff;
+      font-family: var(--f-d);
+      font-weight: 700;
+      text-decoration: none
+    }
+
+    .foot {
+      text-align: center;
+      font-size: 12px;
+      color: var(--ink-3);
+      padding: 10px 16px 24px
+    }
+
+    @media (min-width: 640px) {
+      .stage {
+        padding-top: 34px
+      }
+
+      .q-title {
+        margin-top: 6px
+      }
+
+      .opts.grid {
+        grid-template-columns: repeat(3, 1fr)
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+
+      .screen,
+      .screen.out {
+        animation: none
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5NVDGXLR" height="0" width="0"
+      style="display:none;visibility:hidden"></iframe></noscript>
+
+  <header class="top">
+    <div class="top-in">
+      <button type="button" class="back" id="back" aria-label="Back">←</button>
+      <div class="brand"><img src="./images/gcc-logo.jpeg" alt="GCC School"></div>
+      <div class="count" id="count"></div>
+    </div>
+    <div class="app-title">Application for Hiring Drive Slot Booking</div>
+    <div class="rail">
+      <div class="bar">
+        <div class="fill" id="fill"></div>
+      </div>
+    </div>
+  </header>
+
+  <main class="stage" id="stage" aria-live="polite"></main>
+
+  <div class="cta" id="cta" hidden>
+    <div class="cta-in">
+      <button type="button" class="btn" id="next">Continue</button>
+      <a href="#" class="skip" id="skip" hidden>Skip this question</a>
+    </div>
+  </div>
+
+  <script>
+    /* ═══════════════════════════════════════════════════════════════
+       CONFIG
+    ═══════════════════════════════════════════════════════════════ */
+    var CONFIG = {
+      PROGRAM: 'AEUAP',
+      DRIVE_LABEL: 'AEUAP Batch 2 Hiring Drive',
+      DEADLINE: '2026-11-01T23:59:59+05:30',     // caps the interview calendar — keep in sync with index-v2.html
+      WHATSAPP: '',                              // e.g. '919876543210'. Empty = WhatsApp button hidden
+      LANDING_URL: './index-v2.html#apply',      // where to send someone who opens this page without registering
+      MAX_SLOTS_PER_DAY: 30,
+      SOURCE_ID: 15,
+      /* Where the completed application is sent.
+         QUIZ_ENDPOINT: any URL that accepts a JSON POST (Google Apps Script web app, Zapier/Make webhook, your CRM).
+         If it is empty and QUIZ_FALLBACK_TO_DOSSIER is true, the full application is POSTed to the same
+         createdossiercustomform API used by the landing page, tagged form_position: "quiz" and carrying the
+         original lead_id / dossier_id so the CRM can merge it with the registration. */
+      QUIZ_ENDPOINT: '',
+      QUIZ_FALLBACK_TO_DOSSIER: true
+    };
+    var API_PROD = "https://gccwebsite-admin-prod-backend-738131651355.asia-south1.run.app";
+    var API_DEV = "https://gccwebsite-admin-backend-738131651355.asia-south1.run.app";
+    var API_BASE = (location.hostname.indexOf('gccschool.com') > -1) ? API_PROD : API_DEV;
+
+    /* ═══════════════════════════════════════════════════════════════
+       QUESTIONS — edit freely. Types: single (tap to advance), multi,
+       text (fields), date, inter (interstitial screen). `showIf` hides
+       a question based on earlier answers. `optional` shows a skip link.
+    ═══════════════════════════════════════════════════════════════ */
+    var QUESTIONS = [
+      {
+        type: 'inter', id: 'welcome', big: 'You’re registered, {first}.', sub: 'This short application takes about 3 minutes. Complete it to book your interview slot for the ' + 'AEUAP Hiring Drive' + ' at GCC School Campus, Gurugram.',
+        art: { k: 'What you are applying for', v: '₹10 LPA Pre-Placement Offer', s: 'Issued to candidates selected through the company interview — before any fee.', list: ['6 hiring companies interviewing', 'Interview at GCC School Campus, Gurugram', 'Slot confirmed on call within 24 hours'] }, btn: 'Start my application'
+      },
+
+      /* ── About you ── */
+      {
+        type: 'single', id: 'gender', title: 'How should we address you?', sub: 'Used on your interview call letter.',
+        opts: [['👩', 'Female'], ['👨', 'Male'], ['🙂', 'Prefer not to say']]
+      },
+      { type: 'date', id: 'dob', title: 'What is your date of birth?', sub: 'Hiring partners shortlist candidates aged 21–30 for this drive.' },
+      {
+        type: 'single', id: 'relocate', title: 'Are you open to attending the interview and training in Gurugram?', sub: 'The hiring drive and the 1-year program both run at GCC School Campus, Gurugram.',
+        opts: [['🏙️', 'Yes — I already live in Delhi NCR'], ['🧳', 'Yes — I will relocate to Gurugram'], ['👨‍👩‍👧', 'Need to discuss with my family first'], ['❌', 'No, I cannot relocate']]
+      },
+      {
+        type: 'single', id: 'accommodation', title: 'Will you need accommodation / PG support in Gurugram?', showIf: function (a) { return a.relocate && a.relocate.indexOf('already live') < 0; },
+        opts: [['🏠', 'Yes — please help me find a PG'], ['🙅', 'No — I will arrange it myself'], ['🤔', 'Not sure yet']]
+      },
+
+      /* ── Education ── */
+      {
+        type: 'single', id: 'qualification', title: 'What is your highest qualification?',
+        opts: [['🎓', 'B.Com'], ['🎓', 'BBA'], ['📚', 'M.Com'], ['📚', 'MBA / PGDM'], ['🧾', 'CA / CMA / CS (Inter or Final)'], ['📖', 'Other graduate degree']]
+      },
+      {
+        type: 'single', id: 'grad_year', title: 'Which year did you complete (or will complete) graduation?',
+        opts: [['🗓️', '2026 — final year'], ['🗓️', '2025'], ['🗓️', '2024'], ['🗓️', '2023'], ['🗓️', '2022'], ['🗓️', '2021 or earlier']], layout: 'grid'
+      },
+      {
+        type: 'single', id: 'grad_score', title: 'What is your graduation score?', sub: 'Approximate percentage or CGPA is fine.',
+        opts: [['🏆', 'Above 75% (CGPA 8+)'], ['👍', '60% – 75% (CGPA 6.5 – 8)'], ['🙂', '50% – 60% (CGPA 5.5 – 6.5)'], ['📉', 'Below 50%'], ['⏳', 'Result awaited']]
+      },
+      {
+        type: 'text', id: 'college', title: 'Where did you study?', sub: 'As it should appear on your call letter.',
+        fields: [{ n: 'college_name', label: 'College name', ph: 'e.g. Shri Ram College of Commerce', req: true }, { n: 'university', label: 'University', ph: 'e.g. University of Delhi', req: true }]
+      },
+      {
+        type: 'text', id: 'school', title: 'Your school details', sub: 'Class 12 school and board.',
+        fields: [{ n: 'school_name', label: 'School name', ph: 'e.g. DAV Public School', req: true }, { n: 'school_board', label: 'Board', ph: 'CBSE / ICSE / State board / Other', req: true, select: ['CBSE', 'ICSE / ISC', 'State board', 'NIOS / Other'] }]
+      },
+      {
+        type: 'single', id: 'gap', title: 'Any gap in your education or career?', sub: 'A gap does not disqualify you — hiring partners just like to know.',
+        opts: [['✅', 'No gap'], ['⏱️', 'Less than 1 year'], ['📆', '1 – 2 years'], ['📅', 'More than 2 years']]
+      },
+
+      {
+        type: 'inter', id: 'mid', big: 'Great progress, {first}.', sub: 'Your education profile is complete. Next: a few questions on experience and communication, exactly what hiring managers ask us for before shortlisting.',
+        art: { k: 'Companies interviewing in this drive', v: 'BDO · Baker Tilly · Keysight', s: 'Kreit & Chiu CPA LLP · ASA & Associates LLP · KC Global', list: ['Face-to-face interviews at the Gurugram campus', 'Written ₹10 LPA PPO for selected candidates'] }, btn: 'Continue'
+      },
+
+      /* ── Experience ── */
+      {
+        type: 'single', id: 'experience', title: 'Are you a fresher or experienced?',
+        opts: [['🌱', 'Fresher — no work experience yet'], ['🧑‍💻', 'Internship / articleship only'], ['💼', 'Working — less than 2 years'], ['🏢', 'Working — 2 years or more']]
+      },
+      {
+        type: 'single', id: 'role', title: 'What is your current or last role?', showIf: function (a) { return a.experience && a.experience.indexOf('Fresher') < 0; },
+        opts: [['📒', 'Accounts / bookkeeping'], ['🔍', 'Audit & assurance'], ['🧾', 'Taxation / GST'], ['📊', 'Finance / FP&A / analysis'], ['🤝', 'Sales / operations / other non-finance']]
+      },
+      {
+        type: 'single', id: 'courses', title: 'How familiar are you with professional courses like US CPA, ACCA or EA?',
+        opts: [['🧠', 'Know them well — I have considered or started one'], ['👂', 'Heard of them, not in detail'], ['🆕', 'New to me — happy to learn']]
+      },
+      {
+        type: 'single', id: 'english', title: 'How would you rate your English communication?', sub: 'Interviews with hiring partners are in English.',
+        opts: [['🗣️', 'Fluent — comfortable in interviews and presentations'], ['💬', 'Good — can hold a conversation confidently'], ['📝', 'Basic — better at writing than speaking'], ['📚', 'Need improvement — want to work on it']]
+      },
+
+      /* ── Awareness & engagement ── */
+      {
+        type: 'single', id: 'source', title: 'How did you hear about GCC School?',
+        opts: [['📸', 'Instagram'], ['📘', 'Facebook'], ['▶️', 'YouTube'], ['🔎', 'Google search'], ['📰', 'Newspaper / news website'], ['👥', 'Friend, family or college'], ['💬', 'WhatsApp']], layout: 'grid'
+      },
+      {
+        type: 'multi', id: 'motivation', title: 'What matters most to you in this drive?', sub: 'Pick all that apply.',
+        opts: [['📄', 'Pre-placement offer before any fee'], ['🏢', 'Job with an MNC / GCC in Gurugram'], ['🎓', 'US CPA and global credentials'], ['💰', '₹10 LPA starting salary'], ['🏦', '100% education loan, EMI after salary']]
+      },
+      {
+        type: 'single', id: 'decision', title: 'Who will take the final decision with you?', sub: 'We will include them on the counsellor call.',
+        opts: [['🙋', 'I decide myself'], ['👨‍👩‍👧', 'My parents / family'], ['🤝', 'Both of us together']]
+      },
+      {
+        type: 'single', id: 'call_time', title: 'When should our counsellor call you?', sub: 'You will get the call within 24 hours.',
+        opts: [['🌅', 'Morning (9 am – 12 pm)'], ['☀️', 'Afternoon (12 pm – 4 pm)'], ['🌆', 'Evening (4 pm – 8 pm)']]
+      },
+      {
+        type: 'text', id: 'address', title: 'Your postal address', sub: 'For your interview call letter and document verification.',
+        fields: [{ n: 'address', label: 'Full address', ph: 'House / flat, street, area', req: true, area: true }, { n: 'pincode', label: 'PIN code', ph: '6-digit PIN', req: true, numeric: true, max: 6 }]
+      },
+
+      { type: 'inter', id: 'final', big: 'Application complete. <span class="g">Now book your slot.</span>', sub: 'Choose your interview date at GCC School Campus, Gurugram. Seats are allotted first-come, first-served.', btn: 'Book my interview slot' }
+    ];
+
+    /* ═══════════════════════════════════════════════════════════════
+       ENGINE
+    ═══════════════════════════════════════════════════════════════ */
+    var stage = document.getElementById('stage'), cta = document.getElementById('cta'), nextBtn = document.getElementById('next'),
+      skipLk = document.getElementById('skip'), backBtn = document.getElementById('back'), fill = document.getElementById('fill'), countEl = document.getElementById('count');
+    var qs = new URLSearchParams(location.search), DEMO = qs.get('demo') === '1';
+    var LEAD = {}; try { LEAD = JSON.parse(sessionStorage.getItem('gcc_lead') || '{}'); } catch (e) { }
+    if (!LEAD.leadId && !DEMO) { location.replace(CONFIG.LANDING_URL); }
+    if (DEMO && !LEAD.leadId) LEAD = { leadId: 'DEMO-' + Date.now().toString(36).toUpperCase(), name: 'Demo Candidate', phone: '9999999999', serverId: null, slotData: [] };
+    var FIRST = (LEAD.name || 'there').split(' ')[0];
+
+    var A = {}; try { var saved = JSON.parse(localStorage.getItem('gcc_quiz_' + LEAD.leadId) || 'null'); if (saved && saved.answers) A = saved.answers; } catch (e) { }
+    function persist() { try { localStorage.setItem('gcc_quiz_' + LEAD.leadId, JSON.stringify({ answers: A, idx: idx, ts: Date.now() })); } catch (e) { } }
+    function esc(s) { return String(s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
+    function trk(ev, params, standard) {
+      try {
+        if (window.fbq) { standard ? fbq('track', ev, params || {}) : fbq('trackCustom', ev, params || {}); }
+        if (window.gtag) { gtag('event', ev, params || {}); }
+        if (window.dataLayer) { window.dataLayer.push(Object.assign({ event: ev }, params || {})); }
+      } catch (e) { }
+    }
+
+    function visible() { return QUESTIONS.filter(function (q) { return !q.showIf || q.showIf(A); }); }
+    function questionsOnly(list) { return list.filter(function (q) { return q.type !== 'inter'; }); }
+    var idx = 0;                                    /* index into visible() */
+    var started = false, MODE = 'quiz';             /* quiz | calendar | done */
+
+    function setProgress(list, q) {
+      var qo = questionsOnly(list), n = qo.indexOf(q) + 1, total = qo.length;
+      if (q.type === 'inter') { n = qo.filter(function (x) { return list.indexOf(x) < list.indexOf(q); }).length; }
+      countEl.innerHTML = n > 0 ? '<b>' + n + '</b> / ' + total : '';
+      fill.style.width = Math.round(n / total * 100) + '%';
+      backBtn.classList.toggle('on', idx > 0);
+    }
+
+    function render(dir) {
+      var list = visible(); if (idx >= list.length) return finish();
+      var q = list[idx]; setProgress(list, q);
+      nextBtn.disabled = false; nextBtn.textContent = q.btn || 'Continue'; nextBtn.className = 'btn' + (q.type === 'inter' ? ' amber' : '');
+      skipLk.hidden = !q.optional; cta.hidden = (q.type === 'single');
+      var h = '<div class="screen">';
+      if (q.type === 'inter') {
+        h += '<div class="inter"><div class="big">' + q.big.replace('{first}', esc(FIRST)) + '</div><p>' + q.sub.replace('{first}', esc(FIRST)) + '</p>';
+        if (q.art) h += '<div class="art"><div class="k">' + esc(q.art.k) + '</div><div class="v">' + esc(q.art.v) + '</div><div class="s">' + esc(q.art.s) + '</div>' + (q.art.list ? '<ul>' + q.art.list.map(function (l) { return '<li>' + esc(l) + '</li>'; }).join('') + '</ul>' : '') + '</div>';
+        h += '</div>';
+      } else {
+        h += '<h1 class="q-title">' + esc(q.title) + '</h1>' + (q.sub ? '<p class="q-sub">' + esc(q.sub) + '</p>' : '');
+        if (q.type === 'single' || q.type === 'multi') {
+          var cur = A[q.id] || (q.type === 'multi' ? [] : '');
+          h += '<div class="opts' + (q.layout === 'grid' ? ' grid' : '') + '" role="' + (q.type === 'multi' ? 'group' : 'radiogroup') + '">';
+          q.opts.forEach(function (o, i) {
+            var on = q.type === 'multi' ? cur.indexOf(o[1]) > -1 : cur === o[1];
+            h += '<button type="button" class="tile' + (q.type === 'multi' ? ' box' : '') + (on ? ' sel' : '') + '" data-i="' + i + '" role="' + (q.type === 'multi' ? 'checkbox' : 'radio') + '" aria-checked="' + on + '"><span class="em" aria-hidden="true">' + o[0] + '</span><span class="lb">' + esc(o[1]) + (o[2] ? '<small>' + esc(o[2]) + '</small>' : '') + '</span><span class="tick" aria-hidden="true"></span></button>';
+          });
+          h += '</div>';
+        } else if (q.type === 'text') {
+          var cur = A[q.id] || {};
+          h += '<div class="fields">';
+          q.fields.forEach(function (f) {
+            h += '<div class="fld" data-n="' + f.n + '"><span>' + esc(f.label) + (f.req ? '' : ' <i>(optional)</i>') + '</span>';
+            if (f.select) h += '<select class="in" name="' + f.n + '"><option value="">Select</option>' + f.select.map(function (v) { return '<option' + (cur[f.n] === v ? ' selected' : '') + '>' + esc(v) + '</option>'; }).join('') + '</select>';
+            else if (f.area) h += '<textarea class="in" name="' + f.n + '" placeholder="' + esc(f.ph || '') + '">' + esc(cur[f.n] || '') + '</textarea>';
+            else h += '<input class="in" name="' + f.n + '" type="text" ' + (f.numeric ? 'inputmode="numeric" ' : '') + (f.max ? 'maxlength="' + f.max + '" ' : '') + 'placeholder="' + esc(f.ph || '') + '" value="' + esc(cur[f.n] || '') + '">';
+            h += '<em class="fe">' + (f.err || 'Please fill this in') + '</em></div>';
+          });
+          h += '</div>';
+        } else if (q.type === 'date') {
+          var d = A[q.id] || {};
+          var days = [], months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'], years = [];
+          for (var i = 1; i <= 31; i++) days.push(i);
+          var Y = new Date().getFullYear(); for (var y = Y - 17; y >= Y - 45; y--) years.push(y);
+          h += '<div class="fields"><div class="row2" style="grid-template-columns:1fr 1.3fr 1.1fr">'
+            + '<div class="fld" data-n="d"><span>Day</span><select class="in" name="d"><option value="">DD</option>' + days.map(function (v) { return '<option' + (String(d.d) === String(v) ? ' selected' : '') + '>' + v + '</option>'; }).join('') + '</select></div>'
+            + '<div class="fld" data-n="m"><span>Month</span><select class="in" name="m"><option value="">MM</option>' + months.map(function (v, i) { return '<option value="' + (i + 1) + '"' + (String(d.m) === String(i + 1) ? ' selected' : '') + '>' + v + '</option>'; }).join('') + '</select></div>'
+            + '<div class="fld" data-n="y"><span>Year</span><select class="in" name="y"><option value="">YYYY</option>' + years.map(function (v) { return '<option' + (String(d.y) === String(v) ? ' selected' : '') + '>' + v + '</option>'; }).join('') + '</select></div>'
+            + '</div><div class="hint" id="age-hint"></div></div>';
+        }
+      }
+      h += '</div>';
+      stage.innerHTML = h; window.scrollTo(0, 0);
+      bind(q);
+      if (!started) { started = true; trk('QuizStart', { content_name: CONFIG.DRIVE_LABEL }); }
+    }
+
+    function bind(q) {
+      if (q.type === 'single') {
+        stage.querySelectorAll('.tile').forEach(function (t) {
+          t.addEventListener('click', function () {
+            stage.querySelectorAll('.tile').forEach(function (x) { x.classList.remove('sel'); x.setAttribute('aria-checked', 'false'); });
+            t.classList.add('sel'); t.setAttribute('aria-checked', 'true');
+            A[q.id] = q.opts[+t.dataset.i][1]; persist(); trk('QuizStep', { question: q.id, answer: A[q.id] });
+            setTimeout(advance, 260);
+          });
+        });
+      } else if (q.type === 'multi') {
+        var cur = A[q.id] = (A[q.id] || []).slice();
+        stage.querySelectorAll('.tile').forEach(function (t) {
+          t.addEventListener('click', function () {
+            var v = q.opts[+t.dataset.i][1], k = cur.indexOf(v);
+            if (k > -1) { cur.splice(k, 1); t.classList.remove('sel'); t.setAttribute('aria-checked', 'false'); }
+            else { cur.push(v); t.classList.add('sel'); t.setAttribute('aria-checked', 'true'); }
+            A[q.id] = cur; persist(); nextBtn.disabled = cur.length === 0;
+          });
+        });
+        nextBtn.disabled = cur.length === 0;
+      } else if (q.type === 'text') {
+        var first = stage.querySelector('.in'); if (first && window.innerWidth > 640) first.focus();
+        stage.querySelectorAll('.in').forEach(function (i) {
+          i.addEventListener('input', function () { i.closest('.fld').classList.remove('err'); if (i.name === 'pincode') i.value = i.value.replace(/\D/g, '').slice(0, 6); });
+          i.addEventListener('keydown', function (e) { if (e.key === 'Enter' && i.tagName !== 'TEXTAREA') { e.preventDefault(); nextBtn.click(); } });
+        });
+      } else if (q.type === 'date') {
+        var hint = document.getElementById('age-hint');
+        function upd() {
+          var d = +stage.querySelector('[name=d]').value, m = +stage.querySelector('[name=m]').value, y = +stage.querySelector('[name=y]').value;
+          if (d && m && y) { var age = Math.floor((Date.now() - new Date(y, m - 1, d).getTime()) / (365.25 * 864e5)); hint.textContent = 'You are ' + age + ' years old.'; }
+        }
+        stage.querySelectorAll('select').forEach(function (s) { s.addEventListener('change', function () { s.closest('.fld').classList.remove('err'); upd(); }); });
+        upd();
+      }
+    }
+
+    function validate(q) {
+      if (q.type === 'text') {
+        var ok = true, out = {};
+        q.fields.forEach(function (f) {
+          var el = stage.querySelector('[name="' + f.n + '"]'), v = (el.value || '').trim(); out[f.n] = v;
+          var bad = (f.req && !v) || (f.n === 'pincode' && v && !/^\d{6}$/.test(v));
+          if (bad) { ok = false; el.closest('.fld').classList.add('err'); }
+        });
+        if (!ok) return false; A[q.id] = out; return true;
+      }
+      if (q.type === 'date') {
+        var d = stage.querySelector('[name=d]').value, m = stage.querySelector('[name=m]').value, y = stage.querySelector('[name=y]').value, ok = true;
+        [['d', d], ['m', m], ['y', y]].forEach(function (p) { if (!p[1]) { ok = false; stage.querySelector('[data-n="' + p[0] + '"]').classList.add('err'); } });
+        if (!ok) return false;
+        A[q.id] = { d: +d, m: +m, y: +y, iso: y + '-' + String(m).padStart(2, '0') + '-' + String(d).padStart(2, '0') }; return true;
+      }
+      if (q.type === 'multi') return (A[q.id] || []).length > 0;
+      return true;
+    }
+
+    function advance() {
+      var list = visible(), q = list[idx];
+      var sc = stage.querySelector('.screen'); if (sc) sc.classList.add('out');
+      setTimeout(function () { idx++; persist(); render(1); }, 160);
+      if (q && q.type !== 'single') trk('QuizStep', { question: q.id });
+    }
+    nextBtn.addEventListener('click', function () {
+      if (MODE !== 'quiz') return;
+      var q = visible()[idx]; if (!q) return;
+      if (q.type === 'inter' && q.id === 'final') return finish();
+      if (!validate(q)) { var e = stage.querySelector('.fld.err .in'); if (e) e.focus(); return; }
+      advance();
+    });
+    skipLk.addEventListener('click', function (e) { e.preventDefault(); advance(); });
+    backBtn.addEventListener('click', function () { if (idx > 0) { idx--; persist(); render(-1); } });
+    document.addEventListener('keydown', function (e) {
+      if (MODE !== 'quiz') return;
+      var q = visible()[idx]; if (!q) return;
+      if (q.type === 'single' && /^[1-9]$/.test(e.key)) { var t = stage.querySelectorAll('.tile')[+e.key - 1]; if (t) t.click(); }
+      if (e.key === 'Enter' && (q.type === 'inter' || q.type === 'multi') && !nextBtn.disabled) nextBtn.click();
+    });
+
+    /* ═══════════════════════════════════════════════════════════════
+       SUBMIT → CALENDAR → DONE
+    ═══════════════════════════════════════════════════════════════ */
+    var submitted = false;
+    function buildPayload() {
+      var flat = {};
+      Object.keys(A).forEach(function (k) { var v = A[k]; if (Array.isArray(v)) flat[k] = v.join(' | '); else if (v && typeof v === 'object') Object.keys(v).forEach(function (s) { flat[k + '_' + s] = v[s]; }); else flat[k] = v; });
+      return Object.assign({
+        lead_id: LEAD.leadId, dossier_id: LEAD.serverId || '', form_position: 'quiz', source: CONFIG.SOURCE_ID, drive: CONFIG.DRIVE_LABEL,
+        full_name: LEAD.name || '', name: LEAD.name || '', phone: LEAD.phone || '', email: LEAD.email || '', city: LEAD.city || '', state: LEAD.state || '',
+        degree: LEAD.degree || '', age_range: LEAD.age_range || '', fund_mode: LEAD.fund_mode || '', date_of_birth: (A.dob && A.dob.iso) || '',
+        quiz_completed_at: new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' }), page_url: location.href, user_agent: navigator.userAgent
+      }, LEAD.tracking || {}, flat);
+    }
+    function finish() {
+      if (!submitted) {
+        submitted = true; var payload = buildPayload();
+        trk('CompleteRegistration', { content_name: CONFIG.DRIVE_LABEL, status: 'quiz_complete' }, true);
+        trk('QuizComplete', { questions: Object.keys(A).length });
+        var url = CONFIG.QUIZ_ENDPOINT || (CONFIG.QUIZ_FALLBACK_TO_DOSSIER ? API_BASE + '/api/career/createdossiercustomform' : '');
+        if (url && !DEMO) fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) }).catch(function () { });
+        try { sessionStorage.setItem('gcc_quiz_payload', JSON.stringify(payload)); } catch (e) { }
+      }
+      countEl.textContent = ''; fill.style.width = '100%'; backBtn.classList.remove('on'); skipLk.hidden = true;
+      if (LEAD.serverId || DEMO) renderCalendar(); else renderDone(false);
+    }
+
+    function renderCalendar() {
+      MODE = 'calendar';
+      var cur = new Date(); cur.setDate(1); var sel = null, maxDate = new Date(CONFIG.DEADLINE); maxDate.setHours(0, 0, 0, 0);
+      var slotData = LEAD.slotData || [];
+      if (DEMO && !slotData.length) { var t = new Date(); for (var i = 1; i <= 12; i++) { var dd = new Date(t.getFullYear(), t.getMonth(), t.getDate() + i); if (dd.getDay() && dd.getDay() < 6) slotData.push({ date: String(dd.getDate()).padStart(2, '0') + '-' + String(dd.getMonth() + 1).padStart(2, '0') + '-' + dd.getFullYear(), count: (i * 7) % 31 }); } }
+      cta.hidden = false; nextBtn.className = 'btn amber'; nextBtn.textContent = 'Confirm my interview date'; nextBtn.disabled = true;
+      stage.innerHTML = '<div class="screen"><h1 class="q-title">Pick your interview date</h1><p class="q-sub">GCC School Campus, 9B DLF Cyber City, Gurugram · Mon–Fri</p>'
+        + '<div class="cal"><div class="cal-head"><button type="button" class="cal-nav" data-nav="-1" aria-label="Previous month">‹</button><b data-my></b><button type="button" class="cal-nav" data-nav="1" aria-label="Next month">›</button></div>'
+        + '<div class="cal-wd"><div>Mon</div><div>Tue</div><div>Wed</div><div>Thu</div><div>Fri</div><div style="color:var(--red)">Sat</div><div style="color:var(--red)">Sun</div></div>'
+        + '<div class="cal-days" data-days></div><p class="cal-info" data-info>Select an available date</p></div>'
+        + '<label class="chk"><input type="checkbox" data-doc><span>I will bring my documents (10th &amp; 12th marksheets, graduation degree / marksheets, Aadhaar, PAN &amp; resume) to the hiring drive, and I accept the Terms &amp; Conditions.</span></label>'
+        + '<p class="hint" style="text-align:center;margin-top:14px"><a href="#" data-skip style="color:var(--ink-3)">Skip for now — our counsellor will fix the date on call</a></p></div>';
+      var my = stage.querySelector('[data-my]'), days = stage.querySelector('[data-days]'), info = stage.querySelector('[data-info]'), doc = stage.querySelector('[data-doc]');
+      var MN = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+      function draw() {
+        var y = cur.getFullYear(), m = cur.getMonth(); my.textContent = MN[m] + ' ' + y; days.innerHTML = '';
+        var off = (new Date(y, m, 1).getDay() + 6) % 7, total = new Date(y, m + 1, 0).getDate(), today = new Date(); today.setHours(0, 0, 0, 0);
+        for (var i = 0; i < off; i++) { var e = document.createElement('div'); e.className = 'cd empty'; days.appendChild(e); }
+        for (var d = 1; d <= total; d++) (function (d) {
+          var cell = document.createElement('button'); cell.type = 'button'; cell.className = 'cd';
+          var date = new Date(y, m, d), ds = String(d).padStart(2, '0') + '-' + String(m + 1).padStart(2, '0') + '-' + y;
+          var wk = date.getDay() === 0 || date.getDay() === 6, past = date < today, after = date > maxDate;
+          var slot = slotData.find(function (s) { return s.date === ds; }), booked = slot ? parseInt(slot.count, 10) || 0 : 0, rem = CONFIG.MAX_SLOTS_PER_DAY - booked;
+          cell.innerHTML = '<span>' + d + '</span>'; var sm = document.createElement('small');
+          if (past || wk || after || !slot) { sm.textContent = '–'; cell.classList.add('off'); cell.disabled = true; }
+          else if (rem <= 0) { sm.textContent = 'Full'; cell.classList.add('off'); cell.disabled = true; }
+          else {
+            sm.textContent = rem + ' left'; cell.classList.add('avail'); if (rem <= 5) cell.classList.add('low');
+            cell.addEventListener('click', function () {
+              days.querySelectorAll('.cd.sel').forEach(function (x) { x.classList.remove('sel'); }); cell.classList.add('sel'); sel = ds;
+              info.innerHTML = '<span style="color:var(--green)">Selected: <b>' + ds + '</b> · ' + rem + ' seats left</span>'; upd();
+            });
+          }
+          cell.appendChild(sm); if (sel === ds) cell.classList.add('sel'); days.appendChild(cell);
+        })(d);
+      }
+      function upd() { nextBtn.disabled = !(sel && doc.checked); }
+      stage.querySelectorAll('[data-nav]').forEach(function (b) { b.addEventListener('click', function () { cur.setMonth(cur.getMonth() + parseInt(b.dataset.nav, 10)); draw(); }); });
+      doc.addEventListener('change', upd);
+      stage.querySelector('[data-skip]').addEventListener('click', function (e) { e.preventDefault(); trk('SlotSkipped', {}); renderDone(false); });
+      nextBtn.onclick = function () {
+        if (!sel) return; nextBtn.disabled = true; nextBtn.textContent = 'Booking your seat…';
+        var p = sel.split('-'), ymd = p[2] + '-' + p[1] + '-' + p[0];
+        var req = DEMO ? Promise.resolve() : fetch(API_BASE + '/api/students/create-student-interview-slot/', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ lid: parseInt(LEAD.serverId, 10), interview_date: ymd }) }).catch(function () { });
+        req.then(function () { trk('Schedule', { content_name: CONFIG.DRIVE_LABEL, interview_date: ymd }, true); trk('SlotBooked', { interview_date: ymd }); renderDone(sel); });
+      };
+      draw();
+    }
+
+    function renderDone(dateStr) {
+      MODE = 'done'; cta.hidden = true; nextBtn.onclick = null;
+      var wa = '';
+      if (CONFIG.WHATSAPP) {
+        var msg = encodeURIComponent('Hi, I have completed my application for the ' + CONFIG.DRIVE_LABEL + '. My application ID is ' + LEAD.leadId + (dateStr ? ' and my interview date is ' + dateStr : '') + '. Please confirm my seat.');
+        wa = '<a class="wa" href="https://wa.me/' + CONFIG.WHATSAPP + '?text=' + msg + '" target="_blank" rel="noopener">Confirm on WhatsApp →</a>';
+      }
+      stage.innerHTML = '<div class="screen"><div class="done"><div class="done-ic">✓</div><h1>Application submitted, ' + esc(FIRST) + '!</h1>'
+        + '<p>' + (dateStr ? 'Your interview date is <b>' + dateStr + '</b> at GCC School Campus, Gurugram. ' : '') + 'Keep your phone on — here is what happens next.</p>'
+        + '<span class="ref">Application ID · ' + esc(LEAD.leadId) + '</span>'
+        + '<div class="next">'
+        + '<div class="n"><span class="d">24h</span><span><b>Our counsellor calls you</b>' + (A.call_time ? ' in the ' + esc(A.call_time.split(' (')[0].toLowerCase()) : '') + (A.decision && A.decision.indexOf('myself') < 0 ? ', with your family on the call,' : '') + ' to confirm your seat' + (dateStr ? '' : ' and fix your interview date') + '.</span></div>'
+        + '<div class="n"><span class="d">🏢</span><span><b>Company interview</b> at 9B DLF Cyber City, Gurugram. Bring your documents.</span></div>'
+        + '<div class="n"><span class="d">₹</span><span><b>Clear it → written ₹10 LPA Pre-Placement Offer</b> — before any fee.</span></div>'
+        + '</div>' + wa + '<p class="foot" style="margin-top:22px"><a href="' + CONFIG.LANDING_URL.split('#')[0] + '" style="color:var(--ink-3)">← Back to GCC School</a></p></div></div>';
+      try { localStorage.removeItem('gcc_quiz_' + LEAD.leadId); } catch (e) { }
+    }
+
+    /* resume where the user left off */
+    (function () { try { var saved = JSON.parse(localStorage.getItem('gcc_quiz_' + LEAD.leadId) || 'null'); if (saved && typeof saved.idx === 'number') idx = Math.min(saved.idx, visible().length - 1); } catch (e) { } })();
+    render(1);
+  </script>
+</body>
+
+</html>
