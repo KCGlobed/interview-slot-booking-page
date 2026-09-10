@@ -340,8 +340,8 @@ select.form-control {
     justify-content: center;
     text-align: center;
     overflow: hidden;
-    background:
-        linear-gradient(135deg, #2B0854 0%, #51157C 55%, #862E84 100%);
+    /* background:
+        linear-gradient(135deg, #2B0854 0%, #51157C 55%, #862E84 100%); */
     color: #fff;
     border-radius: var(--r-lg)
 }
