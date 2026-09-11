@@ -61,7 +61,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
-    href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Figtree:wght@400;500;600;700&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Figtree:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap"
     rel="stylesheet">
 
   <style>
@@ -81,9 +81,11 @@
       --green: #16A34A;
       --green-soft: #EAF7EF;
       --red: #DC2626;
+      --red-soft: #FEF2F2;
       --line: rgba(81, 21, 124, .13);
-      --f-d: 'Sora', 'Segoe UI', sans-serif;
-      --f-b: 'Figtree', 'Segoe UI', sans-serif;
+      --f-d: 'Sora', sans-serif;
+      --f-b: 'Figtree', sans-serif;
+      --f-m: 'IBM Plex Mono', monospace;
       --r-s: 10px;
       --r-m: 14px;
       --r-l: 20px;
@@ -666,213 +668,287 @@
 
     /* ════════════════ LEAD FORM CARD ════════════════ */
     .app-shell {
-      position: relative
+      position: relative;
     }
 
     .seal {
       position: absolute;
-      right: -6px;
-      top: -18px;
-      z-index: 3;
-      width: 86px;
-      height: 86px;
+      top: -26px;
+      right: -59px;
+      z-index: 6;
+      width: 98px;
+      height: 98px;
       border-radius: 50%;
-      background: radial-gradient(circle at 35% 30%, #FFD58A, #F1A63E 60%, #C77E14);
-      color: var(--purple-deep);
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       text-align: center;
-      font-family: var(--f-d);
-      box-shadow: 0 10px 26px rgba(0, 0, 0, .35);
-      transform: rotate(8deg)
+      transform: rotate(9deg);
+      background: conic-gradient(from 210deg, #8A5A0E, #F1A63E 22%, #FFE3AE 38%, #F1A63E 55%, #B97B14 72%, #F1A63E 88%, #8A5A0E);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, .4), inset 0 0 0 3px rgba(255, 255, 255, .35);
+      color: #3D2503
+    }
+
+    .seal::before {
+      content: '';
+      position: absolute;
+      inset: 7px;
+      border-radius: 50%;
+      border: 1.5px dashed rgba(61, 37, 3, .55)
     }
 
     .seal .a {
-      font-size: 15px;
+      font-family: var(--f-d);
       font-weight: 800;
-      line-height: 1
+      font-size: 19px;
+      line-height: 1;
+      letter-spacing: -.02em
     }
 
     .seal .b {
-      font-size: 8px;
-      font-weight: 700;
+      font-family: var(--f-m);
+      font-size: 7.6px;
+      font-weight: 600;
+      letter-spacing: .14em;
       text-transform: uppercase;
-      letter-spacing: .05em;
-      margin-top: 4px;
-      line-height: 1.15;
-      padding: 0 8px
+      margin-top: 3px;
+      max-width: 74px;
+      line-height: 1.35
     }
 
     .app-card {
-      background: #fff;
-      color: var(--ink);
+      background: var(--paper);
       border-radius: var(--r-l);
       box-shadow: var(--sh-x);
-      overflow: hidden
+      overflow: hidden;
+      position: relative
     }
 
     .app-head {
-      background: linear-gradient(135deg, var(--purple), #6A22A0);
-      color: #fff;
-      padding: 18px 20px 16px
+      background: linear-gradient(120deg, var(--purple) 0%, #41106A 60%, var(--purple-deep) 100%);
+      padding: 17px 11px 15px;
+      padding-right: 42px;
+      position: relative
+    }
+
+    .app-head::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--amber), #F6C173 45%, var(--amber))
     }
 
     .app-head .k {
-      font-size: 11px;
+      font-family: var(--f-m);
+      font-size: 9.5px;
+      font-weight: 600;
+      letter-spacing: .2em;
       text-transform: uppercase;
-      letter-spacing: .14em;
-      font-weight: 700;
       color: var(--amber);
-      font-family: var(--f-d)
+      display: flex;
+      justify-content: space-between;
+      gap: 10px
     }
 
     .app-head .t {
       font-family: var(--f-d);
+      color: #fff;
       font-weight: 700;
-      font-size: 18px;
-      margin-top: 5px;
-      line-height: 1.25
-    }
-
-    .app-head .s {
-      font-size: 12.5px;
-      color: rgba(255, 255, 255, .8);
-      margin-top: 4px
+      font-size: 17.5px;
+      margin-top: 6px;
+      line-height: 1.35
     }
 
     .app-body {
-      padding: 18px 20px 20px
-    }
-
-    .lf {
+      padding: 20px 22px 24px;
+      min-height: 452px;
       display: flex;
-      flex-direction: column;
-      gap: 12px
-    }
-
-    .lf-2 {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 12px
-    }
-
-    .fl {
-      display: flex;
-      flex-direction: column;
-      gap: 5px
-    }
-
-    .fl>span {
-      font-size: 12.5px;
-      font-weight: 700;
-      color: var(--ink-2)
-    }
-
-    .fl>span i {
-      font-style: normal;
-      font-weight: 500;
-      color: var(--ink-3)
-    }
-
-    .fi {
-      width: 100%;
-      height: 50px;
-      border: 1.5px solid #DDD5EA;
-      border-radius: 11px;
-      padding: 0 14px;
-      font-size: 16px;
-      background: #FCFBFE;
-      color: var(--ink);
-      outline: none;
-      transition: border-color .15s, box-shadow .15s
-    }
-
-    .fi:focus {
-      border-color: var(--purple);
-      box-shadow: 0 0 0 3px rgba(81, 21, 124, .12);
-      background: #fff
-    }
-
-    .fi::placeholder {
-      color: #A99DBA
-    }
-
-    .fi-wrap {
-      position: relative
-    }
-
-    .fi-wrap .pre {
-      position: absolute;
-      left: 14px;
-      top: 50%;
-      transform: translateY(-50%);
-      font-weight: 700;
-      font-size: 15px;
-      color: var(--ink-2);
-      pointer-events: none
-    }
-
-    .fi-wrap .fi {
-      padding-left: 50px
-    }
-
-    .fe {
-      display: none;
-      font-style: normal;
-      font-size: 12px;
-      font-weight: 600;
-      color: var(--red)
-    }
-
-    .fl.err .fe {
-      display: block
-    }
-
-    .fl.err .fi {
-      border-color: var(--red)
+      flex-direction: column
     }
 
     .prog {
       display: flex;
       align-items: center;
-      gap: 10px;
-      margin-bottom: 14px
+      gap: 12px;
+      margin-bottom: 18px
     }
 
     .prog .tick {
+      font-family: var(--f-m);
       font-size: 11px;
-      font-weight: 700;
-      letter-spacing: .1em;
-      color: var(--purple);
-      font-family: var(--f-d);
+      font-weight: 600;
+      letter-spacing: .12em;
+      color: var(--ink-2);
       white-space: nowrap
     }
 
     .prog .rail {
       flex: 1;
       height: 6px;
-      border-radius: 999px;
-      background: var(--wash);
+      border-radius: 6px;
+      background: #EAE4F2;
       overflow: hidden
     }
 
     .prog .fill {
       height: 100%;
-      background: linear-gradient(90deg, var(--purple), var(--violet));
-      border-radius: 999px;
-      transition: width .3s
+      width: 0%;
+      border-radius: 6px;
+      background: linear-gradient(90deg, var(--violet), var(--amber));
+      transition: width .35s ease
+    }
+
+    .q-kicker {
+      font-family: var(--f-m);
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--violet);
+      margin-bottom: 7px
+    }
+
+    .q-title {
+      font-family: var(--f-d);
+      font-size: 19.5px;
+      font-weight: 700;
+      color: var(--ink);
+      line-height: 1.35;
+      margin-bottom: 15px
+    }
+
+    .q-note {
+      background: var(--amber-soft);
+      border: 1px solid rgba(199, 126, 20, .3);
+      border-left: 4px solid var(--amber);
+      border-radius: var(--r-s);
+      padding: 11px 14px;
+      font-size: 13.2px;
+      line-height: 1.55;
+      color: #6B4A0A;
+      margin-bottom: 15px
+    }
+
+    .q-note b {
+      font-family: var(--f-d)
+    }
+
+    .opts {
+      display: flex;
+      flex-direction: column;
+      gap: 10px
+    }
+
+    .opt {
+      display: flex;
+      align-items: center;
+      gap: 13px;
+      width: 100%;
+      text-align: left;
+      background: #fff;
+      border: 1.5px solid var(--line);
+      border-radius: var(--r-m);
+      padding: 15px 16px;
+      font-family: var(--f-b);
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--ink);
+      transition: border-color .15s, box-shadow .15s, transform .12s;
+      min-height: 56px
+    }
+
+    .opt .ring {
+      flex-shrink: 0;
+      width: 21px;
+      height: 21px;
+      border-radius: 50%;
+      border: 2px solid #CBBEDD;
+      position: relative;
+      transition: border-color .15s
+    }
+
+    @media(hover:hover) {
+      .opt:hover {
+        border-color: var(--violet);
+        box-shadow: 0 4px 16px rgba(124, 58, 237, .14);
+        transform: translateY(-1px)
+      }
+    }
+
+    .opt:active {
+      transform: scale(.985)
+    }
+
+    .opt.sel {
+      border-color: var(--purple);
+      background: #F4EEFB;
+      box-shadow: 0 4px 16px rgba(81, 21, 124, .16)
+    }
+
+    .opt.sel .ring {
+      border-color: var(--purple)
+    }
+
+    .opt.sel .ring::after {
+      content: '';
+      position: absolute;
+      inset: 3.5px;
+      border-radius: 50%;
+      background: var(--purple)
+    }
+
+    .opt small {
+      display: block;
+      font-weight: 500;
+      font-size: 12.5px;
+      color: var(--ink-3);
+      margin-top: 2px
+    }
+
+    .step-foot {
+      margin-top: auto;
+      padding-top: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px
+    }
+
+    .back-lk {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: var(--f-d);
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--ink-3);
+      padding: 6px 4px
+    }
+
+    .back-lk:hover {
+      color: var(--purple)
+    }
+
+    .secure {
+      font-family: var(--f-m);
+      font-size: 10px;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--ink-3)
     }
 
     .step {
-      animation: stepIn .25s ease
+      animation: stepIn .32s ease both
     }
 
     @keyframes stepIn {
       from {
         opacity: 0;
-        transform: translateX(14px)
+        transform: translateX(26px)
       }
 
       to {
@@ -881,439 +957,245 @@
       }
     }
 
-    .q-kicker {
-      font-size: 11.5px;
-      text-transform: uppercase;
-      letter-spacing: .12em;
-      font-weight: 700;
-      color: var(--amber-d);
-      font-family: var(--f-d)
-    }
-
-    .q-title {
-      font-family: var(--f-d);
-      font-weight: 700;
-      font-size: 19px;
-      line-height: 1.25;
-      margin-top: 6px;
-      color: var(--ink)
-    }
-
-    .q-note {
-      margin-top: 10px;
-      background: var(--amber-soft);
-      border-radius: var(--r-s);
-      padding: 10px 12px 10px 28px;
-      font-size: 13px;
-      line-height: 1.5;
-      color: var(--ink)
-    }
-
-    .q-note ul {
-      margin: 0;
-      padding: 0
-    }
-
-    .opts {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-      margin-top: 14px
-    }
-
-    .opt {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      width: 100%;
-      text-align: left;
-      padding: 13px 14px;
-      border: 1.5px solid #DDD5EA;
-      border-radius: 12px;
-      background: #FCFBFE;
-      font-size: 15px;
-      font-weight: 600;
-      color: var(--ink);
-      line-height: 1.3;
-      transition: all .15s;
-      touch-action: manipulation
-    }
-
-    .opt:hover {
-      border-color: var(--purple);
-      background: #fff
-    }
-
-    .opt .ring {
-      flex: none;
-      width: 20px;
-      height: 20px;
-      border-radius: 50%;
-      border: 2px solid #C9BFDA;
-      position: relative
-    }
-
-    .opt.sel {
-      border-color: var(--purple);
-      background: var(--wash);
-      box-shadow: 0 0 0 3px rgba(81, 21, 124, .12)
-    }
-
-    .opt.sel .ring {
-      border-color: var(--purple);
-      background: var(--purple)
-    }
-
-    .opt.sel .ring::after {
-      content: "";
-      position: absolute;
-      inset: 4px;
-      border-radius: 50%;
-      background: #fff
-    }
-
-    .step-foot {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-top: 14px;
-      font-size: 12.5px;
-      color: var(--ink-3)
-    }
-
-    .back-lk {
-      font-size: 13px;
-      font-weight: 600;
-      color: var(--purple);
-      padding: 4px 0
-    }
-
-    .pills {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 8px
-    }
-
-    .pill {
-      border: 1.5px solid #DDD5EA;
-      border-radius: 10px;
-      padding: 11px 10px;
-      font-size: 13.5px;
-      font-weight: 600;
-      background: #FCFBFE;
-      color: var(--ink-2);
-      text-align: center;
-      line-height: 1.25;
-      transition: all .15s
-    }
-
-    .pill:hover {
-      border-color: var(--purple)
-    }
-
-    .pill.sel {
-      background: var(--purple);
-      border-color: var(--purple);
-      color: #fff;
-      box-shadow: 0 4px 14px rgba(81, 21, 124, .3)
-    }
-
-    .hp {
-      position: absolute;
-      left: -9999px;
-      width: 1px;
-      height: 1px;
-      overflow: hidden
-    }
-
-    .consent {
-      font-size: 11.5px;
-      color: var(--ink-3);
-      line-height: 1.5;
-      text-align: center
-    }
-
-    .trust-row {
-      display: flex;
-      justify-content: center;
-      gap: 14px;
-      flex-wrap: wrap;
-      font-size: 12px;
-      font-weight: 600;
-      color: var(--ink-2);
-      margin-top: 2px
-    }
-
-    .trust-row span::before {
-      content: "✓";
-      color: var(--green);
-      margin-right: 5px;
-      font-weight: 800
-    }
-
-    .otp-row {
-      display: flex;
-      gap: 8px
-    }
-
-    .otp-row .fi {
-      flex: 1
-    }
-
-    .otp-row .btn {
-      padding: 0 14px;
-      font-size: 13px;
-      border-radius: 10px;
-      white-space: nowrap
-    }
-
-    .otp-ok {
-      font-size: 12.5px;
-      color: var(--green);
-      font-weight: 700
-    }
-
-    .btn-sm-line {
-      font-size: 13px;
-      font-weight: 600;
-      color: var(--purple);
-      text-decoration: underline;
-      text-underline-offset: 3px;
-      background: none;
-      padding: 6px
-    }
-
-    /* form: calendar step */
-    .cal-head {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 8px
-    }
-
-    .cal-head b {
-      font-family: var(--f-d);
-      font-size: 15px
-    }
-
-    .cal-nav {
-      width: 34px;
-      height: 34px;
-      border-radius: 8px;
-      border: 1.5px solid #DDD5EA;
-      font-size: 18px;
-      font-weight: 700;
-      display: flex;
-      align-items: center;
-      justify-content: center
-    }
-
-    .cal-wd {
-      display: grid;
-      grid-template-columns: repeat(7, 1fr);
-      font-size: 11px;
-      font-weight: 700;
-      color: var(--ink-3);
-      text-align: center;
-      margin-bottom: 4px
-    }
-
-    .cal-days {
-      display: grid;
-      grid-template-columns: repeat(7, 1fr);
-      gap: 4px
-    }
-
-    .cd {
-      min-height: 46px;
-      border-radius: 8px;
-      border: 1.5px solid #EEE9F5;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      font-size: 13px;
-      font-weight: 700;
-      color: var(--ink);
-      background: #fff;
-      padding: 3px 0
-    }
-
-    .cd small {
-      font-size: 8.5px;
-      font-weight: 600;
-      color: var(--ink-3);
-      line-height: 1.1;
-      margin-top: 2px
-    }
-
-    .cd.avail {
-      border-color: rgba(22, 163, 74, .45);
-      background: var(--green-soft);
-      cursor: pointer
-    }
-
-    .cd.avail small {
-      color: var(--green)
-    }
-
-    .cd.avail:hover {
-      border-color: var(--green)
-    }
-
-    .cd.low {
-      border-color: rgba(220, 38, 38, .45);
-      background: #FEF2F2
-    }
-
-    .cd.low small {
-      color: var(--red)
-    }
-
-    .cd.sel {
-      background: var(--purple);
-      border-color: var(--purple);
-      color: #fff
-    }
-
-    .cd.sel small {
-      color: #fff
-    }
-
-    .cd.off {
-      opacity: .35;
-      cursor: not-allowed
-    }
-
-    .cd.empty {
-      border: none;
-      background: transparent
-    }
-
-    .cal-info {
-      font-size: 13px;
-      font-weight: 600;
-      text-align: center;
-      color: var(--ink-2);
-      margin-top: 10px;
-      min-height: 20px
-    }
-
-    .chk {
-      display: flex;
-      gap: 10px;
-      align-items: flex-start;
-      font-size: 12.5px;
-      color: var(--ink-2);
-      line-height: 1.45;
-      margin-top: 8px
-    }
-
-    .chk input {
-      width: 18px;
-      height: 18px;
-      margin-top: 2px;
-      accent-color: var(--purple);
-      flex: none
-    }
-
-    /* form: done state */
-    .done {
-      text-align: center;
-      padding: 6px 0 4px
-    }
-
-    .done-ic {
-      width: 64px;
-      height: 64px;
-      border-radius: 50%;
-      background: var(--green);
-      color: #fff;
-      font-size: 30px;
-      font-weight: 800;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin: 0 auto 14px;
-      box-shadow: 0 10px 26px rgba(22, 163, 74, .3)
-    }
-
-    .done h3 {
-      font-size: 21px;
-      margin-bottom: 8px
-    }
-
-    .done p {
-      font-size: 14px;
-      color: var(--ink-2);
-      line-height: 1.6
-    }
-
-    .ref {
-      display: inline-block;
-      margin-top: 12px;
-      font-size: 12px;
-      font-weight: 700;
-      letter-spacing: .06em;
-      padding: 6px 12px;
-      border-radius: 999px;
-      background: var(--wash);
-      color: var(--purple)
-    }
-
-    .next {
-      text-align: left;
-      margin-top: 16px;
+    .f-stack {
       display: flex;
       flex-direction: column;
       gap: 10px
     }
 
-    .next .n {
+    .f-in {
+      width: 100%;
+      padding: 14px 15px;
+      border: 1.5px solid var(--line);
+      border-radius: var(--r-s);
+      font-size: 16px;
+      font-family: var(--f-b);
+      background: #fff;
+      color: var(--ink);
+      outline: none;
+      transition: border-color .15s, box-shadow .15s
+    }
+
+    .f-in:focus {
+      border-color: var(--purple);
+      box-shadow: 0 0 0 3px rgba(81, 21, 124, .10)
+    }
+
+    .f-in::placeholder {
+      color: #A79BB8
+    }
+
+    .f-err {
+      display: none;
+      color: var(--red);
+      font-size: 12px;
+      margin-top: -4px;
+      padding-left: 2px
+    }
+
+    .otp-wrap {
       display: flex;
-      gap: 11px;
+      gap: 8px;
+      align-items: stretch;
+      width: 100%;
+    }
+
+    .btn-otp-send {
+      padding: 0 16px !important;
+      background: var(--amber) !important;
+      color: var(--purple-deep) !important;
+      border: 1.5px solid var(--amber-d) !important;
+      border-radius: var(--r-s) !important;
+      font-family: var(--f-d) !important;
+      font-size: 13.5px !important;
+      font-weight: 700 !important;
+      white-space: nowrap !important;
+      cursor: pointer !important;
+      flex-shrink: 0 !important;
+      min-height: 48px !important;
+      display: inline-flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      transition: background .18s, transform .15s, box-shadow .15s !important;
+    }
+
+    .btn-otp-send:hover:not(:disabled) {
+      background: #F6B95F !important;
+      transform: translateY(-1px) !important;
+      box-shadow: 0 4px 12px rgba(241, 166, 62, .35) !important;
+    }
+
+    .btn-otp-send:disabled {
+      opacity: 0.65 !important;
+      cursor: not-allowed !important;
+    }
+
+    .btn-otp-verify {
+      padding: 0 20px !important;
+      background: var(--purple) !important;
+      color: #fff !important;
+      border: 1.5px solid var(--purple) !important;
+      border-radius: var(--r-s) !important;
+      font-family: var(--f-d) !important;
+      font-size: 13.5px !important;
+      font-weight: 700 !important;
+      white-space: nowrap !important;
+      cursor: pointer !important;
+      flex-shrink: 0 !important;
+      min-height: 48px !important;
+      display: inline-flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      transition: background .18s, transform .15s, box-shadow .15s !important;
+    }
+
+    .btn-otp-verify:hover:not(:disabled) {
+      background: #3E0F61 !important;
+      transform: translateY(-1px) !important;
+      box-shadow: 0 4px 12px rgba(81, 21, 124, .3) !important;
+    }
+
+    .btn-otp-verify:disabled {
+      opacity: 0.65 !important;
+      cursor: not-allowed !important;
+    }
+
+    .otp-success-badge {
+      color: #16A34A;
+      display: none;
+      font-size: 13px;
+      font-weight: 700;
+      margin-top: -2px;
+      margin-bottom: 4px;
+      padding: 6px 10px;
+      background: #EAF7EF;
+      border-radius: 6px;
+      border: 1px solid rgba(22, 163, 74, 0.2);
+    }
+
+    .consent {
+      font-size: 11.5px;
+      color: var(--ink-3);
+      line-height: 1.55;
+      margin-top: 10px;
+      text-align: center
+    }
+
+    .hp-field {
+      position: absolute;
+      left: -6000px;
+      top: -6000px;
+      height: 0;
+      overflow: hidden
+    }
+
+    /* Disqualified + success states */
+    .state-wrap {
+      text-align: center;
+      padding: 16px 4px 6px;
+      animation: stepIn .32s ease both
+    }
+
+    .state-ic {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      margin: 0 auto 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 29px
+    }
+
+    .state-ic.ok {
+      background: var(--green);
+      color: #fff
+    }
+
+    .state-ic.no {
+      background: var(--red-soft);
+      color: var(--red);
+      border: 2px solid #FCA5A5;
+      font-size: 25px
+    }
+
+    .state-wrap h3 {
+      font-size: 21px;
+      font-weight: 800;
+      color: var(--ink);
+      margin-bottom: 9px
+    }
+
+    .state-wrap p {
+      font-size: 14px;
+      color: var(--ink-2);
+      line-height: 1.65;
+      max-width: 340px;
+      margin: 0 auto
+    }
+
+    .lead-ref {
+      display: inline-block;
+      margin: 14px auto 4px;
+      font-family: var(--f-m);
+      font-size: 12.5px;
+      font-weight: 600;
+      letter-spacing: .08em;
+      background: var(--green-soft);
+      color: #0E6B33;
+      border: 1px solid rgba(22, 163, 74, .35);
+      border-radius: 8px;
+      padding: 7px 14px
+    }
+
+    .next-list {
+      text-align: left;
+      max-width: 340px;
+      margin: 16px auto 0;
+      display: flex;
+      flex-direction: column;
+      gap: 9px
+    }
+
+    .next-list .n {
+      display: flex;
+      gap: 10px;
       font-size: 13.5px;
       color: var(--ink-2);
       line-height: 1.5
     }
 
-    .next .n .d {
-      flex: none;
-      width: 34px;
-      height: 34px;
-      border-radius: 9px;
-      background: var(--amber-soft);
-      color: var(--amber-d);
-      font-family: var(--f-d);
-      font-weight: 800;
-      font-size: 12px;
+    .next-list .n b {
+      color: var(--ink)
+    }
+
+    .next-list .n .d {
+      flex-shrink: 0;
+      width: 22px;
+      height: 22px;
+      border-radius: 7px;
+      background: var(--wash);
+      border: 1px solid var(--line);
+      font-family: var(--f-m);
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--purple);
       display: flex;
       align-items: center;
-      justify-content: center
+      justify-content: center;
+      margin-top: 1px
     }
 
-    .wa {
-      margin-top: 16px;
-      background: #25D366;
+    .wa-btn {
+      margin-top: 18px;
+      background: #22C15E;
       color: #fff;
-      width: 100%;
-      padding: 15px;
-      border-radius: 12px
+      box-shadow: 0 6px 20px rgba(34, 193, 94, .35)
     }
 
-    .wa:hover {
-      background: #1FB958;
+    .wa-btn:hover {
+      background: #1FAF55;
       transform: translateY(-2px)
-    }
-
-    .already {
-      background: var(--green-soft);
-      border-radius: var(--r-m);
-      padding: 22px 18px;
-      text-align: center;
-      color: var(--ink);
-      font-weight: 600;
-      font-size: 15px
     }
 
     /* ════════════════ SECTIONS ════════════════ */
@@ -1537,7 +1419,13 @@
       overflow-x: auto;
       scroll-snap-type: x mandatory;
       padding-bottom: 6px;
-      -webkit-overflow-scrolling: touch
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+    }
+
+    .quote-strip::-webkit-scrollbar {
+      display: none;
     }
 
     .quote {
@@ -2395,39 +2283,115 @@
     }
 
     /* final */
-    .final-in {
+    .final-sec {
+      background: radial-gradient(800px 450px at 15% -10%, rgba(124, 58, 237, 0.35), transparent 60%),
+                  radial-gradient(700px 400px at 95% 100%, rgba(241, 166, 62, 0.15), transparent 60%),
+                  linear-gradient(160deg, #18072E 0%, #2A0B4E 55%, #1D0636 100%);
+      color: #fff;
+      padding: 80px 0;
+      position: relative;
+      overflow: hidden;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .final-grid {
       display: grid;
-      grid-template-columns: 1fr;
-      gap: 26px;
-      align-items: center
+      grid-template-columns: 1.08fr 0.92fr;
+      gap: 52px;
+      align-items: center;
     }
 
-    .final h2 {
-      font-size: clamp(28px, 6.5vw, 42px);
-      font-weight: 800
-    }
-
-    .final p {
-      color: rgba(255, 255, 255, .82);
-      font-size: 16px;
-      margin-top: 14px;
-      line-height: 1.6
-    }
-
-    .final .mini {
-      margin-top: 18px;
+    .final-copy {
       display: flex;
       flex-direction: column;
-      gap: 8px;
-      font-size: 14px;
-      font-weight: 600
+      align-items: flex-start;
     }
 
-    .final .mini span::before {
-      content: "✓";
-      color: var(--amber);
-      margin-right: 8px;
-      font-weight: 800
+    .final-badge {
+      display: inline-block;
+      padding: 6px 18px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      font-family: var(--f-m, 'IBM Plex Mono', monospace);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--amber, #F1A63E);
+      margin-bottom: 22px;
+    }
+
+    .final-title {
+      font-family: var(--f-d, 'Sora', sans-serif);
+      font-size: clamp(32px, 4.8vw, 50px);
+      font-weight: 800;
+      line-height: 1.12;
+      letter-spacing: -0.025em;
+      color: #FFFFFF;
+      margin-bottom: 18px;
+    }
+
+    .final-title .hl-amber {
+      color: var(--amber, #F1A63E);
+    }
+
+    .final-desc {
+      font-size: 15.5px;
+      line-height: 1.65;
+      color: rgba(255, 255, 255, 0.82);
+      margin-bottom: 26px;
+      max-width: 520px;
+    }
+
+    .final-checklist {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .final-checklist li {
+      font-size: 14.5px;
+      font-weight: 700;
+      color: #FFFFFF;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .final-checklist .chk {
+      color: var(--amber, #F1A63E);
+      font-size: 16px;
+      font-weight: 800;
+      line-height: 1;
+    }
+
+    .final-form-wrap {
+      width: 100%;
+    }
+
+    .final-form-wrap .app-shell {
+      position: static;
+    }
+
+    .final-form-wrap .app-card {
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.45);
+    }
+
+    @media (max-width: 900px) {
+      .final-sec {
+        padding: 56px 0;
+      }
+      .final-grid {
+        grid-template-columns: 1fr;
+        gap: 36px;
+      }
+      .final-desc {
+        max-width: 100%;
+      }
     }
 
     /* footer */
@@ -2876,17 +2840,23 @@
           <div class="meta"><span>6 hiring companies</span><span>GCC School Campus, Gurugram</span></div>
         </div>
 
-        <!-- THE LEAD FORM -->
+        <!-- THE APPLICATION — styled as the offer letter you're applying for -->
         <div class="app-shell" id="apply">
-          <div class="seal" aria-hidden="true"><span class="a">₹10 LPA</span><span class="b">PPO before fees</span>
-          </div>
+          <div class="seal" aria-hidden="true"><span class="a">₹10 LPA</span><span class="b">Pre-placement offer · Day one</span></div>
           <div class="app-card">
             <div class="app-head">
-              <div class="k"><span data-drive-label>Batch 2 Hiring Drive</span> · Free application</div>
-              <!-- <div class="t">4 quick steps · 45 seconds · interview call within 24 hours</div> -->
-              <div class="s" id="seats-line"></div>
+              <div class="k"><span data-drive-label>Application · AEUAP Hiring Drive</span></div>
+              <div class="t">Check your eligibility &amp; book your interview</div>
             </div>
-            <div class="app-body" id="form-host-1"></div>
+            <div class="app-body">
+              <div class="prog prog-row" id="prog-row">
+                <span class="tick mono prog-tick" id="prog-tick">STEP 01 / 05</span>
+                <div class="rail">
+                  <div class="fill prog-fill" id="prog-fill"></div>
+                </div>
+              </div>
+              <div class="step-host" id="step-host" aria-live="polite"></div>
+            </div>
           </div>
         </div>
       </div>
@@ -3163,24 +3133,36 @@
           </div>
         </div>
       </div>
-      <div class="quote-strip" aria-label="Student quotes">
-        <div class="quote fade">
-          <div class="stars" aria-hidden="true">★★★★★</div>
-          <p>“[Student quote placeholder - the interview experience and receiving the Pre-placement job offer letter on
-            the same day.]”</p>
-          <div class="who">Student name<small>B.Com · University · Offer: [Company]</small></div>
+      <div class="quotes-slider-wrap">
+        <button type="button" class="quotes-slider-btn quotes-slider-prev" id="quotes-slider-prev"
+          aria-label="Previous quote" title="Previous quote">
+          <svg viewBox="0 0 24 24">
+            <polyline points="15 18 9 12 15 6"></polyline>
+          </svg>
+        </button>
+        <div class="quote-strip" id="student-quote-strip" aria-label="Student quotes">
+          <div class="quote fade">
+            <div class="stars" aria-hidden="true">★★★★★</div>
+            <p>GCC School gave me the opportunity to get hired first and then trained. I’m proud to have received a ₹10 LPA pre placement  offer from Kreit & Chiu. This experience has given me the confidence to take the next step in my career.</p>
+            <div class="who">Kavya Aggarwal<small>B.Com · Maharaja Agrasen Himalayan Garhwal University · Offer: [Company]</small></div>
+          </div>
+          <div class="quote fade">
+            <div class="stars" aria-hidden="true">★★★★★</div>
+            <p>I’m really happy to receive my ₹10 LPA pre-placement offer from ASA through GCC School. This opportunity has given me a lot of confidence about starting my career.</p>
+            <div class="who">Devesh Sharma<small>B.Com · Banaras Hindu University · Offer: [Company]</small></div>
+          </div>
+          <div class="quote fade">
+            <div class="stars" aria-hidden="true">★★★★★</div>
+            <p>My journey with GCC School has been an incredible experience. I’m proud to have received my pre-placement offer letter from Kreit & Chiu and excited to begin my professional journey.</p>
+            <div class="who">Sumukh Agarwal<small>B.Com · Sardar Bhagat Singh PG College, Kumaun University · Offer: [Company]</small></div>
+          </div>
         </div>
-        <div class="quote fade">
-          <div class="stars" aria-hidden="true">★★★★★</div>
-          <p>“[Student quote placeholder - what changed for them and their family after the Pre-placement job offer
-            letter.]”</p>
-          <div class="who">Student name<small>B.Com · University · Offer: [Company]</small></div>
-        </div>
-        <div class="quote fade">
-          <div class="stars" aria-hidden="true">★★★★★</div>
-          <p>“[Student quote placeholder - training at DLF Cyber City while already hired.]”</p>
-          <div class="who">Student name<small>B.Com · University · Offer: [Company]</small></div>
-        </div>
+        <button type="button" class="quotes-slider-btn quotes-slider-next" id="quotes-slider-next"
+          aria-label="Next quote" title="Next quote">
+          <svg viewBox="0 0 24 24">
+            <polyline points="9 18 15 12 9 6"></polyline>
+          </svg>
+        </button>
       </div>
     </div>
   </section>
@@ -3571,7 +3553,8 @@
         <div class="ph video r-16x9" data-media="campus-video" data-kind="video"
           data-alt="Batch 1 students walking in the GCC School campus at DLF Cyber City">
           <video width="320" height="240" controls>
-            <source src="https://storage.googleapis.com/gcc_prod_static_files_backend/static/videos/Campus%20Video.mp4" type="video/mp4">
+            <source src="https://storage.googleapis.com/gcc_prod_static_files_backend/static/videos/Campus%20Video.mp4"
+              type="video/mp4">
             <!-- <source src="movie.ogg" type="video/ogg"> -->
             Your browser does not support the video tag.
           </video>
@@ -3832,29 +3815,45 @@
     </div>
   </section>
 
-  <!-- ════════════════ FINAL CTA + SECOND FORM ════════════════ -->
-  <section class="sec sec-dark final" aria-labelledby="final-h2" id="apply-2">
+  <!-- ════════════════ FINAL CTA SECTION (BATCH 2 HIRING DRIVE) ════════════════ -->
+  <section class="final-sec" id="apply-bottom" aria-labelledby="final-h2">
     <div class="wrap">
-      <div class="final-in">
-        <div class="fade">
-          <span class="eyebrow">Batch 2 closes <span data-deadline-text>soon</span></span>
-          <h2 id="final-h2" style="margin-top:14px">Batch 1 got hired.<br><span class="gold">Batch 2 is your
-              turn.</span>
+      <div class="final-grid">
+        <!-- Left Column: Copy & Highlights -->
+        <div class="final-copy">
+          <div class="final-badge">BATCH 2 CLOSES <span data-deadline-text>1ST NOVEMBER 2026</span></div>
+          <h2 class="final-title" id="final-h2">
+            Batch 1 got hired.<br>
+            <span class="hl-amber">Batch 2 is your turn.</span>
           </h2>
-          <p>If you're a B.Com & BBA graduate aged 21–30, your ₹10 LPA pre-placement Pre-placement job offer letter
-            starts with this form -
-            before any fee, before any class.</p>
-          <div class="mini">
-            <span>Callback within 2 hours</span>
-            <span>Interview at DLF Cyber City, Gurugram</span>
-          </div>
+          <p class="final-desc">
+            If you're a B.Com &amp; BBA graduate aged 21–30, your ₹10 LPA pre-placement Pre-placement job offer letter starts with this form - before any fee, before any class.
+          </p>
+          <ul class="final-checklist">
+            <li><span class="chk">✓</span> Callback within 2 hours</li>
+            <li><span class="chk">✓</span> Interview at DLF Cyber City, Gurugram</li>
+          </ul>
         </div>
-        <div class="app-card fade">
-          <div class="app-head">
-            <div class="k"><span data-drive-label>Batch 2 Hiring Drive</span> · Free application</div>
-            <div class="t">4 quick steps · interview call within 24 hours</div>
+
+        <!-- Right Column: Same Multi-step Form Card -->
+        <div class="final-form-wrap">
+          <div class="app-shell">
+            <div class="app-card">
+              <div class="app-head">
+                <div class="k"><span data-drive-label>AEUAP BATCH HIRING DRIVE · FREE APPLICATION</span></div>
+                <div class="t">4 quick steps · interview call within 24 hours</div>
+              </div>
+              <div class="app-body">
+                <div class="prog prog-row">
+                  <span class="tick mono prog-tick">STEP 01 / 05</span>
+                  <div class="rail">
+                    <div class="fill prog-fill"></div>
+                  </div>
+                </div>
+                <div class="step-host" aria-live="polite"></div>
+              </div>
+            </div>
           </div>
-          <div class="app-body" id="form-host-2"></div>
         </div>
       </div>
     </div>
@@ -3899,10 +3898,10 @@
       DRIVE_LABEL: 'AEUAP Batch Hiring Drive',        // shown in strip, form header, tracking
       SEATS_LEFT: '',                                   // e.g. '40'. Empty = seats line hidden (never fake this)
       WHATSAPP: '',                                     // e.g. '919876543210'. Empty = WhatsApp button hidden
-      OTP_MODE: 'off',                                  // 'off' = no OTP gate (max conversion) · 'before' = OTP required before submit
+      OTP_MODE: 'before',                                 // 'off' = no OTP gate · 'before' = OTP required before submit
       SOURCE_ID: 15,                                    // CRM source id (unchanged from live page)
       MAX_SLOTS_PER_DAY: 30,
-      QUIZ_URL: './quiz.html'                          // after Register, continue to the full-screen application (quiz.html). Empty = book the slot inline instead
+      QUIZ_URL: ''                                      // Empty = open calendar popup to book interview slot directly on page
     };
 
     /* ═══════════════════════════════════════════════════════════════
@@ -4102,6 +4101,55 @@
       setTimeout(updateControls, 120);
     })();
 
+    /* ════════════════ STUDENT QUOTES SLIDER LOGIC ════════════════ */
+    (function initStudentQuotesSlider() {
+      var strip = document.getElementById('student-quote-strip') || document.querySelector('.quote-strip');
+      var prevBtn = document.getElementById('quotes-slider-prev');
+      var nextBtn = document.getElementById('quotes-slider-next');
+      if (!strip) return;
+
+      function getScrollStep() {
+        var firstCard = strip.querySelector('.quote');
+        if (firstCard) {
+          var gap = 10;
+          return firstCard.offsetWidth + gap;
+        }
+        return strip.clientWidth * 0.8;
+      }
+
+      function updateControls() {
+        if (!prevBtn && !nextBtn) return;
+        var maxScroll = strip.scrollWidth - strip.clientWidth;
+        if (maxScroll <= 4) {
+          if (prevBtn) { prevBtn.disabled = true; prevBtn.setAttribute('aria-disabled', 'true'); }
+          if (nextBtn) { nextBtn.disabled = true; nextBtn.setAttribute('aria-disabled', 'true'); }
+          return;
+        }
+        var atStart = strip.scrollLeft <= 4;
+        var atEnd = strip.scrollLeft >= maxScroll - 6;
+        if (prevBtn) { prevBtn.disabled = atStart; prevBtn.setAttribute('aria-disabled', String(atStart)); }
+        if (nextBtn) { nextBtn.disabled = atEnd; nextBtn.setAttribute('aria-disabled', String(atEnd)); }
+      }
+
+      if (prevBtn) {
+        prevBtn.addEventListener('click', function (e) {
+          e.preventDefault();
+          strip.scrollBy({ left: -getScrollStep(), behavior: 'smooth' });
+        });
+      }
+
+      if (nextBtn) {
+        nextBtn.addEventListener('click', function (e) {
+          e.preventDefault();
+          strip.scrollBy({ left: getScrollStep(), behavior: 'smooth' });
+        });
+      }
+
+      strip.addEventListener('scroll', updateControls, { passive: true });
+      window.addEventListener('resize', updateControls, { passive: true });
+      setTimeout(updateControls, 120);
+    })();
+
     /* ════════════════ CITY AUTOCOMPLETE ════════════════ */
     var CITY_TO_STATE = {};
     (function () {
@@ -4128,279 +4176,714 @@
       return { city: city, state: state };
     }
 
-    /* ════════════════ LEAD FORM ENGINE (mounted twice) ════════════════ */
-    var LEAD = { submitted: false, serverId: null, slotData: [], leadId: null, name: '', started: false, otpVerified: false, qualifiedFired: false };
-    var FORMS = [];
-    function esc(s) { return String(s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
-    function cleanPhone(v) { return String(v).replace(/\D/g, '').replace(/^(91|0)(?=[6-9]\d{9}$)/, ''); }
+    /* ════════════════ MULTI-STEP APPLICATION ENGINE ════════════════ */
+    (function () {
+      var appCards = document.querySelectorAll('.app-card');
+      if (!appCards.length) return;
 
-    /* ════════════════ MULTI-STEP APPLICATION ENGINE (mounted twice) ════════════════
-       Steps 1–3 are single-tap questions (auto-advance). Step 4 is contact + submit.
-       Nothing disqualifies - every answer is accepted and graded for the sales team. */
-    var STEPS = [
-      {
-        id: 'degree', kicker: 'Step 1 of 4 · Eligibility', title: 'What is your highest education?',
-        opts: ['B.Com — completed', 'B.Com — final year', 'M.Com / commerce PG (after B.Com)', 'Other degree / 12th pass']
-      },
-      {
-        id: 'age_range', kicker: 'Step 2 of 4 · Eligibility', title: 'What is your age?',
-        opts: ['21 – 24', '25 – 30', 'Under 21', 'Over 30']
-      },
-      {
-        id: 'fund_mode', kicker: 'Step 3 of 4 · The hire-first model', title: 'After your Pre-placement job offer letter, how would you plan the program fee?',
-        note: '<ul><li>₹10 LPA pre-placement Pre-placement job offer letter first - <b>free</b></li><li>1-year ' + CONFIG.PROGRAM + ' fee of ₹9,00,000 + GST is payable <b>only after</b> that</li><li><b>100% education loan</b> via Credila / IDFC First - EMI starts after 15 months</li></ul>',
-        opts: ['Self / family funding', 'Education loan - need assistance', 'Not decided yet - want to discuss options']
-      }
-    ];
-    var TOTAL = STEPS.length + 1;
-    function pad2(n) { return String(n).padStart(2, '0'); }
+      var QUESTIONS = [
+        {
+          id: 'education', kicker: 'Eligibility check 1 of 2', title: 'What is your highest education?',
+          opts: [
+            { v: 'B.Com — completed', s: 30 },
+            { v: 'B.Com — final year', s: 20 },
+            { v: 'M.Com / commerce PG (after B.Com)', s: 25 },
+            { v: 'Other degree / 12th pass', dq: 'education' }
+          ]
+        },
+        {
+          id: 'age_band', kicker: 'Eligibility check 2 of 2', title: 'What is your age?',
+          opts: [
+            { v: '18 – 24', s: 20 },
+            { v: '21 – 30', s: 18 },
+            { v: 'Under 21', dq: 'age' },
+            { v: 'Over 30', dq: 'age' }
+          ]
+        },
+        {
+          id: 'status', kicker: 'About you', title: 'Which describes you right now?',
+          opts: [
+            { v: 'Fresher — looking for my first job', s: 12 },
+            { v: 'Working — want a better finance role', s: 10 },
+            { v: 'B.Com final-year student', s: 6 }
+          ]
+        },
+        {
+          id: 'funding', kicker: 'The hire-first model', title: 'How would you fund the program fee after your offer letter?',
+          note: '<ul style="margin: 0; padding-left: 18px; text-align: left;"><li> ₹10 LPA pre-placement offer letter first — free</li><li>The 1-year ' + (CONFIG.PROGRAM || 'AEUAP') + ' fee of ₹9,00,000 + GST is payable only after that</li><li><b>100% Education loan by Credila &amp; IDFC Bank (EMI starts after 15 months)</b></li></ul>',
+          opts: [
+            { v: 'Self / family funding', s: 30 },
+            { v: 'Education loan — need assistance', s: 22 },
+            { v: "I can't invest in a paid program", dq: 'funding' }
+          ]
+        }
+      ];
+      var TOTAL = QUESTIONS.length + 1; // + contact step
+      var DQ_MSG = {
+        education: { h: 'This drive is for B.Com graduates', p: 'The ' + (CONFIG.DRIVE_LABEL || 'AEUAP Hiring Drive') + ' is exclusively for B.Com graduates (completed or final year), including commerce PGs who did B.Com. Keep an eye out — GCC School runs programs for other profiles too.' },
+        age: { h: 'This drive hires in the 21–30 band', p: 'Companies in this drive are hiring for entry-level and early-career ₹10 LPA roles, so applications are limited to candidates aged 21–30.' },
+        funding: { h: (CONFIG.PROGRAM || 'AEUAP') + ' is a paid, hire-first program', p: 'The 1-year program carries a fee of ₹9,00,000 + GST — payable only after your offer letter, with education-loan options. Without a funding plan, the drive won\u2019t be the right fit right now.' }
+      };
 
-    function contactHTML(uid, c) {
-      var otp = CONFIG.OTP_MODE === 'before'
-        ? '<div class="fl" data-f="otp" style="display:none"><span>Enter the OTP sent on WhatsApp / SMS</span><div class="otp-row"><input class="fi" name="otp" type="text" inputmode="numeric" maxlength="6" placeholder="6-digit OTP" autocomplete="one-time-code"><button type="button" class="btn btn-purple" data-act="verify">Verify</button></div><em class="fe">Invalid OTP</em><span class="otp-ok" style="display:none">✓ Number verified</span></div>'
-        : '';
-      var otpBtn = CONFIG.OTP_MODE === 'before' ? '<button type="button" class="btn btn-purple" data-act="sendotp" style="padding:0 14px;font-size:13px;border-radius:10px;white-space:nowrap">Send OTP</button>' : '';
-      return '' +
-        '<div class="step"><div class="q-kicker">Step 4 of 4 · Last step</div><div class="q-title">Where do we send your interview call &amp; slot?</div>' +
-        '<form class="lf" id="' + uid + '" novalidate style="margin-top:14px">' +
-        '<div class="lf-2">' +
-        '<div class="fl" data-f="name"><span>Full name</span><input class="fi" name="name" type="text" autocomplete="name" placeholder="e.g. Priya Sharma" value="' + esc(c.name || '') + '" required><em class="fe">Please enter your full name</em></div>' +
-        '<div class="fl" data-f="phone"><span>WhatsApp number</span><div style="display:flex;gap:8px"><div class="fi-wrap" style="flex:1"><span class="pre">+91</span><input class="fi" name="phone" type="tel" inputmode="numeric" autocomplete="tel-national" maxlength="10" placeholder="10-digit mobile number" value="' + esc(c.phone || '') + '" required></div>' + otpBtn + '</div><em class="fe">Enter a valid 10-digit mobile number</em></div>' +
-        '</div>' +
-        otp +
-        '<div class="lf-2">' +
-        '<div class="fl" data-f="city"><span>Your city</span><input class="fi" name="city" list="city-list" autocomplete="address-level2" placeholder="Start typing - e.g. Gurugram" value="' + esc(c.city || '') + '" required><em class="fe">Please enter your city</em></div>' +
-        '<div class="fl" data-f="email"><span>Email <i>(optional)</i></span><input class="fi" name="email" type="email" autocomplete="email" placeholder="you@example.com" value="' + esc(c.email || '') + '"><em class="fe">Enter a valid email</em></div>' +
-        '</div>' +
-        '<div class="hp" aria-hidden="true"><input type="text" name="website" tabindex="-1" autocomplete="off"></div>' +
-        '<button type="submit" class="btn btn-amber btn-xl btn-pulse">Register →</button>' +
-        '<div class="trust-row"><span>Free to apply</span><span>No fee before Pre-placement job offer letter</span><span>Callback in 24 hrs</span></div>' +
-        '<p class="consent">🔒 Your details stay private. By applying you agree to be contacted by GCC School about this drive via call, WhatsApp and email.</p>' +
-        '<div class="step-foot"><button type="button" class="back-lk" data-back>← Back</button><span>Step 4 of 4</span></div>' +
-        '</form></div>';
-    }
+      function pad2(n) { return String(n).padStart(2, '0'); }
+      function esc(s) { return String(s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
+      function cleanPhone(v) { return (v || '').replace(/\D/g, '').replace(/^(91|0)(?=[6-9]\d{9}$)/, ''); }
 
-    function mountForm(host, uid) {
-      var F = { host: host, uid: uid, idx: 0, answers: {}, contact: {} };
-      FORMS.push(F);
+      appCards.forEach(function (card) {
+        initSingleForm(card);
+      });
 
-      function prog() {
-        var n = Math.min(F.idx + 1, TOTAL);
-        return '<div class="prog"><span class="tick">STEP ' + pad2(n) + ' / ' + pad2(TOTAL) + '</span><div class="rail"><div class="fill" style="width:' + Math.round(n / TOTAL * 100) + '%"></div></div></div>';
-      }
-      function startOnce() { if (!LEAD.started) { LEAD.started = true; trk('StartApplication', { content_name: CONFIG.DRIVE_LABEL, form: uid }); } }
+      function initSingleForm(card) {
+        var host = card.querySelector('.step-host') || card.querySelector('#step-host');
+        if (!host) return;
+        var fill = card.querySelector('.prog-fill') || card.querySelector('#prog-fill');
+        var tickEl = card.querySelector('.prog-tick') || card.querySelector('#prog-tick');
+        var progRow = card.querySelector('.prog-row') || card.querySelector('#prog-row');
 
-      /* ── steps 1–3: one tap each ── */
-      function renderChoice() {
-        var q = STEPS[F.idx], cur = F.answers[q.id];
-        var h = prog() + '<div class="step"><div class="q-kicker">' + esc(q.kicker) + '</div><div class="q-title">' + esc(q.title) + '</div>'
-          + (q.note ? '<div class="q-note">' + q.note + '</div>' : '')
-          + '<div class="opts" role="radiogroup" aria-label="' + esc(q.title) + '">';
-        q.opts.forEach(function (o, i) {
-          h += '<button type="button" class="opt' + (cur === o ? ' sel' : '') + '" role="radio" aria-checked="' + (cur === o) + '" data-i="' + i + '"><span class="ring" aria-hidden="true"></span><span>' + esc(o) + '</span></button>';
-        });
-        h += '</div><div class="step-foot">' + (F.idx > 0 ? '<button type="button" class="back-lk" data-back>← Back</button>' : '<span></span>') + '</div></div>';
-        host.innerHTML = h;
-        host.querySelectorAll('.opt').forEach(function (b) {
-          b.addEventListener('click', function () {
-            startOnce();
-            host.querySelectorAll('.opt').forEach(function (x) { x.classList.remove('sel'); x.setAttribute('aria-checked', 'false'); });
-            b.classList.add('sel'); b.setAttribute('aria-checked', 'true');
-            F.answers[q.id] = q.opts[+b.dataset.i];
-            trk('ApplicationStep', { step: F.idx + 1, question: q.id, form: uid });
-            if (q.id === 'fund_mode' && !LEAD.qualifiedFired) { LEAD.qualifiedFired = true; trk('QualifiedProspect', { content_name: CONFIG.DRIVE_LABEL }); }
-            setTimeout(function () { F.idx++; (F.idx < STEPS.length) ? renderChoice() : renderContact(); }, 220);
+        var state = { idx: 0, answers: {}, score: 0, tags: [], started: false, qualifiedFired: false, submitted: false, isPhoneVerified: false };
+
+        function setProg() {
+          if (tickEl) tickEl.textContent = 'STEP ' + pad2(Math.min(state.idx + 1, TOTAL)) + ' / ' + pad2(TOTAL);
+          if (fill) fill.style.width = Math.round((Math.min(state.idx + 1, TOTAL) / TOTAL) * 100) + '%';
+        }
+
+        function renderChoice() {
+          var q = QUESTIONS[state.idx];
+          var html = '<div class="step">'
+            + '<div class="q-kicker">' + esc(q.kicker) + '</div>'
+            + '<div class="q-title">' + esc(q.title) + '</div>'
+            + (q.note ? '<div class="q-note">' + q.note + '</div>' : '')
+            + '<div class="opts" role="radiogroup" aria-label="' + esc(q.title) + '">';
+          q.opts.forEach(function (o, i) {
+            html += '<button type="button" class="opt" role="radio" aria-checked="false" data-i="' + i + '"><span class="ring" aria-hidden="true"></span><span>' + esc(o.v) + '</span></button>';
           });
-        });
-        var bb = host.querySelector('[data-back]'); if (bb) bb.addEventListener('click', function () { F.idx--; renderChoice(); });
-      }
+          html += '</div><div class="step-foot">'
+            + (state.idx > 0 ? '<button type="button" class="back-lk back-btn">← Back</button>' : '<span></span>')
+            + '<span class="secure">🔒 Free · 60 sec</span></div></div>';
+          host.innerHTML = html;
+          setProg();
+          host.querySelectorAll('.opt').forEach(function (btn) {
+            btn.addEventListener('click', function () { pick(q, q.opts[+btn.dataset.i], btn); });
+          });
+          var bb = host.querySelector('.back-btn');
+          if (bb) bb.addEventListener('click', goBack);
+        }
 
-      /* ── step 4: contact + submit ── */
-      function renderContact() {
-        host.innerHTML = prog() + contactHTML(uid, F.contact);
-        var form = host.querySelector('form');
-        function fl(k) { return form.querySelector('[data-f="' + k + '"]'); }
-        function setErr(k, on, msg) { var el = fl(k); if (!el) return; el.classList.toggle('err', !!on); if (msg) el.querySelector('.fe').textContent = msg; }
+        function pick(q, o, btn) {
+          if (!state.started) { state.started = true; trk('StartApplication', { content_name: CONFIG.DRIVE_LABEL }); }
+          host.querySelectorAll('.opt').forEach(function (b) { b.classList.remove('sel'); b.setAttribute('aria-checked', 'false'); });
+          btn.classList.add('sel'); btn.setAttribute('aria-checked', 'true');
+          setTimeout(function () {
+            if (o.dq) { state.answers[q.id] = o.v; trk('DisqualifiedLead', { reason: o.dq, step: state.idx + 1 }); renderDQ(o.dq); return; }
+            if (state.answers['_s_' + q.id]) state.score -= state.answers['_s_' + q.id];
+            state.answers[q.id] = o.v; state.answers['_s_' + q.id] = o.s || 0; state.score += (o.s || 0);
+            if (o.tag && state.tags.indexOf(o.tag) < 0) state.tags.push(o.tag);
+            trk('ApplicationStep', { step: state.idx + 1, question: q.id });
+            if (q.id === 'funding' && !state.qualifiedFired) { state.qualifiedFired = true; trk('QualifiedProspect', { content_name: CONFIG.DRIVE_LABEL }); }
+            state.idx++;
+            (state.idx < QUESTIONS.length) ? renderChoice() : renderContact();
+          }, 240);
+        }
 
-        form.querySelectorAll('.fi').forEach(function (inp) {
-          inp.addEventListener('input', function () { setErr(inp.name, false); F.contact[inp.name] = inp.value; });
-        });
-        form.querySelector('[name="phone"]').addEventListener('input', function (e) { e.target.value = e.target.value.replace(/\D/g, '').slice(0, 10); F.contact.phone = e.target.value; });
-        host.querySelector('[data-back]').addEventListener('click', function () { F.idx--; renderChoice(); });
-        setTimeout(function () { var n = form.querySelector('[name="name"]'); if (n && !n.value) n.focus({ preventScroll: true }); }, 260);
+        function goBack() { if (state.idx > 0) { state.idx--; renderChoice(); } }
 
-        /* OTP (only when CONFIG.OTP_MODE === 'before') */
-        var sendBtn = form.querySelector('[data-act="sendotp"]'), verBtn = form.querySelector('[data-act="verify"]');
-        if (sendBtn) sendBtn.addEventListener('click', function () {
-          var mobile = cleanPhone(form.phone.value);
-          if (!/^[6-9]\d{9}$/.test(mobile)) { setErr('phone', true, 'Enter a valid 10-digit mobile number to send OTP'); return; }
-          sendBtn.disabled = true; sendBtn.textContent = 'Sending…';
-          fetch('https://gccschool.com/api/otp/send', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ mobile: mobile }) })
-            .then(function (r) { return r.json(); }).then(function (d) {
-              if (d && d.success) { fl('otp').style.display = ''; sendBtn.textContent = 'Resend'; form.otp.focus(); }
-              else { setErr('phone', true, (d && (d.statusMessage || d.message)) || 'Could not send OTP. Try again.'); sendBtn.textContent = 'Send OTP'; }
-            }).catch(function () { setErr('phone', true, 'Network error. Please try again.'); sendBtn.textContent = 'Send OTP'; })
-            .finally(function () { sendBtn.disabled = false; });
-        });
-        if (verBtn) verBtn.addEventListener('click', function () {
-          var mobile = cleanPhone(form.phone.value), otp = form.otp.value.trim();
-          if (otp.length < 4) { setErr('otp', true, 'Enter the complete OTP'); return; }
-          verBtn.disabled = true; verBtn.textContent = 'Verifying…';
-          fetch('https://gccschool.com/api/otp/verify', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ mobile: mobile, otp: otp }) })
-            .then(function (r) { return r.json(); }).then(function (d) {
-              if (d && d.success) { LEAD.otpVerified = true; fl('otp').querySelector('.otp-row').style.display = 'none'; fl('otp').querySelector('.otp-ok').style.display = ''; sendBtn.style.display = 'none'; form.phone.readOnly = true; setErr('otp', false); }
-              else { setErr('otp', true, (d && (d.statusMessage || d.message)) || 'Invalid OTP.'); }
-            }).catch(function () { setErr('otp', true, 'Network error. Please try again.'); })
-            .finally(function () { verBtn.disabled = false; verBtn.textContent = 'Verify'; });
-        });
+        function renderDQ(reason) {
+          var m = DQ_MSG[reason];
+          if (progRow) progRow.style.visibility = 'hidden';
+          host.innerHTML = '<div class="state-wrap"><div class="state-ic no">!</div>'
+            + '<h3>' + esc(m.h) + '</h3><p>' + esc(m.p) + '</p>'
+            + '<div class="step-foot" style="justify-content:center;margin-top:18px"><button type="button" class="back-lk dq-back">← I chose the wrong option</button></div></div>';
+          var dqb = host.querySelector('.dq-back');
+          if (dqb) dqb.addEventListener('click', function () { if (progRow) progRow.style.visibility = 'visible'; renderChoice(); });
+        }
 
-        form.addEventListener('submit', function (e) {
-          e.preventDefault();
-          if (LEAD.submitted) return;
-          var name = form.name.value.trim(), phone = cleanPhone(form.phone.value), email = form.email.value.trim(),
-            loc = splitCity(form.city.value), ok = true, firstBad = null;
-          function bad(k, msg) { setErr(k, true, msg); ok = false; if (!firstBad) firstBad = fl(k); }
-          if (name.length < 3) bad('name');
-          if (!/^[6-9]\d{9}$/.test(phone)) bad('phone', 'Enter a valid 10-digit mobile number');
-          if (CONFIG.OTP_MODE === 'before' && !LEAD.otpVerified) bad('phone', 'Please verify your number with the OTP first');
-          if (!loc.city) bad('city');
-          if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) bad('email');
-          if (form.website.value) return;                            /* honeypot - silently drop bots */
-          if (!ok) { trk('FormError', { form: uid }); firstBad.scrollIntoView({ behavior: 'smooth', block: 'center' }); var i = firstBad.querySelector('.fi'); if (i) i.focus({ preventScroll: true }); return; }
+        function renderContact() {
+          var html = '<div class="step">'
+            + '<div class="q-kicker">Final step — you\u2019re eligible ✓</div>'
+            + '<div class="q-title">Where do we send your drive seat &amp; test schedule?</div>'
+            + '<form class="lead-form-dummy" onsubmit="return false;">'
+            + '<div class="f-stack">'
+            + '<input class="f-in f-name" type="text" placeholder="Full name" autocomplete="name"><span class="f-err e-name">Please enter your full name</span>'
+            + '<div class="otp-wrap">'
+            + '<input class="f-in f-phone" type="tel" placeholder="WhatsApp / phone number" autocomplete="tel" inputmode="numeric" maxlength="14" style="flex: 1; min-width: 0;">'
+            + '<button type="button" class="btn btn-otp-send send-otp-btn">Send OTP</button>'
+            + '</div>'
+            + '<span class="f-err e-phone">Enter a valid 10-digit Indian mobile number</span>'
+            + '<div class="otp-wrap otp-section" style="display: none; margin-top: 4px;">'
+            + '<input class="f-in f-otp" type="text" placeholder="Enter 4-digit OTP" autocomplete="one-time-code" inputmode="numeric" maxlength="6" style="flex: 1; min-width: 0; letter-spacing: 0.08em; font-weight: 600;">'
+            + '<button type="button" class="btn btn-otp-verify verify-otp-btn">Verify OTP</button>'
+            + '</div>'
+            + '<span class="f-err e-otp">Invalid OTP</span>'
+            + '<div class="otp-success-badge e-otp-success">✓ Phone number verified successfully</div>'
+            + '<input class="f-in f-email" type="email" placeholder="Email address" autocomplete="email"><span class="f-err e-email">Enter a valid email</span>'
+            + '<select class="f-in f-state" name="state" required><option value="" disabled selected>State</option></select><span class="f-err e-state">Please select your state</span>'
+            + '<select class="f-in f-city" name="city" required><option value="" disabled selected>City</option></select><span class="f-err e-city">Please select your city</span>'
+            + '<div class="hp-field" aria-hidden="true"><input type="text" class="f-web" tabindex="-1" autocomplete="off"></div>'
+            + '<button type="button" class="btn btn-amber submit-btn" style="width:100%;margin-top:4px">Book Interview Slot →</button>'
+            + '</div>'
+            + '<p class="consent">By submitting, you agree to be contacted by GCC School about this drive via call, WhatsApp and email.</p>'
+            + '<div class="step-foot"><button type="button" class="back-lk back-btn">← Back</button><span class="secure">🔒 Your details stay private</span></div>'
+            + '</form>'
+            + '<div class="form-success-dummy" style="display:none; text-align:center; padding: 20px;"><div class="state-ic ok" style="margin: 0 auto 16px; width:64px; height:64px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:29px; background:var(--green); color:#fff;">✓</div><h3 style="font-size:21px;font-weight:800;color:var(--ink);margin-bottom:9px;">Application Submitted</h3><p style="font-size:14px;color:var(--ink-2);line-height:1.65;max-width:340px;margin:0 auto;"></p></div>'
+            + '</div>';
+          host.innerHTML = html; setProg();
 
-          LEAD.submitted = true; LEAD.name = name;
-          LEAD.leadId = CONFIG.PROGRAM + '-' + Date.now().toString(36).toUpperCase() + Math.random().toString(36).slice(2, 5).toUpperCase();
-          var btn = form.querySelector('[type="submit"]'); btn.disabled = true; btn.classList.remove('btn-pulse'); btn.textContent = 'Submitting your application…';
-
-          var A = F.answers, inAge = (A.age_range === '21 – 24' || A.age_range === '25 – 30'), bcom = A.degree && A.degree.indexOf('Other') < 0;
-          var grade = (bcom && inAge) ? (A.fund_mode && A.fund_mode.indexOf('Not decided') < 0 ? 'A' : 'B') : 'C';
-          var payload = Object.assign({
-            lead_id: LEAD.leadId, full_name: name, name: name, phone: phone, email: email, state: loc.state, city: loc.city,
-            source: CONFIG.SOURCE_ID, degree: A.degree || '', education: A.degree || '', age_range: A.age_range || '', age_band: A.age_range || '',
-            degree_stage: '', fund_mode: A.fund_mode || '', funding: A.fund_mode || '', attend_from: '',
-            lead_grade: grade, drive: CONFIG.DRIVE_LABEL, form_position: uid,
-            page_url: location.href, referrer: document.referrer || '',
-            ts_ist: new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' }), user_agent: navigator.userAgent
-          }, getTrackingParams());
-
-          /* THE conversion event - point Meta / Google optimisation at this */
-          trk('Lead', { content_name: CONFIG.DRIVE_LABEL, lead_grade: grade, city: loc.city, state: loc.state, education: A.degree, funding: A.fund_mode, value: grade === 'A' ? 100 : (grade === 'B' ? 60 : 30), currency: 'INR' }, true);
-          trk('generate_lead', { lead_grade: grade, form: uid, city: loc.city });
-
-          function post() {
-            return fetch(API_BASE + '/api/career/createdossiercustomform', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) })
-              .then(function (r) { return r.json(); });
+          var stateEl = host.querySelector('.f-state');
+          var cityEl = host.querySelector('.f-city');
+          var scData = window.STATE_CITY_DATA;
+          if (scData && stateEl) {
+            Object.keys(scData).sort().forEach(function (s) {
+              var o = document.createElement('option');
+              o.value = s; o.textContent = s;
+              stateEl.appendChild(o);
+            });
+            stateEl.addEventListener('change', function () {
+              cityEl.innerHTML = '<option value="" disabled selected>Select City</option>';
+              var cities = scData[stateEl.value] || [];
+              cities.slice().sort().forEach(function (c) {
+                var o = document.createElement('option');
+                o.value = c; o.textContent = c;
+                cityEl.appendChild(o);
+              });
+              err('city', false);
+            });
           }
-          post().catch(function () { return new Promise(function (res) { setTimeout(res, 1500); }).then(post); })
-            .then(function (result) {
-              if (result && result.success && result.data) { LEAD.serverId = result.data.id; LEAD.slotData = result.data.slot_data || []; }
-            })
-            .catch(function () { /* lead events already fired; continue to success so the user is never stuck */ })
-            .then(function () {
-              FORMS.forEach(function (o) { if (o !== F) o.host.innerHTML = '<div class="already">✓ You’ve already applied, ' + esc(name.split(' ')[0]) + '. Check your first form above for your interview date.</div>'; });
-              if (CONFIG.QUIZ_URL) {
-                /* hand the lead to the full-screen application page */
-                try {
-                  sessionStorage.setItem('gcc_lead', JSON.stringify({
-                    leadId: LEAD.leadId, serverId: LEAD.serverId, slotData: LEAD.slotData, name: name, phone: phone, email: email,
-                    city: loc.city, state: loc.state, degree: A.degree || '', age_range: A.age_range || '', fund_mode: A.fund_mode || '',
-                    tracking: getTrackingParams()
-                  }));
-                } catch (e) { }
-                btn.textContent = 'Opening your application…';
-                location.href = CONFIG.QUIZ_URL + (CONFIG.QUIZ_URL.indexOf('?') > -1 ? '&' : '?') + 'lid=' + encodeURIComponent(LEAD.leadId);
+
+          var backBtn = host.querySelector('.back-btn');
+          if (backBtn) backBtn.addEventListener('click', function () { state.idx--; renderChoice(); });
+          var submitBtn = host.querySelector('.submit-btn');
+          if (submitBtn) submitBtn.addEventListener('click', submit);
+          host.querySelectorAll('.f-in').forEach(function (inp) {
+            inp.addEventListener('keydown', function (e) { if (e.key === 'Enter') submit(); });
+            inp.addEventListener('input', function () {
+              var m = inp.className.match(/f-([a-z]+)/);
+              if (m && m[1]) err(m[1], false);
+            });
+          });
+
+          // OTP Logic
+          state.isPhoneVerified = false;
+          var sendOtpBtn = host.querySelector('.send-otp-btn');
+          var verifyOtpBtn = host.querySelector('.verify-otp-btn');
+          var otpSection = host.querySelector('.otp-section');
+          var phoneInp = host.querySelector('.f-phone');
+          var otpInp = host.querySelector('.f-otp');
+          var eOtpSuccess = host.querySelector('.e-otp-success');
+
+          if (sendOtpBtn) {
+            sendOtpBtn.addEventListener('click', async function () {
+              var mobile = cleanPhone(phoneInp.value);
+              if (!/^[6-9]\d{9}$/.test(mobile)) {
+                err('phone', true);
+                var ep = host.querySelector('.e-phone');
+                if (ep) ep.textContent = "Enter a valid 10-digit mobile number to send OTP";
                 return;
               }
-              if (LEAD.serverId) renderCalendar(F); else renderDone(F, false);
-              host.scrollIntoView({ behavior: 'smooth', block: 'center' });
+              sendOtpBtn.disabled = true;
+              sendOtpBtn.textContent = 'Sending...';
+
+              try {
+                var res = await fetch('https://gccschool.com/api/otp/send', {
+                  method: 'POST',
+                  headers: { 'Content-Type': 'application/json' },
+                  body: JSON.stringify({ mobile: mobile })
+                });
+                var data = await res.json();
+                if (res.ok && data.success) {
+                  otpSection.style.display = 'flex';
+                  sendOtpBtn.textContent = 'Resend OTP';
+                  err('phone', false);
+                  otpInp.focus();
+                } else {
+                  err('phone', true);
+                  var ep = host.querySelector('.e-phone');
+                  if (ep) ep.textContent = data.statusMessage || data.message || "Failed to send OTP.";
+                  sendOtpBtn.textContent = 'Send OTP';
+                }
+              } catch (e) {
+                err('phone', true);
+                var ep = host.querySelector('.e-phone');
+                if (ep) ep.textContent = "Network error. Please try again.";
+                sendOtpBtn.textContent = 'Send OTP';
+              }
+              sendOtpBtn.disabled = false;
             });
+          }
+
+          if (verifyOtpBtn) {
+            verifyOtpBtn.addEventListener('click', async function () {
+              var mobile = cleanPhone(phoneInp.value);
+              var otp = otpInp.value.trim();
+              if (otp.length < 4) {
+                err('otp', true);
+                var eo = host.querySelector('.e-otp');
+                if (eo) eo.textContent = "Enter the complete OTP";
+                return;
+              }
+              verifyOtpBtn.disabled = true;
+              verifyOtpBtn.textContent = 'Verifying...';
+
+              try {
+                var res = await fetch('https://gccschool.com/api/otp/verify', {
+                  method: 'POST',
+                  headers: { 'Content-Type': 'application/json' },
+                  body: JSON.stringify({ mobile: mobile, otp: otp })
+                });
+                var data = await res.json();
+                if (res.ok && data.success) {
+                  state.isPhoneVerified = true;
+                  otpSection.style.display = 'none';
+                  sendOtpBtn.style.display = 'none';
+                  phoneInp.disabled = true;
+                  phoneInp.style.backgroundColor = '#f1f5f9';
+                  if (eOtpSuccess) eOtpSuccess.style.display = 'block';
+                  err('otp', false);
+                  err('phone', false);
+                } else {
+                  err('otp', true);
+                  var eo = host.querySelector('.e-otp');
+                  if (eo) eo.textContent = data.statusMessage || data.message || "Invalid OTP.";
+                }
+              } catch (e) {
+                err('otp', true);
+                var eo = host.querySelector('.e-otp');
+                if (eo) eo.textContent = "Network error. Please try again.";
+              }
+              verifyOtpBtn.disabled = false;
+              if (!state.isPhoneVerified) verifyOtpBtn.textContent = 'Verify';
+            });
+          }
+
+          var fn = host.querySelector('.f-name');
+          if (fn) fn.focus();
+        }
+
+        function err(key, on) {
+          var e = host.querySelector('.e-' + key) || host.querySelector('#e-' + key);
+          var f = host.querySelector('.f-' + key) || host.querySelector('#f-' + key);
+          if (e) e.style.display = on ? 'block' : 'none';
+          if (f) f.style.borderColor = on ? 'var(--red)' : '';
+        }
+
+        function submit() {
+          if (state.submitted) return;
+          var nameInp = host.querySelector('.f-name');
+          var phoneInp = host.querySelector('.f-phone');
+          var emailInp = host.querySelector('.f-email');
+          var stateInp = host.querySelector('.f-state');
+          var cityInp = host.querySelector('.f-city');
+          var webInp = host.querySelector('.f-web');
+
+          var name = (nameInp ? nameInp.value.trim() : ''),
+            phone = cleanPhone(phoneInp ? phoneInp.value : ''),
+            email = (emailInp ? emailInp.value.trim() : ''),
+            stateSel = (stateInp ? stateInp.value : ''),
+            city = (cityInp ? cityInp.value : ''),
+            hp = (webInp ? webInp.value : '');
+
+          var ok = true;
+          if (name.length < 3) { err('name', true); ok = false; }
+          if (!/^[6-9]\d{9}$/.test(phone)) { err('phone', true); ok = false; }
+          if (!state.isPhoneVerified) {
+            err('phone', true);
+            var ePhone = host.querySelector('.e-phone');
+            if (ePhone) ePhone.textContent = "Please verify your mobile number with OTP first.";
+            ok = false;
+          }
+          if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { err('email', true); ok = false; }
+          if (!stateSel) { err('state', true); ok = false; }
+          if (!city) { err('city', true); ok = false; }
+          if (!ok || hp) return;                      /* hp filled = bot; silently drop */
+          state.submitted = true;
+          var subBtn = host.querySelector('.submit-btn');
+          if (subBtn) subBtn.textContent = 'Booking your seat…';
+
+          var grade = state.score >= 80 ? 'A' : (state.score >= 60 ? 'B' : 'C');
+          var leadId = (CONFIG.PROGRAM || 'AEUAP') + '-' + Date.now().toString(36).toUpperCase() + Math.random().toString(36).slice(2, 5).toUpperCase();
+          var u = new URLSearchParams(location.search);
+          var payload = {
+            lead_id: leadId, name: name, phone: phone, email: email, state: stateSel, city: city,
+            education: state.answers.education || '', age_band: state.answers.age_band || '',
+            status: state.answers.status || '', funding: state.answers.funding || '', attend: state.answers.attend || '',
+            lead_score: state.score, lead_grade: grade, tags: state.tags.join('|'),
+            drive: CONFIG.DRIVE_LABEL,
+            utm_source: u.get('utm_source') || '', utm_medium: u.get('utm_medium') || '',
+            utm_campaign: u.get('utm_campaign') || '', utm_content: u.get('utm_content') || '',
+            utm_term: u.get('utm_term') || '', fbclid: u.get('fbclid') || '',
+            page_url: location.href, referrer: document.referrer || '',
+            ts_ist: new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' }),
+            user_agent: navigator.userAgent
+          };
+
+          trk('Lead', {
+            content_name: CONFIG.DRIVE_LABEL, lead_grade: grade, lead_score: state.score,
+            education: payload.education, funding: payload.funding, value: grade === 'A' ? 100 : (grade === 'B' ? 60 : 30), currency: 'INR'
+          }, true);
+          trk('generate_lead', { lead_grade: grade, lead_score: state.score });
+
+          var baseUrl = window.GCC_Base_url || API_BASE;
+          var apiPayload = Object.assign({}, payload, {
+            full_name: name,
+            email: email,
+            phone: phone,
+            state: stateSel,
+            city: city,
+            source: CONFIG.SOURCE_ID || 15,
+            degree: state.answers.education || "",
+            age_range: state.answers.age_band || "",
+            degree_stage: state.answers.status || "",
+            fund_mode: state.answers.funding || "",
+            attend_from: state.answers.attend || ""
+          }, getTrackingParams());
+
+          var formEl = host.querySelector('.lead-form-dummy');
+          var successEl = host.querySelector('.form-success-dummy');
+
+          fetch(baseUrl + '/api/career/createdossiercustomform', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(apiPayload)
+          })
+            .then(function (res) { return res.json(); })
+            .then(function (result) {
+              if (subBtn) subBtn.textContent = 'Book my drive seat →';
+              if (result.success && result.data && window.openCalendarPopup) {
+                window.openCalendarPopup(result.data.id, result.data.slot_data || [], formEl, successEl, leadId, renderFormDone);
+              } else if (window.openCalendarPopup) {
+                window.openCalendarPopup(null, [], formEl, successEl, leadId, renderFormDone);
+              } else {
+                renderFormDone(leadId, name);
+              }
+            })
+            .catch(function (e) {
+              if (subBtn) subBtn.textContent = 'Book my drive seat →';
+              if (window.openCalendarPopup) {
+                window.openCalendarPopup(null, [], formEl, successEl, leadId, renderFormDone);
+              } else {
+                renderFormDone(leadId, name);
+              }
+            });
+        }
+
+        function renderFormDone(leadId, name, bookedDate) {
+          if (progRow) progRow.style.visibility = 'hidden';
+          var first = (name || '').split(' ')[0] || 'there';
+          var wa = '';
+          if (CONFIG.WHATSAPP) {
+            var msg = encodeURIComponent('Hi, I\u2019ve applied for the ' + CONFIG.DRIVE_LABEL + '. My application ID is ' + leadId + (bookedDate ? ' and my interview date is ' + bookedDate : '') + '. Please confirm my drive seat.');
+            wa = '<a class="btn wa-btn" href="https://wa.me/' + CONFIG.WHATSAPP + '?text=' + msg + '" target="_blank" rel="noopener">Confirm on WhatsApp →</a>';
+          }
+          host.innerHTML = '<div class="state-wrap"><div class="state-ic ok">✓</div>'
+            + '<h3>Seat request received, ' + esc(first) + '!</h3>'
+            + '<p>' + (bookedDate ? 'Your interview slot is confirmed for <b>' + bookedDate + '</b>. ' : 'You\u2019ve cleared the eligibility check. ') + 'Keep your phone on — here\u2019s what happens next.</p>'
+            + '<span class="lead-ref">Application ID · ' + leadId + '</span>'
+            + '<div class="next-list">'
+            + '<div class="n"><span class="d">24h</span><span><b>Our team calls you</b> to confirm your seat' + (bookedDate ? '' : ' and schedule your eligibility test') + '.</span></div>'
+            + '<div class="n"><span class="d">T</span><span><b>Test + company interview</b> at DLF Cyber City, Gurugram.</span></div>'
+            + '<div class="n"><span class="d">₹</span><span><b>Clear it → written ₹10 LPA offer letter</b> — before any fee is paid.</span></div>'
+            + '</div>' + wa + '</div>';
+          var bar = document.getElementById('mbar'); if (bar) bar.classList.remove('show'); window.__leadDone = true;
+        }
+
+        renderChoice();
+      }
+    })();
+
+    /* ════════════════ CALENDAR POPUP SYSTEM ════════════════ */
+    (function () {
+      var activeLeadId = null;
+      var activeLeadAppId = null;
+      var activeSlotData = [];
+      var activeFormElement = null;
+      var activeSuccessElement = null;
+      var calendarCurrentDate = new Date();
+      calendarCurrentDate.setDate(1);
+      var selectedDateStr = null;
+
+      var calModal = document.getElementById('calendar-modal');
+      var calMonthYear = document.getElementById('cal-month-year');
+      var calDaysContainer = document.getElementById('calendar-days');
+      var calPrevBtn = document.getElementById('cal-prev-btn');
+      var calNextBtn = document.getElementById('cal-next-btn');
+      var bookSlotBtn = document.getElementById('book-slot-btn');
+      var slotsDisplay = document.getElementById('slots-count-display');
+      var calCloseBtn = document.getElementById('calendar-modal-close');
+      var calDocCheckbox = document.getElementById('cal-doc-checkbox');
+
+      var activeDoneCallback = null;
+      window.openCalendarPopup = function (leadId, slotData, form, success, appLeadId, doneCb) {
+        activeLeadId = leadId;
+        activeLeadAppId = appLeadId || ('AEUAP-' + Date.now().toString(36).toUpperCase());
+        activeSlotData = slotData || [];
+        activeFormElement = form;
+        activeSuccessElement = success;
+        activeDoneCallback = doneCb || window.renderFormDone;
+        selectedDateStr = null;
+
+        if (calDocCheckbox) {
+          calDocCheckbox.checked = false;
+        }
+
+        if (bookSlotBtn) {
+          bookSlotBtn.disabled = true;
+          bookSlotBtn.textContent = 'Book Interview Slot →';
+        }
+        if (slotsDisplay) {
+          slotsDisplay.textContent = 'Please select an available slot in the calendar.';
+          slotsDisplay.style.color = 'var(--c-text-m, #463772)';
+        }
+
+        if (form) {
+          form.reset();
+        }
+
+        calendarCurrentDate = new Date();
+        calendarCurrentDate.setDate(1);
+
+        renderCalendar();
+        if (calModal) {
+          calModal.style.display = 'flex';
+          document.body.classList.add('modal-open');
+          var cardBody = calModal.querySelector('.card-body');
+          if (cardBody) {
+            cardBody.scrollTop = 0;
+          }
+        }
+      };
+
+      function closeCalendarPopup() {
+        if (calModal) {
+          calModal.style.display = 'none';
+        }
+        document.body.classList.remove('modal-open');
+      }
+
+      var MAX_SLOTS = CONFIG.MAX_SLOTS_PER_DAY || 30;
+
+      function renderCalendar() {
+        if (!calDaysContainer) return;
+        var year = calendarCurrentDate.getFullYear();
+        var month = calendarCurrentDate.getMonth();
+
+        var monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+        if (calMonthYear) calMonthYear.textContent = monthNames[month] + " " + year;
+
+        calDaysContainer.innerHTML = '';
+
+        var firstDay = new Date(year, month, 1);
+        var offset = (firstDay.getDay() + 6) % 7;
+        var totalDays = new Date(year, month + 1, 0).getDate();
+        var maxDeadline = new Date(CONFIG.DEADLINE);
+        maxDeadline.setHours(0, 0, 0, 0);
+
+        for (var i = 0; i < offset; i++) {
+          var emptyCell = document.createElement('div');
+          emptyCell.className = 'cal-day-cell empty';
+          calDaysContainer.appendChild(emptyCell);
+        }
+
+        for (var day = 1; day <= totalDays; day++) {
+          var dayCell = document.createElement('button');
+          dayCell.type = 'button';
+          dayCell.className = 'cal-day-cell';
+
+          var dateString = String(day).padStart(2, '0') + '-' + String(month + 1).padStart(2, '0') + '-' + year;
+          dayCell.setAttribute('data-date', dateString);
+
+          var cellDate = new Date(year, month, day);
+          var today = new Date();
+          today.setHours(0, 0, 0, 0);
+
+          var isPast = cellDate < today;
+          var isAfterMax = cellDate > maxDeadline;
+
+          var currentDayOfWeek = cellDate.getDay();
+          var isWeekend = (currentDayOfWeek === 0 || currentDayOfWeek === 6);
+          if (isWeekend) {
+            dayCell.classList.add('weekend');
+          }
+
+          var slotObj = activeSlotData.find(function (item) {
+            return item.date === dateString;
+          });
+
+          var booked = slotObj ? parseInt(slotObj.count, 10) : 0;
+          var remaining = MAX_SLOTS - booked;
+
+          dayCell.setAttribute('data-booked', booked);
+          dayCell.setAttribute('data-remaining', remaining);
+
+          var dayNumSpan = document.createElement('span');
+          dayNumSpan.textContent = day;
+          dayCell.appendChild(dayNumSpan);
+
+          var slotsSpan = document.createElement('span');
+          slotsSpan.className = 'cal-slots';
+
+          if (isPast || isWeekend || !slotObj || isAfterMax) {
+            slotsSpan.textContent = "-";
+            dayCell.classList.add("unavailable");
+            dayCell.disabled = true;
+          } else if (remaining <= 0) {
+            slotsSpan.textContent = "Full";
+            dayCell.classList.add("unavailable");
+            dayCell.disabled = true;
+          } else {
+            slotsSpan.textContent =
+              remaining + (remaining === 1 ? " Slot Left" : " Slots Left");
+            dayCell.classList.add("available");
+
+            if (remaining <= 5) {
+              slotsSpan.style.color = "#ef4444";
+              dayCell.style.color = "#ef4444";
+              dayCell.style.borderColor = "#ef4444";
+            }
+          }
+
+          dayCell.appendChild(slotsSpan);
+
+          if (dayCell.classList.contains('available')) {
+            dayCell.addEventListener('click', function () {
+              var prevSelected = calDaysContainer.querySelector('.cal-day-cell.selected');
+              if (prevSelected) {
+                prevSelected.classList.remove('selected');
+              }
+
+              this.classList.add('selected');
+              selectedDateStr = this.getAttribute('data-date');
+              var rem = this.getAttribute("data-remaining");
+
+              if (slotsDisplay) {
+                slotsDisplay.innerHTML =
+                  "<strong>" + rem + (rem == 1 ? " Slot Available" : " Slots Available") + "</strong><br>" +
+                  "Selected Date : " + selectedDateStr;
+                slotsDisplay.style.color = 'var(--c-green, #16A34A)';
+              }
+              updateBookSlotButtonState();
+            });
+          }
+
+          if (selectedDateStr === dateString) {
+            dayCell.classList.add('selected');
+          }
+
+          calDaysContainer.appendChild(dayCell);
+        }
+      }
+
+      if (calPrevBtn) calPrevBtn.addEventListener('click', function () {
+        calendarCurrentDate.setMonth(calendarCurrentDate.getMonth() - 1);
+        renderCalendar();
+      });
+
+      if (calNextBtn) calNextBtn.addEventListener('click', function () {
+        calendarCurrentDate.setMonth(calendarCurrentDate.getMonth() + 1);
+        renderCalendar();
+      });
+
+      if (calCloseBtn) calCloseBtn.addEventListener('click', function () {
+        closeCalendarPopup();
+        if (activeDoneCallback) activeDoneCallback(activeLeadAppId, '', null);
+        else if (window.renderFormDone) window.renderFormDone(activeLeadAppId, '', null);
+      });
+      if (calModal) calModal.addEventListener('click', function (e) {
+        if (e.target === calModal) {
+          closeCalendarPopup();
+          if (activeDoneCallback) activeDoneCallback(activeLeadAppId, '', null);
+          else if (window.renderFormDone) window.renderFormDone(activeLeadAppId, '', null);
+        }
+      });
+
+      if (calDocCheckbox) {
+        calDocCheckbox.addEventListener('change', function () {
+          updateBookSlotButtonState();
         });
       }
 
-      renderChoice();
-    }
-
-    /* ════════════════ POST-LEAD: INLINE INTERVIEW CALENDAR ════════════════ */
-    function renderCalendar(F) {
-      var host = F.host, cur = new Date(); cur.setDate(1); var sel = null;
-      var maxDate = new Date(CONFIG.DEADLINE); maxDate.setHours(0, 0, 0, 0);
-      host.innerHTML = '<div class="done" style="padding-bottom:12px"><div class="done-ic">✓</div><h3>Application received, ' + esc(LEAD.name.split(' ')[0]) + '!</h3><p>Lock your interview date now - seats are first-come, first-served. Our team will confirm on call within 24 hours.</p></div>'
-        + '<div class="cal"><div class="cal-head"><button type="button" class="cal-nav" data-nav="-1" aria-label="Previous month">‹</button><b data-my></b><button type="button" class="cal-nav" data-nav="1" aria-label="Next month">›</button></div>'
-        + '<div class="cal-wd"><div>Mon</div><div>Tue</div><div>Wed</div><div>Thu</div><div>Fri</div><div style="color:var(--red)">Sat</div><div style="color:var(--red)">Sun</div></div>'
-        + '<div class="cal-days" data-days></div><p class="cal-info" data-info>Select an available date for your interview</p>'
-        + '<label class="chk"><input type="checkbox" data-doc><span>I will bring my documents (10th &amp; 12th marksheets, B.Com degree / marksheets, Aadhaar, PAN &amp; resume) to the hiring drive, and I accept the Terms &amp; Conditions.</span></label>'
-        + '<button type="button" class="btn btn-amber btn-xl" data-book disabled style="margin-top:12px">Confirm my interview date →</button>'
-        + '<div style="text-align:center;margin-top:6px"><button type="button" class="btn-sm-line" data-skip>Skip for now - our counsellor will call to fix the date</button></div></div>';
-      var my = host.querySelector('[data-my]'), days = host.querySelector('[data-days]'), info = host.querySelector('[data-info]'),
-        doc = host.querySelector('[data-doc]'), book = host.querySelector('[data-book]');
-      var MN = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-      function draw() {
-        var y = cur.getFullYear(), m = cur.getMonth(); my.textContent = MN[m] + ' ' + y; days.innerHTML = '';
-        var off = (new Date(y, m, 1).getDay() + 6) % 7, total = new Date(y, m + 1, 0).getDate(), today = new Date(); today.setHours(0, 0, 0, 0);
-        for (var i = 0; i < off; i++) { var e = document.createElement('div'); e.className = 'cd empty'; days.appendChild(e); }
-        for (var d = 1; d <= total; d++) (function (d) {
-          var cell = document.createElement('button'); cell.type = 'button'; cell.className = 'cd';
-          var date = new Date(y, m, d), ds = String(d).padStart(2, '0') + '-' + String(m + 1).padStart(2, '0') + '-' + y;
-          var wk = date.getDay() === 0 || date.getDay() === 6, past = date < today, after = date > maxDate;
-          var slot = LEAD.slotData.find(function (s) { return s.date === ds; });
-          var booked = slot ? parseInt(slot.count, 10) || 0 : 0, rem = CONFIG.MAX_SLOTS_PER_DAY - booked;
-          cell.innerHTML = '<span>' + d + '</span>';
-          var sm = document.createElement('small');
-          if (past || wk || after || !slot) { sm.textContent = '–'; cell.classList.add('off'); cell.disabled = true; }
-          else if (rem <= 0) { sm.textContent = 'Full'; cell.classList.add('off'); cell.disabled = true; }
-          else {
-            sm.textContent = rem + ' left'; cell.classList.add('avail'); if (rem <= 5) cell.classList.add('low');
-            cell.addEventListener('click', function () {
-              days.querySelectorAll('.cd.sel').forEach(function (x) { x.classList.remove('sel'); });
-              cell.classList.add('sel'); sel = ds;
-              info.innerHTML = '<span style="color:var(--green)">Selected: <b>' + ds + '</b> · ' + rem + ' seats left</span>'; upd();
-            });
-          }
-          cell.appendChild(sm); if (sel === ds) cell.classList.add('sel'); days.appendChild(cell);
-        })(d);
+      function updateBookSlotButtonState() {
+        if (selectedDateStr && calDocCheckbox && calDocCheckbox.checked) {
+          if (bookSlotBtn) bookSlotBtn.disabled = false;
+        } else {
+          if (bookSlotBtn) bookSlotBtn.disabled = true;
+        }
       }
-      function upd() { book.disabled = !(sel && doc.checked); }
-      host.querySelectorAll('[data-nav]').forEach(function (b) { b.addEventListener('click', function () { cur.setMonth(cur.getMonth() + parseInt(b.dataset.nav, 10)); draw(); }); });
-      doc.addEventListener('change', upd);
-      host.querySelector('[data-skip]').addEventListener('click', function () { trk('SlotSkipped', {}); renderDone(F, false); });
-      book.addEventListener('click', function () {
-        if (!sel) return; book.disabled = true; book.textContent = 'Booking your seat…';
-        var p = sel.split('-'), ymd = p[2] + '-' + p[1] + '-' + p[0];
-        fetch(API_BASE + '/api/students/create-student-interview-slot/', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ lid: parseInt(LEAD.serverId, 10), interview_date: ymd }) })
-          .then(function (r) { return r.json().catch(function () { return {}; }); })
-          .catch(function () { })
-          .then(function () { trk('Schedule', { content_name: CONFIG.DRIVE_LABEL, interview_date: ymd }, true); trk('SlotBooked', { interview_date: ymd }); renderDone(F, sel); });
+
+      if (bookSlotBtn) bookSlotBtn.addEventListener('click', function () {
+        if (!selectedDateStr) return;
+        if (calDocCheckbox && !calDocCheckbox.checked) return;
+
+        bookSlotBtn.disabled = true;
+        bookSlotBtn.textContent = 'Booking Slot...';
+
+        var baseUrl = window.GCC_Base_url || API_BASE;
+
+        var parts = selectedDateStr.split('-');
+        var yyyymmdd = parts[2] + '-' + parts[1] + '-' + parts[0];
+
+        var bookPayload = {
+          lid: activeLeadId ? parseInt(activeLeadId, 10) : 0,
+          interview_date: yyyymmdd
+        };
+
+        fetch(baseUrl + '/api/students/create-student-interview-slot/', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(bookPayload)
+        })
+          .then(function (res2) {
+            return res2.json().catch(function () { return {}; });
+          })
+          .then(function (data2) {
+            completeBooking(selectedDateStr, yyyymmdd);
+          })
+          .catch(function (err) {
+            console.warn('Booking API error (proceeding in fallback mode):', err);
+            completeBooking(selectedDateStr, yyyymmdd);
+          });
       });
-      draw();
-    }
 
-    /* ════════════════ FINAL SUCCESS ════════════════ */
-    function renderDone(F, dateStr) {
-      var first = esc(LEAD.name.split(' ')[0]), wa = '';
-      if (CONFIG.WHATSAPP) {
-        var msg = encodeURIComponent('Hi, I have applied for the ' + CONFIG.DRIVE_LABEL + '. My application ID is ' + LEAD.leadId + (dateStr ? ' and my interview date is ' + dateStr : '') + '. Please confirm my seat.');
-        wa = '<a class="btn wa" href="https://wa.me/' + CONFIG.WHATSAPP + '?text=' + msg + '" target="_blank" rel="noopener">Confirm on WhatsApp →</a>';
+      function completeBooking(dateStr, ymd) {
+        closeCalendarPopup();
+        trk('Schedule', { content_name: CONFIG.DRIVE_LABEL, interview_date: ymd }, true);
+        trk('SlotBooked', { interview_date: ymd });
+
+        if (activeDoneCallback) {
+          activeDoneCallback(activeLeadAppId, '', dateStr);
+        } else if (window.renderFormDone) {
+          window.renderFormDone(activeLeadAppId, '', dateStr);
+        } else if (activeFormElement && activeSuccessElement) {
+          activeFormElement.style.display = 'none';
+          var stepContainer = activeFormElement.closest('.step');
+          if (stepContainer) {
+            var kicker = stepContainer.querySelector('.q-kicker');
+            var title = stepContainer.querySelector('.q-title');
+            if (kicker) kicker.style.display = 'none';
+            if (title) title.style.display = 'none';
+          }
+          var successP = activeSuccessElement.querySelector('p');
+          if (successP) {
+            successP.innerHTML = 'Your slot is booked for <strong>' + dateStr + '</strong>. Keep your phone handy. We will call you within 24 hours to confirm your slot.';
+          }
+          activeSuccessElement.style.display = 'block';
+        }
       }
-      F.host.innerHTML = '<div class="done"><div class="done-ic">✓</div><h3>You’re registered, ' + first + '!</h3>'
-        + '<p>' + (dateStr ? 'Your interview date is <b>' + dateStr + '</b> at DLF Cyber City, Gurugram. ' : '') + 'Keep your phone on - here’s what happens next.</p>'
-        + '<span class="ref">Application ID · ' + LEAD.leadId + '</span>'
-        + '<div class="next">'
-        + '<div class="n"><span class="d">24h</span><span><b>Our team calls you</b> (parents welcome on the call) to confirm your seat' + (dateStr ? '' : ' and fix your interview date') + '.</span></div>'
-        + '<div class="n"><span class="d">🏢</span><span><b>Company interview</b> at 9B DLF Cyber City, Gurugram. Bring your documents.</span></div>'
-        + '<div class="n"><span class="d">₹</span><span><b>Clear it → written ₹10 LPA Pre-placement job offer letter</b> - before any fee is paid.</span></div>'
-        + '</div>' + wa + '</div>';
-      var bar = document.getElementById('mbar'); if (bar) bar.classList.remove('show'); window.__leadDone = true;
-    }
-
-    mountForm(document.getElementById('form-host-1'), 'form-hero');
-    mountForm(document.getElementById('form-host-2'), 'form-final');
-
+    })();
+   
     /* ════════════════ CTA LINKS → focus the form ════════════════ */
-    document.querySelectorAll('.go-apply').forEach(function (a) {
+    document.querySelectorAll('.go-apply, .start-btn, a[href="#apply"]').forEach(function (a) {
       a.addEventListener('click', function (e) {
-        e.preventDefault(); trk('CTAClick', { label: a.textContent.trim().slice(0, 40) });
-        var t = document.getElementById('apply'); t.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        setTimeout(function () { var i = t.querySelector('input[name="name"]'); if (i && !LEAD.submitted) i.focus({ preventScroll: true }); }, 500);
+        e.preventDefault();
+        trk('CTAClick', { label: a.textContent.trim().slice(0, 40) });
+        var t = document.getElementById('apply');
+        if (t) {
+          t.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          setTimeout(function () {
+            var i = t.querySelector('#f-name, input[type="text"], .opt');
+            if (i) i.focus({ preventScroll: true });
+          }, 500);
+        }
       });
     });
 
@@ -4465,12 +4948,12 @@
       if ('IntersectionObserver' in window) {
         var io = new IntersectionObserver(function (es) { es.forEach(function (en) { if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); } }); }, { threshold: .1 });
         els.forEach(function (el) { io.observe(el); });
-        var bar = document.getElementById('mbar'), f1 = document.getElementById('apply'), f2 = document.getElementById('apply-2'), v1 = true, v2 = false;
+        var bar = document.getElementById('mbar'), f1 = document.getElementById('apply'), v1 = true;
         var fo = new IntersectionObserver(function (es) {
-          es.forEach(function (en) { if (en.target === f1) v1 = en.isIntersecting; if (en.target === f2) v2 = en.isIntersecting; });
-          bar.classList.toggle('show', !v1 && !v2 && !window.__leadDone);
+          es.forEach(function (en) { if (en.target === f1) v1 = en.isIntersecting; });
+          if (bar) bar.classList.toggle('show', !v1 && !window.__leadDone);
         }, { threshold: .15 });
-        fo.observe(f1); fo.observe(f2);
+        if (f1) fo.observe(f1);
       } else { els.forEach(function (el) { el.classList.add('in'); }); }
     })();
 
@@ -4483,6 +4966,68 @@
       }, { passive: true });
     })();
   </script>
+
+  <!-- ════════════════ CALENDAR MODAL ════════════════ -->
+  <div class="modal" id="calendar-modal">
+    <div class="modal-card" style="max-width: 480px; max-height: 90vh; display: flex; flex-direction: column;">
+      <button class="modal-close" id="calendar-modal-close" aria-label="Close"
+        style="color: var(--c-primary-d)">×</button>
+      <div class="card-header"
+        style="background: var(--purple, #51157C); color: #fff; padding: 20px; text-align: center; border-radius: var(--r-xl, 20px) var(--r-xl, 20px) 0 0;">
+        <div class="lbl"
+          style="text-transform: uppercase; font-size: 11px; letter-spacing: 0.05em; margin-bottom: 4px; color: var(--amber, #F1A63E)">
+          Select Interview Slot</div>
+        <h3 class="ttl" style="font-size: 20px; font-weight: 700; margin: 0; font-family: var(--f-head, 'Inter', sans-serif);">Book Your Slot
+        </h3>
+      </div>
+      <div class="card-body" style="padding: 20px; overflow-y: auto; flex: 1;">
+        <div class="calendar-container">
+          <div class="calendar-header">
+            <button type="button" id="cal-prev-btn" class="cal-nav-btn">&lt;</button>
+            <h4 id="cal-month-year">June 2026</h4>
+            <button type="button" id="cal-next-btn" class="cal-nav-btn">&gt;</button>
+          </div>
+
+          <div class="calendar-weekdays">
+            <div>Mon</div>
+            <div>Tue</div>
+            <div>Wed</div>
+            <div>Thu</div>
+            <div>Fri</div>
+            <div style="color: var(--red, #DC2626)">Sat</div>
+            <div style="color: var(--red, #DC2626)">Sun</div>
+          </div>
+
+          <div id="calendar-days" class="calendar-days">
+            <!-- Days injected dynamically -->
+          </div>
+        </div>
+
+        <div id="calendar-info">
+          <p id="slots-count-display"
+            style="font-size: 13.5px; font-weight: 600; color: var(--c-text-m, #463772); margin: 0; text-align: center;">
+            Please select an available slot in the calendar.
+          </p>
+        </div>
+
+        <div class="calendar-consent">
+          <input type="checkbox" id="cal-doc-checkbox">
+          <label for="cal-doc-checkbox">
+            I will bring all required physical documents (10th & 12th marksheets, B.Com degree, Aadhaar, PAN & resume)
+            to the
+            Hiring Drive.<br>
+            I accept the Terms & Conditions by submitting this form.
+          </label>
+        </div>
+
+        <button type="button" id="book-slot-btn" class="btn btn-amber btn-full btn-lg"
+          style="margin-top: 16px; width: 100%; display: flex; align-items: center; justify-content: center; gap: 8px;"
+          disabled>
+          Book Interview Slot →
+        </button>
+      </div>
+    </div>
+  </div>
 </body>
 
 </html>
