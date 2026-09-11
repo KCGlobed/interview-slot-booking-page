@@ -3912,3 +3912,190 @@ body.modal-open {
         height: 68px;
     }
 }
+
+/* ════════════════ PRINT MEDIA SLIDER ════════════════ */
+.print-slider-wrap {
+    position: relative;
+    width: 100%;
+    margin: 24px 0 12px;
+}
+
+.print-slider-btn {
+    position: absolute;
+    top: 45%;
+    transform: translateY(-50%);
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    background: #FFFFFF;
+    border: 1.5px solid rgba(81, 21, 124, 0.2);
+    color: var(--purple, #51157C);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 4px 16px rgba(42, 11, 78, 0.16);
+    transition: background 0.25s ease, color 0.25s ease, border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease, opacity 0.25s ease;
+    z-index: 10;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.print-slider-btn:hover:not(:disabled) {
+    background: var(--purple, #51157C);
+    color: #FFFFFF;
+    border-color: var(--purple, #51157C);
+    transform: translateY(-50%) scale(1.08);
+    box-shadow: 0 8px 24px rgba(81, 21, 124, 0.32);
+}
+
+.print-slider-btn:active:not(:disabled) {
+    transform: translateY(-50%) scale(0.96);
+}
+
+.print-slider-btn:disabled,
+.print-slider-btn[aria-disabled="true"] {
+    opacity: 0.32;
+    cursor: not-allowed;
+    pointer-events: none;
+    transform: translateY(-50%) scale(1);
+    box-shadow: 0 2px 8px rgba(42, 11, 78, 0.08);
+}
+
+.print-slider-btn svg {
+    width: 22px;
+    height: 22px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    display: block;
+    pointer-events: none;
+}
+
+.print-slider-prev {
+    left: -72px;
+}
+
+.print-slider-next {
+    right: -60px;
+}
+
+.clip-strip {
+    display: flex !important;
+    gap: 20px;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    padding: 10px 4px 16px;
+    margin: 0;
+}
+
+.clip-strip::-webkit-scrollbar {
+    display: none;
+}
+
+.clip {
+    flex: 0 0 calc((100% - (3 * 20px)) / 4);
+    min-width: 0;
+    scroll-snap-align: start;
+    margin: 0;
+    background: #FFFFFF;
+    border-radius: var(--r-m, 14px);
+    border: 1px solid rgba(81, 21, 124, 0.12);
+    box-shadow: 0 4px 16px rgba(42, 11, 78, 0.07);
+    padding: 8px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    cursor: default;
+    box-sizing: border-box;
+}
+
+.clip:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 28px rgba(81, 21, 124, 0.16);
+    border-color: rgba(81, 21, 124, 0.28);
+}
+
+.clip .ph {
+    border-radius: 10px;
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+    cursor: default;
+}
+
+.clip figcaption {
+    font-size: 13px;
+    color: var(--ink-3, #7E7191);
+    margin-top: 10px;
+    line-height: 1.4;
+    text-align: center;
+    padding: 0 4px 4px;
+}
+
+.clip figcaption b {
+    color: var(--ink, #1B1030);
+    display: block;
+    font-size: 14px;
+    margin-bottom: 2px;
+}
+
+/* Responsive adjustments for Print Media Slider */
+@media (max-width: 1100px) {
+    .clip {
+        flex: 0 0 calc((100% - (2 * 18px)) / 3);
+    }
+    .clip-strip {
+        gap: 18px;
+    }
+    .print-slider-prev {
+        left: -12px;
+    }
+    .print-slider-next {
+        right: -12px;
+    }
+}
+
+@media (max-width: 768px) {
+    .clip {
+        flex: 0 0 calc((100% - 16px) / 2);
+    }
+    .clip-strip {
+        gap: 16px;
+    }
+    .print-slider-btn {
+        width: 40px;
+        height: 40px;
+    }
+    .print-slider-btn svg {
+        width: 18px;
+        height: 18px;
+    }
+    .print-slider-prev {
+        left: -8px;
+    }
+    .print-slider-next {
+        right: -8px;
+    }
+}
+
+@media (max-width: 540px) {
+    .clip {
+        flex: 0 0 80%;
+    }
+    .clip-strip {
+        gap: 14px;
+        padding-left: 8px;
+        padding-right: 8px;
+    }
+    .print-slider-prev {
+        left: 2px;
+    }
+    .print-slider-next {
+        right: 2px;
+    }
+}
