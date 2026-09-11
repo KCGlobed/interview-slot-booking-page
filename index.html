@@ -1910,7 +1910,6 @@
     }
 
     .clip .ph.has-media {
-      cursor: zoom-in;
       box-shadow: var(--sh-m)
     }
 
@@ -2544,6 +2543,11 @@
     @media (max-width: 480px) {
       .strip-long {
         display: none
+      }
+
+      .btn {
+        padding: 6px 8px;
+        font-size: 7px;
       }
 
       .strip-short {
@@ -3270,35 +3274,50 @@
         <h1 style="margin: 20px 0; text-align: center;">Making Headlines Across India’s Print Media</h1>
         <!-- <p>Newspaper coverage of the hiring drives and the founding batch. Tap a clipping to enlarge.</p> -->
       </div>
-      <div class="clip-strip" aria-label="Newspaper clippings">
-        <figure class="clip">
-          <div class="ph r-3x4" data-media="clip-1" data-kind="img" data-alt="Newspaper clipping 1" data-zoom="1">
-            <div class="ph-in"><span class="ph-ic">🗞️</span>Newspaper clipping<span class="ph-hint"><img src="/images/print/nav.jpg" alt=""></span>
+      <div class="print-slider-wrap">
+        <button type="button" class="print-slider-btn print-slider-prev" id="print-slider-prev" aria-label="Previous clipping" title="Previous clipping">
+          <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg>
+        </button>
+        <div class="clip-strip" id="print-clip-strip" aria-label="Newspaper clippings">
+          <figure class="clip">
+            <div class="ph r-3x4" data-media="clip-1" data-kind="img" data-alt="Navbharat newspaper clipping">
+              <div class="ph-in"><span class="ph-ic">🗞️</span>Newspaper clipping<span class="ph-hint"><img src="./images/print/nav.jpg" alt="Navbharat clipping"></span>
+              </div>
             </div>
-          </div>
-          <figcaption><b>Navbharat</b> · Edition · DD Mon YYYY</figcaption>
-        </figure>
-        <figure class="clip">
-          <div class="ph r-3x4" data-media="clip-2" data-kind="img" data-alt="Newspaper clipping 2" data-zoom="1">
-            <div class="ph-in"><span class="ph-ic">🗞️</span>Newspaper clipping<span class="ph-hint"><img src="/images/print/Punjab Kesari, P-2, April 19.jpeg" alt=""></span>
+            <figcaption>Navbharat · Edition · DD Mon YYYY</figcaption>
+          </figure>
+          <figure class="clip">
+            <div class="ph r-3x4" data-media="clip-2" data-kind="img" data-alt="Punjab Kesari newspaper clipping">
+              <div class="ph-in"><span class="ph-ic">🗞️</span>Newspaper clipping<span class="ph-hint"><img src="./images/print/Punjab Kesari, P-2, April 19.jpeg" alt="Punjab Kesari clipping"></span>
+              </div>
             </div>
-          </div>
-          <figcaption><b>Punjab Kesari</b> · Edition · DD Mon YYYY</figcaption>
-        </figure>
-        <figure class="clip">
-          <div class="ph r-3x4" data-media="clip-3" data-kind="img" data-alt="Newspaper clipping 3" data-zoom="1">
-            <div class="ph-in"><span class="ph-ic">🗞️</span>Newspaper clipping<span class="ph-hint"><img src="images/print/Jagmarg, P-8, April 6 (1).jpeg" alt=""></span>
+            <figcaption>Punjab Kesari · Edition · DD Mon YYYY</figcaption>
+          </figure>
+          <figure class="clip">
+            <div class="ph r-3x4" data-media="clip-3" data-kind="img" data-alt="Jagmarg newspaper clipping">
+              <div class="ph-in"><span class="ph-ic">🗞️</span>Newspaper clipping<span class="ph-hint"><img src="./images/print/Jagmarg, P-8, April 6 (1).jpeg" alt="Jagmarg clipping"></span>
+              </div>
             </div>
-          </div>
-          <figcaption><b>Jagmarg</b> · Edition · DD Mon YYYY</figcaption>
-        </figure>
-        <figure class="clip">
-          <div class="ph r-3x4" data-media="clip-4" data-kind="img" data-alt="Newspaper clipping 4" data-zoom="1">
-            <div class="ph-in"><span class="ph-ic">🗞️</span>Newspaper clipping<span class="ph-hint">3:4 · clip-4</span>
+            <figcaption>Jagmarg · Edition · DD Mon YYYY</figcaption>
+          </figure>
+          <figure class="clip">
+            <div class="ph r-3x4" data-media="clip-4" data-kind="img" data-alt="The Public Side newspaper clipping">
+              <div class="ph-in"><span class="ph-ic">🗞️</span>Newspaper clipping<span class="ph-hint"><img src="./images/print/The Public Side (1).jpeg" alt="The Public Side clipping"></span>
+              </div>
             </div>
-          </div>
-          <figcaption><b>Newspaper name</b> · Edition · DD Mon YYYY</figcaption>
-        </figure>
+            <figcaption>The Public Side · 11/6/26</figcaption>
+          </figure>
+          <figure class="clip">
+            <div class="ph r-3x4" data-media="clip-5" data-kind="img" data-alt="Karnavati Express newspaper clipping">
+              <div class="ph-in"><span class="ph-ic">🗞️</span>Newspaper clipping<span class="ph-hint"><img src="./images/print/Karnavati Express_GCC_Pg_03_12.04.2026.jpg" alt="Karnavati Express clipping"></span>
+              </div>
+            </div>
+            <figcaption>Karnavati Express · 14/4/26</figcaption>
+          </figure>
+        </div>
+        <button type="button" class="print-slider-btn print-slider-next" id="print-slider-next" aria-label="Next clipping" title="Next clipping">
+          <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg>
+        </button>
       </div>
 
       <div class="sec-cta">
@@ -4001,6 +4020,55 @@
     LB.addEventListener('click', function (e) { if (e.target !== LB.querySelector('img')) closeLightbox(); });
     document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !LB.hidden) closeLightbox(); });
 
+    /* ════════════════ PRINT MEDIA SLIDER LOGIC ════════════════ */
+    (function initPrintMediaSlider() {
+      var strip = document.getElementById('print-clip-strip') || document.querySelector('.clip-strip');
+      var prevBtn = document.getElementById('print-slider-prev');
+      var nextBtn = document.getElementById('print-slider-next');
+      if (!strip) return;
+
+      function getScrollStep() {
+        var firstCard = strip.querySelector('.clip');
+        if (firstCard) {
+          var gap = 20;
+          return firstCard.offsetWidth + gap;
+        }
+        return strip.clientWidth * 0.8;
+      }
+
+      function updateControls() {
+        if (!prevBtn && !nextBtn) return;
+        var maxScroll = strip.scrollWidth - strip.clientWidth;
+        if (maxScroll <= 4) {
+          if (prevBtn) { prevBtn.disabled = true; prevBtn.setAttribute('aria-disabled', 'true'); }
+          if (nextBtn) { nextBtn.disabled = true; nextBtn.setAttribute('aria-disabled', 'true'); }
+          return;
+        }
+        var atStart = strip.scrollLeft <= 4;
+        var atEnd = strip.scrollLeft >= maxScroll - 6;
+        if (prevBtn) { prevBtn.disabled = atStart; prevBtn.setAttribute('aria-disabled', String(atStart)); }
+        if (nextBtn) { nextBtn.disabled = atEnd; nextBtn.setAttribute('aria-disabled', String(atEnd)); }
+      }
+
+      if (prevBtn) {
+        prevBtn.addEventListener('click', function (e) {
+          e.preventDefault();
+          strip.scrollBy({ left: -getScrollStep(), behavior: 'smooth' });
+        });
+      }
+
+      if (nextBtn) {
+        nextBtn.addEventListener('click', function (e) {
+          e.preventDefault();
+          strip.scrollBy({ left: getScrollStep(), behavior: 'smooth' });
+        });
+      }
+
+      strip.addEventListener('scroll', updateControls, { passive: true });
+      window.addEventListener('resize', updateControls, { passive: true });
+      setTimeout(updateControls, 120);
+    })();
+
     /* ════════════════ CITY AUTOCOMPLETE ════════════════ */
     var CITY_TO_STATE = {};
     (function () {
@@ -4039,7 +4107,7 @@
     var STEPS = [
       {
         id: 'degree', kicker: 'Step 1 of 4 · Eligibility', title: 'What is your highest education?',
-        opts: ['B.Com - Completed', 'BBA + MBA Finance', 'M.Com / Commerce PG (after B.Com)']
+        opts: ['B.Com — completed', 'B.Com — final year', 'M.Com / commerce PG (after B.Com)', 'Other degree / 12th pass']
       },
       {
         id: 'age_range', kicker: 'Step 2 of 4 · Eligibility', title: 'What is your age?',
