@@ -390,6 +390,12 @@
       aspect-ratio: 9 / 16
     }
 
+    .banner-footer {
+      margin-top: 20px;
+      font-weight: 700;
+      font-size: 17px;
+    }
+
     /* ════════════════ TOP STRIP + NAV ════════════════ */
     .strip {
       background: var(--purple-deep);
@@ -1587,14 +1593,16 @@
       margin-top: 28px;
     }
 
-    /* ════════════════ STUDENTS VIDEO SLIDER ════════════════ */
-    .student-videos-slider-wrap {
+    /* ════════════════ TESTIMONIAL VIDEO SLIDERS (STUDENTS & PARENTS) ════════════════ */
+    .student-videos-slider-wrap,
+    .parent-videos-slider-wrap {
       position: relative;
       width: 100%;
       margin-top: 28px;
     }
 
-    section[aria-labelledby="students-h2"] .video-grid {
+    section[aria-labelledby="students-h2"] .video-grid,
+    section[aria-labelledby="parents-h2"] .video-grid {
       display: flex;
       flex-wrap: nowrap;
       overflow-x: auto;
@@ -1612,19 +1620,22 @@
       /* Hide scrollbar for IE and Edge */
     }
 
-    section[aria-labelledby="students-h2"] .video-grid::-webkit-scrollbar {
+    section[aria-labelledby="students-h2"] .video-grid::-webkit-scrollbar,
+    section[aria-labelledby="parents-h2"] .video-grid::-webkit-scrollbar {
       display: none;
       /* Hide scrollbar for Chrome, Safari, and Opera */
     }
 
-    section[aria-labelledby="students-h2"] .video-grid>.video-card {
+    section[aria-labelledby="students-h2"] .video-grid>.video-card,
+    section[aria-labelledby="parents-h2"] .video-grid>.video-card {
       flex: 0 0 210px;
       min-width: 200px;
       max-width: 220px;
       scroll-snap-align: start;
     }
 
-    .student-slider-btn {
+    .student-slider-btn,
+    .parent-slider-btn {
       position: absolute;
       top: 50%;
       transform: translateY(-50%);
@@ -1645,7 +1656,8 @@
       -webkit-tap-highlight-color: transparent;
     }
 
-    .student-slider-btn:hover:not(:disabled) {
+    .student-slider-btn:hover:not(:disabled),
+    .parent-slider-btn:hover:not(:disabled) {
       background: var(--purple, #51157C);
       color: #FFFFFF;
       border-color: var(--purple, #51157C);
@@ -1653,12 +1665,15 @@
       box-shadow: 0 8px 24px rgba(81, 21, 124, 0.32);
     }
 
-    .student-slider-btn:active:not(:disabled) {
+    .student-slider-btn:active:not(:disabled),
+    .parent-slider-btn:active:not(:disabled) {
       transform: translateY(-50%) scale(0.96);
     }
 
     .student-slider-btn:disabled,
-    .student-slider-btn[aria-disabled="true"] {
+    .student-slider-btn[aria-disabled="true"],
+    .parent-slider-btn:disabled,
+    .parent-slider-btn[aria-disabled="true"] {
       opacity: 0.32;
       cursor: not-allowed;
       pointer-events: none;
@@ -1666,7 +1681,8 @@
       box-shadow: 0 2px 8px rgba(42, 11, 78, 0.08);
     }
 
-    .student-slider-btn svg {
+    .student-slider-btn svg,
+    .parent-slider-btn svg {
       width: 20px;
       height: 20px;
       fill: none;
@@ -1678,51 +1694,72 @@
       pointer-events: none;
     }
 
-    .student-slider-prev {
+    .student-slider-prev,
+    .parent-slider-prev {
       left: -22px;
     }
 
-    .student-slider-next {
+    .student-slider-next,
+    .parent-slider-next {
       right: -22px;
     }
 
     @media (max-width: 1100px) {
-      .student-slider-prev {
+
+      .student-slider-prev,
+      .parent-slider-prev {
         left: -12px;
       }
 
-      .student-slider-next {
+      .student-slider-next,
+      .parent-slider-next {
         right: -12px;
       }
     }
 
     @media (max-width: 768px) {
-      .student-slider-btn {
+
+      .student-slider-btn,
+      .parent-slider-btn {
         width: 38px;
         height: 38px;
       }
 
-      .student-slider-btn svg {
+      .student-slider-btn svg,
+      .parent-slider-btn svg {
         width: 18px;
         height: 18px;
       }
 
-      .student-slider-prev {
+      .student-slider-prev,
+      .parent-slider-prev {
         left: -6px;
       }
 
-      .student-slider-next {
+      .student-slider-next,
+      .parent-slider-next {
         right: -6px;
       }
     }
 
     @media (max-width: 640px) {
-      section[aria-labelledby="students-h2"] .video-grid {
+      .seq {
+        margin-top: 30px;
+      }
+
+      .seq li {
+        font-size: 12px;
+        font-weight: 500;
+      }
+
+      section[aria-labelledby="students-h2"] .video-grid,
+      section[aria-labelledby="parents-h2"] .video-grid {
         gap: 14px;
         padding-bottom: 12px;
       }
 
-      section[aria-labelledby="students-h2"] .video-grid>.video-card {
+      section[aria-labelledby="students-h2"] .video-grid>.video-card,
+      section[aria-labelledby="parents-h2"] .video-grid>.video-card {
         flex: 0 0 72%;
         min-width: 190px;
         max-width: 240px;
@@ -1730,21 +1767,26 @@
     }
 
     @media (max-width: 540px) {
-      .student-slider-btn {
+
+      .student-slider-btn,
+      .parent-slider-btn {
         width: 34px;
         height: 34px;
       }
 
-      .student-slider-btn svg {
+      .student-slider-btn svg,
+      .parent-slider-btn svg {
         width: 16px;
         height: 16px;
       }
 
-      .student-slider-prev {
+      .student-slider-prev,
+      .parent-slider-prev {
         left: 2px;
       }
 
-      .student-slider-next {
+      .student-slider-next,
+      .parent-slider-next {
         right: 2px;
       }
     }
@@ -3313,11 +3355,11 @@
           <li>On-boarding with corporate</li>
         </ol>
 
-        <p style="margin-top: 20px; font-weight: 700; font-size: 17px;"> - Program Fee INR 9 Lc (Ex. GST) | 100% backed
+        <p" class="banner-footer"> - Program Fee INR 9 Lc (Ex. GST) | 100% backed
           by education loan
           EMI starts after 1st salary</p>
 
-        <p style="margin-top: 20px; font-weight: 700; font-size: 17px;"> - GCC School Campus, DLF Cyber City, Gurugram
+        <p class="banner-footer"> - GCC School Campus, DLF Cyber City, Gurugram
           (A Hub of GCC Organisations)
       </div>
     </div>
@@ -3455,57 +3497,68 @@
 
       </div>
 
-      <div class="video-grid">
-        <div class="video-card fade-up">
-          <div class="video-thumb" data-youtube-id="IP9qlbTftGs">
-            <img src="https://img.youtube.com/vi/IP9qlbTftGs/hqdefault.jpg" alt="Parent testimonial thumbnail"
-              loading="lazy">
-            <button class="play-btn" aria-label="Play Video">
-              ▶
-            </button>
+      <div class="parent-videos-slider-wrap">
+        <button type="button" class="parent-slider-btn parent-slider-prev" id="parent-videos-prev"
+          aria-label="Previous parent video" title="Previous video">
+          <svg viewBox="0 0 24 24">
+            <polyline points="15 18 9 12 15 6"></polyline>
+          </svg>
+        </button>
+
+        <div class="video-grid" id="parent-video-grid">
+          <div class="video-card fade-up">
+            <div class="video-thumb" data-youtube-id="IP9qlbTftGs">
+              <img src="https://img.youtube.com/vi/IP9qlbTftGs/hqdefault.jpg" alt="Parent testimonial thumbnail"
+                loading="lazy">
+              <button class="play-btn" aria-label="Play Video">
+                ▶
+              </button>
+            </div>
+          </div>
+          <div class="video-card fade-up">
+            <div class="video-thumb" data-youtube-id="qnjBI1AN8uU">
+              <img src="https://img.youtube.com/vi/qnjBI1AN8uU/hqdefault.jpg" alt="Parent testimonial thumbnail"
+                loading="lazy">
+              <button class="play-btn" aria-label="Play Video">
+                ▶
+              </button>
+            </div>
+          </div>
+          <div class="video-card fade-up">
+            <div class="video-thumb" data-youtube-id="5H6_uvQRGD4">
+              <img src="https://img.youtube.com/vi/5H6_uvQRGD4/hqdefault.jpg" alt="Parent testimonial thumbnail"
+                loading="lazy">
+              <button class="play-btn" aria-label="Play Video">
+                ▶
+              </button>
+            </div>
+          </div>
+          <div class="video-card fade-up">
+            <div class="video-thumb" data-youtube-id="s4PPX9_AxW0">
+              <img src="https://img.youtube.com/vi/s4PPX9_AxW0/hqdefault.jpg" alt="Parent testimonial thumbnail"
+                loading="lazy">
+              <button class="play-btn" aria-label="Play Video">
+                ▶
+              </button>
+            </div>
+          </div>
+          <div class="video-card fade-up">
+            <div class="video-thumb" data-youtube-id="wBbDIcQZE6k">
+              <img src="https://img.youtube.com/vi/wBbDIcQZE6k/hqdefault.jpg" alt="Parent testimonial thumbnail"
+                loading="lazy">
+              <button class="play-btn" aria-label="Play Video">
+                ▶
+              </button>
+            </div>
           </div>
         </div>
-        <div class="video-card fade-up">
-          <div class="video-thumb" data-youtube-id="qnjBI1AN8uU">
-            <img src="https://img.youtube.com/vi/qnjBI1AN8uU/hqdefault.jpg" alt="Parent testimonial thumbnail"
-              loading="lazy">
-            <button class="play-btn" aria-label="Play Video">
-              ▶
-            </button>
-          </div>
-        </div>
-        <div class="video-card fade-up">
-          <div class="video-thumb" data-youtube-id="5H6_uvQRGD4">
-            <img src="https://img.youtube.com/vi/5H6_uvQRGD4/hqdefault.jpg" alt="Parent testimonial thumbnail"
-              loading="lazy">
-            <button class="play-btn" aria-label="Play Video">
-              ▶
-            </button>
-          </div>
-        </div>
-        <div class="video-card fade-up">
-          <div class="video-thumb" data-youtube-id="s4PPX9_AxW0">
-            <img src="https://img.youtube.com/vi/s4PPX9_AxW0/hqdefault.jpg" alt="Parent testimonial thumbnail"
-              loading="lazy">
-            <button class="play-btn" aria-label="Play Video">
-              ▶
-            </button>
-          </div>
-        </div>
-        <div class="video-card fade-up">
-          <div class="video-thumb" data-youtube-id="wBbDIcQZE6k">
-            <img src="https://img.youtube.com/vi/wBbDIcQZE6k/hqdefault.jpg" alt="Parent testimonial thumbnail"
-              loading="lazy">
-            <button class="play-btn" aria-label="Play Video">
-              ▶
-            </button>
-          </div>
-        </div>
-      </div>
-      <div class="scroll-dots" aria-hidden="true">
-        <span class="dot active"></span>
-        <span class="dot"></span>
-        <span class="dot"></span>
+
+        <button type="button" class="parent-slider-btn parent-slider-next" id="parent-videos-next"
+          aria-label="Next parent video" title="Next video">
+          <svg viewBox="0 0 24 24">
+            <polyline points="9 18 15 12 9 6"></polyline>
+          </svg>
+        </button>
       </div>
 
       <div class="sec-cta">
@@ -5576,6 +5629,68 @@
         }
       });
     });
+
+    /* ════════════════ PARENT VIDEOS SLIDER LOGIC ════════════════ */
+    (function initParentVideosSlider() {
+      var grid = document.getElementById('parent-video-grid') || document.querySelector('section[aria-labelledby="parents-h2"] .video-grid');
+      var prevBtn = document.getElementById('parent-videos-prev');
+      var nextBtn = document.getElementById('parent-videos-next');
+      if (!grid) return;
+
+      function getScrollStep() {
+        var firstCard = grid.querySelector('.video-card');
+        if (firstCard) {
+          var gap = 18;
+          var cardsToScroll = window.innerWidth < 768 ? 1 : 2;
+          return (firstCard.offsetWidth + gap) * cardsToScroll;
+        }
+        return grid.clientWidth * 0.8;
+      }
+
+      function updateControls() {
+        if (!prevBtn && !nextBtn) return;
+        var maxScroll = grid.scrollWidth - grid.clientWidth;
+        if (maxScroll <= 4) {
+          if (prevBtn) { prevBtn.disabled = true; prevBtn.setAttribute('aria-disabled', 'true'); }
+          if (nextBtn) { nextBtn.disabled = true; nextBtn.setAttribute('aria-disabled', 'true'); }
+          return;
+        }
+        var atStart = grid.scrollLeft <= 4;
+        var atEnd = grid.scrollLeft >= maxScroll - 6;
+        if (prevBtn) { prevBtn.disabled = atStart; prevBtn.setAttribute('aria-disabled', String(atStart)); }
+        if (nextBtn) { nextBtn.disabled = atEnd; nextBtn.setAttribute('aria-disabled', String(atEnd)); }
+      }
+
+      if (prevBtn) {
+        prevBtn.addEventListener('click', function (e) {
+          e.preventDefault();
+          grid.scrollBy({ left: -getScrollStep(), behavior: 'smooth' });
+        });
+      }
+
+      if (nextBtn) {
+        nextBtn.addEventListener('click', function (e) {
+          e.preventDefault();
+          grid.scrollBy({ left: getScrollStep(), behavior: 'smooth' });
+        });
+      }
+
+      grid.addEventListener('scroll', updateControls, { passive: true });
+      window.addEventListener('resize', updateControls, { passive: true });
+      setTimeout(updateControls, 120);
+
+      grid.addEventListener('wheel', function (e) {
+        if (e.deltaY !== 0 && grid.scrollWidth > grid.clientWidth) {
+          var maxScroll = grid.scrollWidth - grid.clientWidth;
+          var canScrollLeft = grid.scrollLeft > 0 && e.deltaY < 0;
+          var canScrollRight = grid.scrollLeft < (maxScroll - 1) && e.deltaY > 0;
+          if (canScrollLeft || canScrollRight) {
+            e.preventDefault();
+            grid.scrollBy({ left: e.deltaY * 1.2, behavior: 'smooth' });
+          }
+        }
+      }, { passive: false });
+    })();
 
     /* ════════════════ STUDENT VIDEOS SLIDER LOGIC ════════════════ */
     (function initStudentVideosSlider() {
