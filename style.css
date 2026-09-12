@@ -184,6 +184,24 @@ h6 {
     animation: btn-glow 2.4s ease-in-out infinite
 }
 
+@media screen and (max-width: 660px) {
+    .btn {
+        font-size: 12px;
+        padding: 12px 12px;
+    }
+    .btn-pulse {
+        animation: none;
+        background-color: var(--c-accent);
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .btn {
+        font-size: 8px;
+        padding: 12px 12px;
+    }
+}
+
 @media (max-width: 400px) {
     .btn {
         font-size: 7px;
