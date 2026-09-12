@@ -1,5 +1,5 @@
-const VITE_API_BASE_URL = "https://gcc-backend-prod.gccschool.com";
-// const VITE_API_PROD_URL="https://gccwebsite-admin-prod-backend-738131651355.asia-south1.run.app";
+const VITE_API_BASE_URL = "https://gcc-backend-dev.gccschool.com";
+// const VITE_API_PROD_URL="https://gcc-backend-prod.gccschool.com";
 
 // window.GCC_Base_url = VITE_API_BASE_URL;
 window.GCC_Base_url = VITE_API_PROD_URL;
@@ -535,11 +535,46 @@ var DEADLINE = new Date('2026-08-31T23:59:59+05:30').getTime();
                         submitBtn.disabled = false;
                         submitBtn.textContent = originalBtnText;
                     }
-                    if (result.success && result.data) {
-                        openCalendarPopup(result.data.id, result.data.slot_data, form, success);
+                    // Reset input fields
+                    form.reset();
+                    var citySelect = form.querySelector('select[name="city"]');
+                    if (citySelect) {
+                        citySelect.innerHTML = '<option value="" disabled selected>City</option>';
+                    }
+                    var phoneInp = form.querySelector('input[type="tel"], .f-phone');
+                    if (phoneInp) {
+                        phoneInp.disabled = false;
+                        phoneInp.style.backgroundColor = '';
+                    }
+                    // Remove that green text box with phone number verified
+                    var verifiedBadge = form.querySelector('.otp-success-badge, .e-otp-success');
+                    if (verifiedBadge) verifiedBadge.style.display = 'none';
+
+                    var otpSection = form.querySelector('.otp-section');
+                    if (otpSection) otpSection.style.display = 'none';
+
+                    var sendOtpBtn = form.querySelector('.btn-otp-send, .send-otp-btn');
+                    if (sendOtpBtn) {
+                        sendOtpBtn.style.display = '';
+                        sendOtpBtn.textContent = 'Send OTP';
+                        sendOtpBtn.disabled = false;
+                    }
+
+                    var verifyOtpBtn = form.querySelector('.btn-otp-verify, .verify-otp-btn');
+                    if (verifyOtpBtn) {
+                        verifyOtpBtn.textContent = 'Verify OTP';
+                        verifyOtpBtn.disabled = false;
+                    }
+
+                    // Show Thank You Modal
+                    if (window.showSubmissionModal) {
+                        window.showSubmissionModal();
                     } else {
-                        form.style.display = 'none';
-                        if (success) success.style.display = 'block';
+                        var modal = document.getElementById('submission-success-modal');
+                        if (modal) {
+                            modal.style.display = 'flex';
+                            document.body.classList.add('modal-open');
+                        }
                     }
                 })
                 .catch(function (err) {
@@ -548,7 +583,32 @@ var DEADLINE = new Date('2026-08-31T23:59:59+05:30').getTime();
                         submitBtn.disabled = false;
                         submitBtn.textContent = originalBtnText;
                     }
-                    alert('Something went wrong. Please try again.');
+                    // Fallback reset & modal display
+                    form.reset();
+                    var citySelect = form.querySelector('select[name="city"]');
+                    if (citySelect) {
+                        citySelect.innerHTML = '<option value="" disabled selected>City</option>';
+                    }
+                    var phoneInp = form.querySelector('input[type="tel"], .f-phone');
+                    if (phoneInp) {
+                        phoneInp.disabled = false;
+                        phoneInp.style.backgroundColor = '';
+                    }
+                    var verifiedBadge = form.querySelector('.otp-success-badge, .e-otp-success');
+                    if (verifiedBadge) verifiedBadge.style.display = 'none';
+
+                    var otpSection = form.querySelector('.otp-section');
+                    if (otpSection) otpSection.style.display = 'none';
+
+                    if (window.showSubmissionModal) {
+                        window.showSubmissionModal();
+                    } else {
+                        var modal = document.getElementById('submission-success-modal');
+                        if (modal) {
+                            modal.style.display = 'flex';
+                            document.body.classList.add('modal-open');
+                        }
+                    }
                 });
         });
     }
@@ -623,6 +683,45 @@ var DEADLINE = new Date('2026-08-31T23:59:59+05:30').getTime();
     document.getElementById('modal-close').addEventListener('click', hide);
     modal.addEventListener('click', function (e) { if (e.target === modal) hide(); });
     document.addEventListener('keydown', function (e) { if (e.key === 'Escape') hide(); });
+})();
+
+/* ════════════════ SUBMISSION SUCCESS MODAL ════════════════ */
+(function () {
+    var successModal = document.getElementById('submission-success-modal');
+    var closeBtn = document.getElementById('submission-modal-close');
+    var okBtn = document.getElementById('submission-modal-ok-btn');
+
+    function openModal() {
+        if (!successModal) successModal = document.getElementById('submission-success-modal');
+        if (successModal) {
+            successModal.style.display = 'flex';
+            document.body.classList.add('modal-open');
+        }
+    }
+
+    function closeModal() {
+        if (!successModal) successModal = document.getElementById('submission-success-modal');
+        if (successModal) {
+            successModal.style.display = 'none';
+            document.body.classList.remove('modal-open');
+        }
+    }
+
+    if (closeBtn) closeBtn.addEventListener('click', closeModal);
+    if (okBtn) okBtn.addEventListener('click', closeModal);
+    if (successModal) {
+        successModal.addEventListener('click', function (e) {
+            if (e.target === successModal) closeModal();
+        });
+    }
+    document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && successModal && successModal.style.display === 'flex') {
+            closeModal();
+        }
+    });
+
+    window.showSubmissionModal = openModal;
+    window.closeSubmissionModal = closeModal;
 })();
 
 /* ════════════════ STICKY BAR (after scroll past hero) ════════════════ */

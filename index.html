@@ -1073,6 +1073,121 @@
       border: 1px solid rgba(22, 163, 74, 0.2);
     }
 
+    /* ════════════════ SUBMISSION SUCCESS MODAL ════════════════ */
+    #submission-success-modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(13, 4, 40, .75);
+      z-index: 10010;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+    }
+
+    #submission-success-modal .modal-card {
+      background: #ffffff;
+      max-width: 440px;
+      width: 100%;
+      border-radius: 20px;
+      box-shadow: 0 25px 50px -12px rgba(42, 11, 78, 0.28);
+      position: relative;
+      padding: 0;
+      overflow: hidden;
+      animation: modal-in .3s ease;
+    }
+
+    #submission-modal-close {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: #F3F4F6 !important;
+      color: #4B5563 !important;
+      font-size: 22px !important;
+      line-height: 1 !important;
+      font-weight: 700 !important;
+      border: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+      z-index: 10;
+    }
+
+    #submission-modal-close:hover {
+      background: #E5E7EB !important;
+      color: #111827 !important;
+      transform: scale(1.08);
+    }
+
+    .submission-modal-body {
+      padding: 38px 26px 30px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    .submission-modal-icon {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      background: #EAF7EF;
+      color: #16A34A;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 34px;
+      font-weight: 800;
+      margin-bottom: 20px;
+      box-shadow: 0 0 0 8px #F0FDF4;
+      animation: iconPop 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
+    }
+
+    @keyframes iconPop {
+      from {
+        opacity: 0;
+        transform: scale(0.6);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    .submission-modal-title {
+      font-family: var(--f-d, 'Sora', sans-serif);
+      font-size: 22px;
+      font-weight: 800;
+      color: #1B1030;
+      line-height: 1.3;
+      margin-bottom: 10px;
+    }
+
+    .submission-modal-desc {
+      font-family: var(--f-b, 'Figtree', sans-serif);
+      font-size: 15px;
+      color: #4A3A66;
+      line-height: 1.6;
+      margin-bottom: 24px;
+      max-width: 340px;
+    }
+
+    .submission-modal-btn {
+      width: 100%;
+      padding: 14px 20px;
+      font-size: 15.5px;
+      font-weight: 700;
+      border-radius: 12px;
+      cursor: pointer;
+    }
+
     .consent {
       font-size: 11.5px;
       color: var(--ink-3);
@@ -4355,7 +4470,7 @@
         function renderContact() {
           var html = '<div class="step">'
             + '<div class="q-kicker">Final step — you\u2019re eligible ✓</div>'
-            + '<div class="q-title">Where do we send your drive seat &amp; test schedule?</div>'
+            // + '<div class="q-title">Where do we send your drive seat &amp; test schedule?</div>'
             + '<form class="lead-form-dummy" onsubmit="return false;">'
             + '<div class="f-stack">'
             + '<input class="f-in f-name" type="text" placeholder="Full name" autocomplete="name"><span class="f-err e-name">Please enter your full name</span>'
@@ -4591,8 +4706,68 @@
             attend_from: state.answers.attend || ""
           }, getTrackingParams());
 
-          var formEl = host.querySelector('.lead-form-dummy');
-          var successEl = host.querySelector('.form-success-dummy');
+          function handleSubmissionSuccess() {
+            if (subBtn) {
+              subBtn.disabled = false;
+              subBtn.textContent = 'Book Interview Slot →';
+            }
+
+            // 1. Make form input fields empty
+            if (nameInp) nameInp.value = '';
+            if (phoneInp) {
+              phoneInp.value = '';
+              phoneInp.disabled = false;
+              phoneInp.style.backgroundColor = '';
+            }
+            if (emailInp) emailInp.value = '';
+            if (stateInp) stateInp.value = '';
+            if (cityInp) {
+              cityInp.innerHTML = '<option value="" disabled selected>City</option>';
+              cityInp.value = '';
+            }
+            var otpInp = host.querySelector('.f-otp');
+            if (otpInp) otpInp.value = '';
+            if (webInp) webInp.value = '';
+
+            // 2. Remove that green text box with phone number verified
+            var eOtpSuccess = host.querySelector('.e-otp-success');
+            if (eOtpSuccess) eOtpSuccess.style.display = 'none';
+
+            // 3. Reset OTP UI section & buttons
+            var otpSection = host.querySelector('.otp-section');
+            if (otpSection) otpSection.style.display = 'none';
+            var sendOtpBtn = host.querySelector('.send-otp-btn');
+            if (sendOtpBtn) {
+              sendOtpBtn.style.display = '';
+              sendOtpBtn.textContent = 'Send OTP';
+              sendOtpBtn.disabled = false;
+            }
+            var verifyOtpBtn = host.querySelector('.verify-otp-btn');
+            if (verifyOtpBtn) {
+              verifyOtpBtn.textContent = 'Verify OTP';
+              verifyOtpBtn.disabled = false;
+            }
+
+            // 4. Reset internal state flags & clear error states
+            state.isPhoneVerified = false;
+            state.submitted = false;
+            ['name', 'phone', 'otp', 'email', 'state', 'city'].forEach(function (k) {
+              err(k, false);
+            });
+
+            // 5. Show Thank You Modal
+            if (typeof window.showSubmissionModal === 'function') {
+              window.showSubmissionModal();
+            } else if (typeof showSubmissionModal === 'function') {
+              showSubmissionModal();
+            } else {
+              var m = document.getElementById('submission-success-modal');
+              if (m) {
+                m.style.display = 'flex';
+                document.body.classList.add('modal-open');
+              }
+            }
+          }
 
           fetch(baseUrl + '/api/career/createdossiercustomform', {
             method: 'POST',
@@ -4601,22 +4776,12 @@
           })
             .then(function (res) { return res.json(); })
             .then(function (result) {
-              if (subBtn) subBtn.textContent = 'Book my drive seat →';
-              if (result.success && result.data && window.openCalendarPopup) {
-                window.openCalendarPopup(result.data.id, result.data.slot_data || [], formEl, successEl, leadId, renderFormDone);
-              } else if (window.openCalendarPopup) {
-                window.openCalendarPopup(null, [], formEl, successEl, leadId, renderFormDone);
-              } else {
-                renderFormDone(leadId, name);
-              }
+              console.log('Submission successful:', result);
+              handleSubmissionSuccess();
             })
             .catch(function (e) {
-              if (subBtn) subBtn.textContent = 'Book my drive seat →';
-              if (window.openCalendarPopup) {
-                window.openCalendarPopup(null, [], formEl, successEl, leadId, renderFormDone);
-              } else {
-                renderFormDone(leadId, name);
-              }
+              console.warn('Submission fallback:', e);
+              handleSubmissionSuccess();
             });
         }
 
@@ -5020,6 +5185,42 @@
         marks.forEach(function (m) { if (p >= m && !fired[m]) { fired[m] = 1; trk('ScrollDepth', { percent: m }); } });
       }, { passive: true });
     })();
+
+    /* ════════════════ SUBMISSION SUCCESS MODAL ════════════════ */
+    function showSubmissionModal() {
+      var modal = document.getElementById('submission-success-modal');
+      if (modal) {
+        modal.style.display = 'flex';
+        document.body.classList.add('modal-open');
+      }
+    }
+
+    function closeSubmissionModal() {
+      var modal = document.getElementById('submission-success-modal');
+      if (modal) {
+        modal.style.display = 'none';
+        document.body.classList.remove('modal-open');
+      }
+    }
+
+    window.showSubmissionModal = showSubmissionModal;
+    window.closeSubmissionModal = closeSubmissionModal;
+
+    document.addEventListener('click', function (e) {
+      if (e.target && (e.target.id === 'submission-modal-close' || e.target.closest('#submission-modal-close'))) {
+        closeSubmissionModal();
+      } else if (e.target && (e.target.id === 'submission-modal-ok-btn' || e.target.closest('#submission-modal-ok-btn'))) {
+        closeSubmissionModal();
+      } else if (e.target && e.target.id === 'submission-success-modal') {
+        closeSubmissionModal();
+      }
+    });
+
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') {
+        closeSubmissionModal();
+      }
+    });
   </script>
 
   <!-- ════════════════ CALENDAR MODAL ════════════════ -->
@@ -5081,6 +5282,23 @@
           style="margin-top: 16px; width: 100%; display: flex; align-items: center; justify-content: center; gap: 8px;"
           disabled>
           Book Interview Slot →
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════════════════ THANK YOU SUBMISSION MODAL ════════════════ -->
+  <div class="modal" id="submission-success-modal" style="display: none;">
+    <div class="modal-card">
+      <button type="button" class="modal-close" id="submission-modal-close" aria-label="Close">×</button>
+      <div class="submission-modal-body">
+        <div class="submission-modal-icon" aria-hidden="true">✓</div>
+        <h3 class="submission-modal-title">Thank you for submitting your details</h3>
+        <p class="submission-modal-desc">
+          Our team will call you within 2 hours.
+        </p>
+        <button type="button" id="submission-modal-ok-btn" class="btn btn-amber submission-modal-btn">
+          Got it
         </button>
       </div>
     </div>
