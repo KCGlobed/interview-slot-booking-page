@@ -4628,10 +4628,13 @@
           if (fn) fn.focus();
         }
 
-        function err(key, on) {
+        function err(key, on, msg) {
           var e = host.querySelector('.e-' + key) || host.querySelector('#e-' + key);
           var f = host.querySelector('.f-' + key) || host.querySelector('#f-' + key);
-          if (e) e.style.display = on ? 'block' : 'none';
+          if (e) {
+            if (msg) e.textContent = msg;
+            e.style.display = on ? 'block' : 'none';
+          }
           if (f) f.style.borderColor = on ? 'var(--red)' : '';
         }
 
@@ -4652,17 +4655,59 @@
             hp = (webInp ? webInp.value : '');
 
           var ok = true;
-          if (name.length < 3) { err('name', true); ok = false; }
-          if (!/^[6-9]\d{9}$/.test(phone)) { err('phone', true); ok = false; }
-          if (!state.isPhoneVerified) {
-            err('phone', true);
-            var ePhone = host.querySelector('.e-phone');
-            if (ePhone) ePhone.textContent = "Please verify your mobile number with OTP first.";
+
+          // Full Name Validation
+          if (!name) {
+            err('name', true, 'Please enter your full name');
             ok = false;
+          } else if (name.length < 3) {
+            err('name', true, 'Name must be at least 3 characters');
+            ok = false;
+          } else {
+            err('name', false);
           }
-          if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { err('email', true); ok = false; }
-          if (!stateSel) { err('state', true); ok = false; }
-          if (!city) { err('city', true); ok = false; }
+
+          // Phone Validation
+          if (!phone) {
+            err('phone', true, 'Please enter your mobile number');
+            ok = false;
+          } else if (!/^[6-9]\d{9}$/.test(phone)) {
+            err('phone', true, 'Enter a valid 10-digit Indian mobile number');
+            ok = false;
+          } else if (CONFIG.OTP_MODE !== 'off' && !state.isPhoneVerified) {
+            err('phone', true, 'Please verify your mobile number with OTP first.');
+            ok = false;
+          } else {
+            err('phone', false);
+          }
+
+          // Email Validation
+          if (!email) {
+            err('email', true, 'Please enter your email address');
+            ok = false;
+          } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+            err('email', true, 'Enter a valid email address');
+            ok = false;
+          } else {
+            err('email', false);
+          }
+
+          // State Validation
+          if (!stateSel) {
+            err('state', true, 'Please select your state');
+            ok = false;
+          } else {
+            err('state', false);
+          }
+
+          // City Validation
+          if (!city) {
+            err('city', true, 'Please select your city');
+            ok = false;
+          } else {
+            err('city', false);
+          }
+
           if (!ok || hp) return;                      /* hp filled = bot; silently drop */
           state.submitted = true;
           var subBtn = host.querySelector('.submit-btn');
