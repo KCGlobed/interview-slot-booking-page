@@ -475,7 +475,7 @@
       background: radial-gradient(900px 500px at 8% -10%, rgba(124, 58, 237, .45), transparent 60%),
         radial-gradient(700px 400px at 100% 100%, rgba(241, 166, 62, .18), transparent 60%),
         linear-gradient(160deg, #1C0736 0%, #2A0B4E 55%, #3B0F63 100%);
-      padding: 34px 0 44px
+      padding: 34px 0 44px;
     }
 
     .hero-in {
@@ -513,11 +513,11 @@
     }
 
     .h1 {
-      font-size: clamp(34px, 8.6vw, 60px);
+      font-size: clamp(26px, 3.8vw, 44px);
       font-weight: 800;
       margin-top: 16px;
-      line-height: 1.04;
-      letter-spacing: -.025em
+      line-height: 1.15;
+      letter-spacing: -.025em;
     }
 
     .offer {
@@ -764,8 +764,8 @@
     }
 
     .app-body {
-      padding: 20px 22px 24px;
-      min-height: 452px;
+      padding: 11px 22px 8px;
+      /* min-height: 452px; */
       display: flex;
       flex-direction: column
     }
@@ -852,13 +852,12 @@
       background: #fff;
       border: 1.5px solid var(--line);
       border-radius: var(--r-m);
-      padding: 15px 16px;
+      padding: 11px 16px;
       font-family: var(--f-b);
       font-size: 15px;
       font-weight: 600;
       color: var(--ink);
       transition: border-color .15s, box-shadow .15s, transform .12s;
-      min-height: 56px
     }
 
     .opt .ring {
@@ -911,7 +910,7 @@
 
     .step-foot {
       margin-top: auto;
-      padding-top: 16px;
+      padding-top: 6px;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -1155,6 +1154,7 @@
         opacity: 0;
         transform: scale(0.6);
       }
+
       to {
         opacity: 1;
         transform: scale(1);
@@ -1587,6 +1587,168 @@
       margin-top: 28px;
     }
 
+    /* ════════════════ STUDENTS VIDEO SLIDER ════════════════ */
+    .student-videos-slider-wrap {
+      position: relative;
+      width: 100%;
+      margin-top: 28px;
+    }
+
+    section[aria-labelledby="students-h2"] .video-grid {
+      display: flex;
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      overflow-y: hidden;
+      justify-content: flex-start;
+      gap: 18px;
+      margin-top: 0;
+      padding: 10px 4px 14px 4px;
+      scroll-snap-type: x mandatory;
+      scroll-behavior: smooth;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      /* Hide scrollbar for Firefox */
+      -ms-overflow-style: none;
+      /* Hide scrollbar for IE and Edge */
+    }
+
+    section[aria-labelledby="students-h2"] .video-grid::-webkit-scrollbar {
+      display: none;
+      /* Hide scrollbar for Chrome, Safari, and Opera */
+    }
+
+    section[aria-labelledby="students-h2"] .video-grid>.video-card {
+      flex: 0 0 210px;
+      min-width: 200px;
+      max-width: 220px;
+      scroll-snap-align: start;
+    }
+
+    .student-slider-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: #FFFFFF;
+      border: 1.5px solid rgba(81, 21, 124, 0.2);
+      color: var(--purple, #51157C);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 4px 16px rgba(42, 11, 78, 0.16);
+      transition: background 0.25s ease, color 0.25s ease, border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease, opacity 0.25s ease;
+      z-index: 10;
+      user-select: none;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .student-slider-btn:hover:not(:disabled) {
+      background: var(--purple, #51157C);
+      color: #FFFFFF;
+      border-color: var(--purple, #51157C);
+      transform: translateY(-50%) scale(1.08);
+      box-shadow: 0 8px 24px rgba(81, 21, 124, 0.32);
+    }
+
+    .student-slider-btn:active:not(:disabled) {
+      transform: translateY(-50%) scale(0.96);
+    }
+
+    .student-slider-btn:disabled,
+    .student-slider-btn[aria-disabled="true"] {
+      opacity: 0.32;
+      cursor: not-allowed;
+      pointer-events: none;
+      transform: translateY(-50%) scale(1);
+      box-shadow: 0 2px 8px rgba(42, 11, 78, 0.08);
+    }
+
+    .student-slider-btn svg {
+      width: 20px;
+      height: 20px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2.5;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      display: block;
+      pointer-events: none;
+    }
+
+    .student-slider-prev {
+      left: -22px;
+    }
+
+    .student-slider-next {
+      right: -22px;
+    }
+
+    @media (max-width: 1100px) {
+      .student-slider-prev {
+        left: -12px;
+      }
+
+      .student-slider-next {
+        right: -12px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .student-slider-btn {
+        width: 38px;
+        height: 38px;
+      }
+
+      .student-slider-btn svg {
+        width: 18px;
+        height: 18px;
+      }
+
+      .student-slider-prev {
+        left: -6px;
+      }
+
+      .student-slider-next {
+        right: -6px;
+      }
+    }
+
+    @media (max-width: 640px) {
+      section[aria-labelledby="students-h2"] .video-grid {
+        gap: 14px;
+        padding-bottom: 12px;
+      }
+
+      section[aria-labelledby="students-h2"] .video-grid>.video-card {
+        flex: 0 0 72%;
+        min-width: 190px;
+        max-width: 240px;
+      }
+    }
+
+    @media (max-width: 540px) {
+      .student-slider-btn {
+        width: 34px;
+        height: 34px;
+      }
+
+      .student-slider-btn svg {
+        width: 16px;
+        height: 16px;
+      }
+
+      .student-slider-prev {
+        left: 2px;
+      }
+
+      .student-slider-next {
+        right: 2px;
+      }
+    }
+
     .scroll-dots {
       display: none;
     }
@@ -1906,14 +2068,26 @@
     }
 
     .clip .ph {
-      border-radius: var(--r-m);
-      background: repeating-linear-gradient(0deg, #F7F4EE 0 14px, #EFEAE0 14px 28px);
-      border-color: rgba(120, 100, 60, .35);
-      color: #6B5A3A
+      border-radius: 10px;
+      background: #F8F7F4;
+      border: 1px solid rgba(0, 0, 0, 0.06);
+      color: #6B5A3A;
+      cursor: zoom-in;
     }
 
-    .clip .ph.has-media {
-      box-shadow: var(--sh-m)
+    .clip .ph img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: contain !important;
+      object-position: center;
+      box-sizing: border-box;
+      transition: transform 0.3s ease;
+    }
+
+    .clip:hover .ph img {
+      transform: scale(1.03);
     }
 
     .clip figcaption {
@@ -2033,19 +2207,197 @@
       text-shadow: 0 1px 4px rgba(0, 0, 0, .6)
     }
 
-    /* campus */
-    .campus-strip {
-      display: flex;
-      gap: 10px;
-      overflow-x: auto;
-      scroll-snap-type: x mandatory;
-      padding-bottom: 8px;
-      -webkit-overflow-scrolling: touch
+    /* ════════════════ CAMPUS PHOTOS SLIDER ════════════════ */
+    .campus-slider-wrap {
+      position: relative;
+      width: 100%;
+      margin-top: 24px;
     }
 
-    .campus-strip .ph {
-      flex: 0 0 70%;
-      scroll-snap-align: start
+    .campus-strip {
+      display: flex;
+      gap: 16px;
+      overflow-x: auto;
+      overflow-y: hidden;
+      scroll-snap-type: x mandatory;
+      scroll-behavior: smooth;
+      padding: 6px 4px 16px 4px;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+    }
+
+    .campus-strip::-webkit-scrollbar {
+      display: none;
+    }
+
+    .campus-strip .ph,
+    .campus-card {
+      position: relative;
+      flex: 0 0 340px;
+      max-width: 340px;
+      aspect-ratio: 4 / 3;
+      border-radius: var(--r-m);
+      overflow: hidden;
+      border: 1px solid var(--line);
+      box-shadow: var(--sh-m);
+      background: #fff;
+      scroll-snap-align: start;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      display: block;
+    }
+
+    .campus-strip .ph:hover,
+    .campus-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--sh-l);
+    }
+
+    .campus-strip .ph img,
+    .campus-strip img,
+    .campus-img,
+    img.classroom {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      border: 0;
+      border-radius: inherit;
+    }
+
+    .campus-slider-btn {
+      position: absolute;
+      top: calc(50% - 8px);
+      transform: translateY(-50%);
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: #FFFFFF;
+      border: 1.5px solid rgba(81, 21, 124, 0.2);
+      color: var(--purple, #51157C);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 4px 16px rgba(42, 11, 78, 0.16);
+      transition: background 0.25s ease, color 0.25s ease, border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease, opacity 0.25s ease;
+      z-index: 10;
+      user-select: none;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .campus-slider-btn:hover:not(:disabled) {
+      background: var(--purple, #51157C);
+      color: #FFFFFF;
+      border-color: var(--purple, #51157C);
+      transform: translateY(-50%) scale(1.08);
+      box-shadow: 0 8px 24px rgba(81, 21, 124, 0.32);
+    }
+
+    .campus-slider-btn:active:not(:disabled) {
+      transform: translateY(-50%) scale(0.96);
+    }
+
+    .campus-slider-btn:disabled,
+    .campus-slider-btn[aria-disabled="true"] {
+      opacity: 0.32;
+      cursor: not-allowed;
+      pointer-events: none;
+      transform: translateY(-50%) scale(1);
+      box-shadow: 0 2px 8px rgba(42, 11, 78, 0.08);
+    }
+
+    .campus-slider-btn svg {
+      width: 20px;
+      height: 20px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2.5;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      display: block;
+      pointer-events: none;
+    }
+
+    .campus-slider-prev {
+      left: -22px;
+    }
+
+    .campus-slider-next {
+      right: -22px;
+    }
+
+    @media (max-width: 1100px) {
+      .campus-slider-prev {
+        left: -12px;
+      }
+
+      .campus-slider-next {
+        right: -12px;
+      }
+    }
+
+    @media (max-width: 768px) {
+
+      .campus-strip .ph,
+      .campus-card {
+        flex: 0 0 280px;
+        max-width: 280px;
+      }
+
+      .campus-slider-btn {
+        width: 38px;
+        height: 38px;
+      }
+
+      .campus-slider-btn svg {
+        width: 18px;
+        height: 18px;
+      }
+
+      .campus-slider-prev {
+        left: -6px;
+      }
+
+      .campus-slider-next {
+        right: -6px;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .campus-strip {
+        gap: 12px;
+        padding-bottom: 12px;
+      }
+
+      .campus-strip .ph,
+      .campus-card {
+        flex: 0 0 78%;
+        min-width: 220px;
+        max-width: 300px;
+      }
+    }
+
+    @media (max-width: 540px) {
+      .campus-slider-btn {
+        width: 34px;
+        height: 34px;
+      }
+
+      .campus-slider-btn svg {
+        width: 16px;
+        height: 16px;
+      }
+
+      .campus-slider-prev {
+        left: 2px;
+      }
+
+      .campus-slider-next {
+        right: 2px;
+      }
     }
 
     .campus-facts {
@@ -2712,7 +3064,7 @@
       }
 
       .stack-grid {
-        grid-template-columns: repeat(4, 1fr)
+        grid-template-columns: repeat(5, 1fr)
       }
 
       .elig-grid {
@@ -2739,27 +3091,21 @@
 
       .hero-in {
         grid-template-columns: 1.05fr .95fr;
-        grid-template-rows: auto auto;
-        gap: 0 48px;
-        align-items: center
+        grid-template-rows: auto;
+        gap: 48px;
+        align-items: center;
       }
 
       .hero-copy {
         grid-column: 1;
         grid-row: 1;
-        align-self: end
-      }
-
-      .hero-extra {
-        grid-column: 1;
-        grid-row: 2;
-        align-self: start;
-        margin-top: 30px
+        align-self: center;
       }
 
       .app-shell {
         grid-column: 2;
-        grid-row: 1 / 3
+        grid-row: 1;
+        align-self: center;
       }
 
       .h1 {
@@ -2771,7 +3117,9 @@
       }
 
       .seq {
-        grid-template-columns: 1fr 1fr
+        margin-top: 30px;
+        display: flex;
+        gap: 12px;
       }
 
       .facts {
@@ -2800,7 +3148,8 @@
       }
 
       .app-body {
-        padding: 20px 24px 22px
+        /* padding: 20px 24px 22px; */
+
       }
 
       .lf-2 {
@@ -2925,7 +3274,7 @@
       <div class="hero-in">
         <div class="hero-copy">
           <div class="kicker">GCC School <span aria-hidden="true">|</span> AEUAP Hiring Drive</div>
-          <h1 class="h1" id="hero-h1">Get hired first<br><span class="gold">Then trained.</span></h1>
+          <h1 class="h1" id="hero-h1">Get hired first <span class="gold">Then trained.</span></h1>
 
           <div class="offer">
             <div class="offer-amt">₹10 LPA <span>Pre-Placement Offer</span></div>
@@ -2935,34 +3284,6 @@
           <a href="#apply" class="btn btn-amber hero-cta go-apply">Check eligibility &amp; program details →</a>
         </div>
 
-        <div class="hero-extra">
-          <ol class="seq" aria-label="Your path">
-            <li>Receive your Pre-Placement Offer</li>
-            <li>Enrol in AEUAP</li>
-            <li>Complete your training</li>
-            <li>On-boarding with corporate</li>
-          </ol>
-
-          <dl class="facts">
-            <div>
-              <dt>1-year AEUAP Integrated Program</dt>
-              <dd>US CPA &bull; British Council - English for work<br>AI for Finance , Accounts &amp; Auditing, Tax.
-                &bull; AICTE-approved PGCM<br> Data Analytics, Power BI, Advance Excel &bull; SAP FI CO, Quickbook</dd>
-            </div>
-            <div>
-              <dt>Required program fee: ₹9 lakh + GST</dt>
-              <dd>Admission after pre-placement offer through company interview.</dd>
-              <ul class="fin">
-                <li>100% backed by education loan</li>
-                <li>EMI starts after 1st salary</li>
-              </ul>
-            </div>
-          </dl>
-
-          <div class="meta"><span>6 hiring companies</span><span>GCC School Campus, Gurugram</span></div>
-        </div>
-
-        <!-- THE APPLICATION — styled as the offer letter you're applying for -->
         <div class="app-shell" id="apply">
           <div class="seal" aria-hidden="true"><span class="a">₹10 LPA</span><span class="b">Pre-placement offer · Day
               one</span></div>
@@ -2983,6 +3304,23 @@
           </div>
         </div>
       </div>
+      <div class="hero-extra">
+        <ol class="seq" aria-label="Your path">
+          <li>Interview </li>
+          <li>Receive your Pre-Placement Offer</li>
+          <li>Submit Fee and Enroll in AEUAP with US CPA Program (AICTE Approved 40 Credit PGCM)</li>
+          <li>Complete your training</li>
+          <li>On-boarding with corporate</li>
+        </ol>
+
+        <p style="margin-top: 20px; font-weight: 700; font-size: 17px;"> - Program Fee INR 9 Lc (Ex. GST) | 100% backed
+          by education loan
+          EMI starts after 1st salary</p>
+
+        <p style="margin-top: 20px; font-weight: 700; font-size: 17px;"> - GCC School Campus, DLF Cyber City, Gurugram
+          (A Hub of GCC Organisations)
+      </div>
+    </div>
     </div>
   </section>
 
@@ -3170,11 +3508,6 @@
         <span class="dot"></span>
       </div>
 
-      <div class="parent-note fade">
-        <div><b>Parents are welcome to join the hiring drive with their child.
-        </div>
-      </div>
-
       <div class="sec-cta">
         <a href="#apply" class="btn btn-amber go-apply">Apply for Free →</a>
         <div class="note">Our counsellor will love to speak with your parents</div>
@@ -3191,71 +3524,91 @@
             hand.</span>
         </h2>
       </div>
-      <!-- <div class="proof-grid">
-        <div class="ph video r-9x16 fade" data-media="student-video-1" data-kind="video"
-          data-alt="Student testimonial 1">
-          <div class="ph-in"><span class="ph-play">▶</span>Video · Student testimonial 1<span class="ph-hint">9:16 ·
-              student-video-1</span></div>
-        </div>
-        <div class="ph video r-9x16 fade" data-media="student-video-2" data-kind="video"
-          data-alt="Student testimonial 2">
-          <div class="ph-in"><span class="ph-play">▶</span>Video · Student testimonial 2<span class="ph-hint">9:16 ·
-              student-video-2</span></div>
-        </div>
-        <div class="ph video r-9x16 fade" data-media="student-video-3" data-kind="video"
-          data-alt="Student testimonial 3">
-          <div class="ph-in"><span class="ph-play">▶</span>Video · Student testimonial 3<span class="ph-hint">9:16 ·
-              student-video-3</span></div>
-        </div>
-      </div> -->
 
-      <div class="video-grid">
-        <div class="video-card fade-up">
-          <div class="video-thumb" data-youtube-id="n83fF8DivYw">
-            <img src="https://img.youtube.com/vi/n83fF8DivYw/hqdefault.jpg" alt="Student testimonial thumbnail"
-              loading="lazy">
-            <button class="play-btn" aria-label="Play Video">
-              ▶
-            </button>
+      <div class="student-videos-slider-wrap">
+        <button type="button" class="student-slider-btn student-slider-prev" id="student-videos-prev"
+          aria-label="Previous student video" title="Previous video">
+          <svg viewBox="0 0 24 24">
+            <polyline points="15 18 9 12 15 6"></polyline>
+          </svg>
+        </button>
+
+        <div class="video-grid" id="student-video-grid">
+          <div class="video-card fade-up">
+            <div class="video-thumb" data-youtube-id="n83fF8DivYw">
+              <img src="https://img.youtube.com/vi/n83fF8DivYw/hqdefault.jpg" alt="Student testimonial thumbnail"
+                loading="lazy">
+              <button class="play-btn" aria-label="Play Video">
+                ▶
+              </button>
+            </div>
+          </div>
+          <div class="video-card fade-up">
+            <div class="video-thumb" data-youtube-id="JDGF3OaamM0">
+              <img src="https://img.youtube.com/vi/JDGF3OaamM0/hqdefault.jpg" alt="Student testimonial thumbnail"
+                loading="lazy">
+              <button class="play-btn" aria-label="Play Video">
+                ▶
+              </button>
+            </div>
+          </div>
+          <div class="video-card fade-up">
+            <div class="video-thumb" data-youtube-id="CWYzQUQBqI8">
+              <img src="https://img.youtube.com/vi/CWYzQUQBqI8/hqdefault.jpg" alt="Student testimonial thumbnail"
+                loading="lazy">
+              <button class="play-btn" aria-label="Play Video">
+                ▶
+              </button>
+            </div>
+          </div>
+          <div class="video-card fade-up">
+            <div class="video-thumb" data-youtube-id="ID5ZonOLiB0">
+              <img src="https://img.youtube.com/vi/ID5ZonOLiB0/hqdefault.jpg" alt="Student testimonial thumbnail"
+                loading="lazy">
+              <button class="play-btn" aria-label="Play Video">
+                ▶
+              </button>
+            </div>
+          </div>
+          <div class="video-card fade-up">
+            <div class="video-thumb" data-youtube-id="1AD_U7WkLIw">
+              <img src="https://img.youtube.com/vi/1AD_U7WkLIw/hqdefault.jpg" alt="Student testimonial thumbnail"
+                loading="lazy">
+              <button class="play-btn" aria-label="Play Video">
+                ▶
+              </button>
+            </div>
+          </div>
+          <div class="video-card fade-up">
+            <div class="video-thumb" data-youtube-id="p1O5nI28_MU">
+              <img src="https://img.youtube.com/vi/p1O5nI28_MU/hqdefault.jpg" alt="Student testimonial thumbnail"
+                loading="lazy">
+              <button class="play-btn" aria-label="Play Video">
+                ▶
+              </button>
+            </div>
+          </div>
+          <div class="video-card fade-up">
+            <div class="video-thumb" data-youtube-id="jXOxpmBzI8s">
+              <img src="https://img.youtube.com/vi/jXOxpmBzI8s/hqdefault.jpg" alt="Student testimonial thumbnail"
+                loading="lazy">
+              <button class="play-btn" aria-label="Play Video">
+                ▶
+              </button>
+            </div>
           </div>
         </div>
-        <div class="video-card fade-up">
-          <div class="video-thumb" data-youtube-id="JDGF3OaamM0">
-            <img src="https://img.youtube.com/vi/JDGF3OaamM0/hqdefault.jpg" alt="Student testimonial thumbnail"
-              loading="lazy">
-            <button class="play-btn" aria-label="Play Video">
-              ▶
-            </button>
-          </div>
-        </div>
-        <div class="video-card fade-up">
-          <div class="video-thumb" data-youtube-id="CWYzQUQBqI8">
-            <img src="https://img.youtube.com/vi/CWYzQUQBqI8/hqdefault.jpg" alt="Student testimonial thumbnail"
-              loading="lazy">
-            <button class="play-btn" aria-label="Play Video">
-              ▶
-            </button>
-          </div>
-        </div>
-        <div class="video-card fade-up">
-          <div class="video-thumb" data-youtube-id="ID5ZonOLiB0">
-            <img src="https://img.youtube.com/vi/ID5ZonOLiB0/hqdefault.jpg" alt="Student testimonial thumbnail"
-              loading="lazy">
-            <button class="play-btn" aria-label="Play Video">
-              ▶
-            </button>
-          </div>
-        </div>
-        <div class="video-card fade-up">
-          <div class="video-thumb" data-youtube-id="1AD_U7WkLIw">
-            <img src="https://img.youtube.com/vi/1AD_U7WkLIw/hqdefault.jpg" alt="Student testimonial thumbnail"
-              loading="lazy">
-            <button class="play-btn" aria-label="Play Video">
-              ▶
-            </button>
-          </div>
-        </div>
+
+        <button type="button" class="student-slider-btn student-slider-next" id="student-videos-next"
+          aria-label="Next student video" title="Next video">
+          <svg viewBox="0 0 24 24">
+            <polyline points="9 18 15 12 9 6"></polyline>
+          </svg>
+        </button>
       </div>
+
+
+
       <div class="quotes-slider-wrap">
         <button type="button" class="quotes-slider-btn quotes-slider-prev" id="quotes-slider-prev"
           aria-label="Previous quote" title="Previous quote">
@@ -3439,44 +3792,48 @@
           </svg>
         </button>
         <div class="clip-strip" id="print-clip-strip" aria-label="Newspaper clippings">
-          <figure class="clip">
-            <div class="ph r-3x4" data-media="clip-1" data-kind="img" data-alt="Navbharat newspaper clipping">
-              <div class="ph-in"><span class="ph-ic">🗞️</span>Newspaper clipping<span class="ph-hint"><img
-                    src="./images/print/nav.jpg" alt="Navbharat clipping"></span>
-              </div>
+          <figure class="clip"
+            onclick="openLightbox('./images/print/3. Nav Bharat, P-2, April 14.jpg.jpeg', 'Navbharat newspaper clipping')"
+            title="Click to enlarge">
+            <div class="ph r-3x4" data-alt="Navbharat newspaper clipping">
+              <img src="./images/print/3. Nav Bharat, P-2, April 14.jpg.jpeg" alt="Navbharat newspaper clipping"
+                loading="lazy">
             </div>
             <figcaption>Navbharat · Edition · DD Mon YYYY</figcaption>
           </figure>
-          <figure class="clip">
-            <div class="ph r-3x4" data-media="clip-2" data-kind="img" data-alt="Punjab Kesari newspaper clipping">
-              <div class="ph-in"><span class="ph-ic">🗞️</span>Newspaper clipping<span class="ph-hint"><img
-                    src="./images/print/Punjab Kesari, P-2, April 19.jpeg" alt="Punjab Kesari clipping"></span>
-              </div>
+          <figure class="clip"
+            onclick="openLightbox('./images/print/4. Punjab Kesari, P-2, April 19.jpg.jpeg', 'Punjab Kesari newspaper clipping')"
+            title="Click to enlarge">
+            <div class="ph r-3x4" data-alt="Punjab Kesari newspaper clipping">
+              <img src="./images/print/4. Punjab Kesari, P-2, April 19.jpg.jpeg" alt="Punjab Kesari newspaper clipping"
+                loading="lazy">
             </div>
             <figcaption>Punjab Kesari · Edition · DD Mon YYYY</figcaption>
           </figure>
-          <figure class="clip">
-            <div class="ph r-3x4" data-media="clip-3" data-kind="img" data-alt="Jagmarg newspaper clipping">
-              <div class="ph-in"><span class="ph-ic">🗞️</span>Newspaper clipping<span class="ph-hint"><img
-                    src="./images/print/Jagmarg, P-8, April 6 (1).jpeg" alt="Jagmarg clipping"></span>
-              </div>
+          <figure class="clip"
+            onclick="openLightbox('./images/print/2. Jagmarg, P-8, April 6.jpg.jpeg', 'Jagmarg newspaper clipping')"
+            title="Click to enlarge">
+            <div class="ph r-3x4" data-alt="Jagmarg newspaper clipping">
+              <img src="./images/print/2. Jagmarg, P-8, April 6.jpg.jpeg" alt="Jagmarg newspaper clipping"
+                loading="lazy">
             </div>
             <figcaption>Jagmarg · Edition · DD Mon YYYY</figcaption>
           </figure>
-          <figure class="clip">
-            <div class="ph r-3x4" data-media="clip-4" data-kind="img" data-alt="The Public Side newspaper clipping">
-              <div class="ph-in"><span class="ph-ic">🗞️</span>Newspaper clipping<span class="ph-hint"><img
-                    src="./images/print/The Public Side (1).jpeg" alt="The Public Side clipping"></span>
-              </div>
+          <figure class="clip"
+            onclick="openLightbox('./images/print/5. The Public Side.jpg.jpeg', 'The Public Side newspaper clipping')"
+            title="Click to enlarge">
+            <div class="ph r-3x4" data-alt="The Public Side newspaper clipping">
+              <img src="./images/print/5. The Public Side.jpg.jpeg" alt="The Public Side newspaper clipping"
+                loading="lazy">
             </div>
             <figcaption>The Public Side · 11/6/26</figcaption>
           </figure>
-          <figure class="clip">
-            <div class="ph r-3x4" data-media="clip-5" data-kind="img" data-alt="Karnavati Express newspaper clipping">
-              <div class="ph-in"><span class="ph-ic">🗞️</span>Newspaper clipping<span class="ph-hint"><img
-                    src="./images/print/Karnavati Express_GCC_Pg_03_12.04.2026.jpg"
-                    alt="Karnavati Express clipping"></span>
-              </div>
+          <figure class="clip"
+            onclick="openLightbox('./images/print/1. Karnavati Express.jpg.jpeg', 'Karnavati Express newspaper clipping')"
+            title="Click to enlarge">
+            <div class="ph r-3x4" data-alt="Karnavati Express newspaper clipping">
+              <img src="./images/print/1. Karnavati Express.jpg.jpeg" alt="Karnavati Express newspaper clipping"
+                loading="lazy">
             </div>
             <figcaption>Karnavati Express · 14/4/26</figcaption>
           </figure>
@@ -3686,44 +4043,49 @@
             classroom to career.</span></h2>
 
       </div>
-      <div class="campus-strip" aria-label="Campus photos">
-        <div class="ph r-4x3" data-media="campus-1" data-kind="img" data-alt="Batch 1 students in class">
-          <div class="ph-in"><span class="ph-ic">🏫</span>Photo · Batch 1 in class<span class="ph-hint">4:3 ·
-              campus-1</span></div>
+      <div class="campus-slider-wrap">
+        <button type="button" class="campus-slider-btn campus-slider-prev" id="campus-prev"
+          aria-label="Previous campus photo" title="Previous photo">
+          <svg viewBox="0 0 24 24">
+            <polyline points="15 18 9 12 15 6"></polyline>
+          </svg>
+        </button>
+
+        <div class="campus-strip" id="campus-strip" aria-label="Campus photos">
+          <div class="ph r-4x3 campus-card" data-media="campus-1" data-kind="img" data-alt="Batch 1 students in class">
+            <img class="classroom" src="./images/ClassRoomStudents/1.jpeg" alt="Batch 1 students in class"
+              loading="lazy">
+          </div>
+          <div class="ph r-4x3 campus-card" data-media="campus-2" data-kind="img"
+            data-alt="Students at DLF Cyber City campus">
+            <img class="classroom" src="./images/ClassRoomStudents/2.jpeg" alt="Students at DLF Cyber City campus"
+              loading="lazy">
+          </div>
+          <div class="ph r-4x3 campus-card" data-media="campus-3" data-kind="img"
+            data-alt="Students working on laptops">
+            <img class="classroom" src="./images/ClassRoomStudents/3.jpeg" alt="Students working on laptops"
+              loading="lazy">
+          </div>
+          <div class="ph r-4x3 campus-card" data-media="campus-4" data-kind="img"
+            data-alt="Industry leader session with students">
+            <img class="classroom" src="./images/ClassRoomStudents/4.jpeg" alt="Industry leader session with students"
+              loading="lazy">
+          </div>
         </div>
-        <div class="ph r-4x3" data-media="campus-2" data-kind="img" data-alt="Students at DLF Cyber City campus">
-          <div class="ph-in"><span class="ph-ic">🏢</span>Photo · Campus at DLF Cyber City<span class="ph-hint">4:3 ·
-              campus-2</span></div>
-        </div>
-        <div class="ph r-4x3" data-media="campus-3" data-kind="img" data-alt="Students working on laptops">
-          <div class="ph-in"><span class="ph-ic">💻</span>Photo · SAP / AI tools lab session<span class="ph-hint">4:3 ·
-              campus-3</span></div>
-        </div>
-        <div class="ph r-4x3" data-media="campus-4" data-kind="img" data-alt="Industry leader session with students">
-          <div class="ph-in"><span class="ph-ic">🎤</span>Photo · Industry leader session<span class="ph-hint">4:3 ·
-              campus-4</span></div>
-        </div>
-        <div class="ph r-4x3" data-media="campus-5" data-kind="img" data-alt="Students engaging on campus">
-          <div class="ph-in"><span class="ph-ic">🤝</span>Photo · Students engaging on campus<span class="ph-hint">4:3 ·
-              campus-5</span></div>
-        </div>
-        <div class="ph r-4x3" data-media="campus-6" data-kind="img" data-alt="Batch 1 group photo">
-          <div class="ph-in"><span class="ph-ic">📸</span>Photo · Batch 1 group photo<span class="ph-hint">4:3 ·
-              campus-6</span></div>
-        </div>
+
+        <button type="button" class="campus-slider-btn campus-slider-next" id="campus-next"
+          aria-label="Next campus photo" title="Next photo">
+          <svg viewBox="0 0 24 24">
+            <polyline points="9 18 15 12 9 6"></polyline>
+          </svg>
+        </button>
       </div>
       <div class="proof-feature fade" style="margin-top:22px">
-        <!-- <div class="ph video r-16x9" data-media="campus-video" data-kind="video"
-          data-alt="Batch 1 students walking in the GCC School campus at DLF Cyber City">
-          <div class="ph-in"><span class="ph-play">▶</span>Video · Students walking in campus<br>DLF Cyber City,
-            Gurugram<span class="ph-hint">16:9 · campus-video</span></div>
-        </div> -->
         <div class="ph video r-16x9" data-media="campus-video" data-kind="video"
           data-alt="Batch 1 students walking in the GCC School campus at DLF Cyber City">
           <video width="320" height="240" controls>
             <source src="https://storage.googleapis.com/gcc_prod_static_files_backend/static/videos/Campus%20Video.mp4"
               type="video/mp4">
-            <!-- <source src="movie.ogg" type="video/ogg"> -->
             Your browser does not support the video tag.
           </video>
         </div>
@@ -3744,7 +4106,7 @@
           <div><b>DLF Cyber City - Hub of Corporate</b></div>
         </div>
         <div class="fact fade"><span class="ic">🎯</span>
-          <div><b>Corporate - aligned Training</b></div>
+          <div><b>Corporate - Aligned Training</b></div>
         </div>
         <div class="fact fade"><span class="ic">🧑‍🏫</span>
           <div><b>Get trained by Industry Leaders</b></div>
@@ -3808,8 +4170,8 @@
             <div class="fp"><span class="tk">✓</span><span><b>Sequence is fixed:</b> interview → Pre-placement job offer
                 letter → then
                 fee. Never the other way around.</span></div>
-            <div class="fp"><span class="tk">✓</span><span><b>100% education loan</b> options via HDFC Credila, IDFC
-                First Bank, Yes Bank and Avanse - EMI can start after 15 months.</span></div>
+            <div class="fp"><span class="tk">✓</span><span><b>100% education loan</b> via HDFC Credila - EMI can start
+                after 15 months.</span></div>
             <div class="fp"><span class="tk">✓</span><span><b>Salary clarity from day one</b> - you study the full year
                 already knowing the ₹10 LPA role waiting for you.</span></div>
           </div>
@@ -3842,7 +4204,8 @@
     <div class="wrap">
       <div class="sec-head">
         <span class="eyebrow">Inside AEUAP</span>
-        <h2 class="sec-title" id="stack-h2">One year. <span class="hl">Four credentials.</span> One job waiting.</h2>
+        <h2 class="sec-title" id="stack-h2">One year. <span class="hl">Five Powerful Credentials.</span> One Job
+          Waiting.</h2>
       </div>
       <div class="stack-grid">
         <div class="scard fade">
@@ -3866,6 +4229,13 @@
         </div>
         <div class="scard fade">
           <div class="ic"><img
+              src="https://storage.googleapis.com/gcc_prod_static_files_backend/static/images/analytics.png"
+              alt="AI Tools in Accounting" loading="lazy"></div>
+          <h3>Data Analytics</h3>
+          <p>Future-ready business insights</p>
+        </div>
+        <div class="scard fade">
+          <div class="ic"><img
               src="https://storage.googleapis.com/gcc_prod_static_files_backend/static/images/AIMA%20Logo.svg"
               alt="PGCM by AIMA" loading="lazy"></div>
           <h3>PGCM by AIMA</h3>
@@ -3885,14 +4255,14 @@
       <div class="elig-grid">
         <div class="ecard fade"><span class="tk">✓</span>
           <div>
-            <h3>B.Com & BBA graduate</h3>
-            <p>Completed or final year. M.Com / commerce PG after B.Com also qualifies.</p>
+            <h3>B.Com/BBA graduate</h3>
+            <p>Additional qualification can be M.Com, MBA Finance, CA, CS, CMA completed or perusing.</p>
           </div>
         </div>
         <div class="ecard fade"><span class="tk">✓</span>
           <div>
-            <h3>Aged 21–30</h3>
-            <p>The drive hires for entry-level and early-career ₹10 LPA finance roles.</p>
+            <h3>Age Group 21–30</h3>
+            <p>The hiring drive is for early-career ₹10 LPA global audit, tax and finance roles.</p>
           </div>
         </div>
         <div class="ecard fade"><span class="tk">✓</span>
@@ -3913,7 +4283,7 @@
     <div class="wrap">
       <div class="sec-head">
         <span class="eyebrow">Straight answers</span>
-        <h2 class="sec-title" id="faq-h2">Everything students &amp; parents ask before applying</h2>
+        <h2 class="sec-title" id="faq-h2">Everything Candidates &amp; Parents Should Know Before Applying</h2>
       </div>
       <div class="faq">
         <div class="faq-item"><button class="faq-q" aria-expanded="false">Do I really get the Pre-placement job offer
@@ -5206,6 +5576,130 @@
         }
       });
     });
+
+    /* ════════════════ STUDENT VIDEOS SLIDER LOGIC ════════════════ */
+    (function initStudentVideosSlider() {
+      var grid = document.getElementById('student-video-grid') || document.querySelector('section[aria-labelledby="students-h2"] .video-grid');
+      var prevBtn = document.getElementById('student-videos-prev');
+      var nextBtn = document.getElementById('student-videos-next');
+      if (!grid) return;
+
+      function getScrollStep() {
+        var firstCard = grid.querySelector('.video-card');
+        if (firstCard) {
+          var gap = 18;
+          var cardsToScroll = window.innerWidth < 768 ? 1 : 2;
+          return (firstCard.offsetWidth + gap) * cardsToScroll;
+        }
+        return grid.clientWidth * 0.8;
+      }
+
+      function updateControls() {
+        if (!prevBtn && !nextBtn) return;
+        var maxScroll = grid.scrollWidth - grid.clientWidth;
+        if (maxScroll <= 4) {
+          if (prevBtn) { prevBtn.disabled = true; prevBtn.setAttribute('aria-disabled', 'true'); }
+          if (nextBtn) { nextBtn.disabled = true; nextBtn.setAttribute('aria-disabled', 'true'); }
+          return;
+        }
+        var atStart = grid.scrollLeft <= 4;
+        var atEnd = grid.scrollLeft >= maxScroll - 6;
+        if (prevBtn) { prevBtn.disabled = atStart; prevBtn.setAttribute('aria-disabled', String(atStart)); }
+        if (nextBtn) { nextBtn.disabled = atEnd; nextBtn.setAttribute('aria-disabled', String(atEnd)); }
+      }
+
+      if (prevBtn) {
+        prevBtn.addEventListener('click', function (e) {
+          e.preventDefault();
+          grid.scrollBy({ left: -getScrollStep(), behavior: 'smooth' });
+        });
+      }
+
+      if (nextBtn) {
+        nextBtn.addEventListener('click', function (e) {
+          e.preventDefault();
+          grid.scrollBy({ left: getScrollStep(), behavior: 'smooth' });
+        });
+      }
+
+      grid.addEventListener('scroll', updateControls, { passive: true });
+      window.addEventListener('resize', updateControls, { passive: true });
+      setTimeout(updateControls, 120);
+
+      grid.addEventListener('wheel', function (e) {
+        if (e.deltaY !== 0 && grid.scrollWidth > grid.clientWidth) {
+          var maxScroll = grid.scrollWidth - grid.clientWidth;
+          var canScrollLeft = grid.scrollLeft > 0 && e.deltaY < 0;
+          var canScrollRight = grid.scrollLeft < (maxScroll - 1) && e.deltaY > 0;
+          if (canScrollLeft || canScrollRight) {
+            e.preventDefault();
+            grid.scrollBy({ left: e.deltaY * 1.2, behavior: 'smooth' });
+          }
+        }
+      }, { passive: false });
+    })();
+
+    /* ════════════════ CAMPUS PHOTOS SLIDER LOGIC ════════════════ */
+    (function initCampusSlider() {
+      var strip = document.getElementById('campus-strip') || document.querySelector('.campus-strip');
+      var prevBtn = document.getElementById('campus-prev');
+      var nextBtn = document.getElementById('campus-next');
+      if (!strip) return;
+
+      function getScrollStep() {
+        var firstCard = strip.querySelector('.ph, .campus-card');
+        if (firstCard) {
+          var gap = 16;
+          var cardsToScroll = window.innerWidth < 768 ? 1 : 2;
+          return (firstCard.offsetWidth + gap) * cardsToScroll;
+        }
+        return strip.clientWidth * 0.8;
+      }
+
+      function updateControls() {
+        if (!prevBtn && !nextBtn) return;
+        var maxScroll = strip.scrollWidth - strip.clientWidth;
+        if (maxScroll <= 4) {
+          if (prevBtn) { prevBtn.disabled = true; prevBtn.setAttribute('aria-disabled', 'true'); }
+          if (nextBtn) { nextBtn.disabled = true; nextBtn.setAttribute('aria-disabled', 'true'); }
+          return;
+        }
+        var atStart = strip.scrollLeft <= 4;
+        var atEnd = strip.scrollLeft >= maxScroll - 6;
+        if (prevBtn) { prevBtn.disabled = atStart; prevBtn.setAttribute('aria-disabled', String(atStart)); }
+        if (nextBtn) { nextBtn.disabled = atEnd; nextBtn.setAttribute('aria-disabled', String(atEnd)); }
+      }
+
+      if (prevBtn) {
+        prevBtn.addEventListener('click', function (e) {
+          e.preventDefault();
+          strip.scrollBy({ left: -getScrollStep(), behavior: 'smooth' });
+        });
+      }
+
+      if (nextBtn) {
+        nextBtn.addEventListener('click', function (e) {
+          e.preventDefault();
+          strip.scrollBy({ left: getScrollStep(), behavior: 'smooth' });
+        });
+      }
+
+      strip.addEventListener('scroll', updateControls, { passive: true });
+      window.addEventListener('resize', updateControls, { passive: true });
+      setTimeout(updateControls, 120);
+
+      strip.addEventListener('wheel', function (e) {
+        if (e.deltaY !== 0 && strip.scrollWidth > strip.clientWidth) {
+          var maxScroll = strip.scrollWidth - strip.clientWidth;
+          var canScrollLeft = strip.scrollLeft > 0 && e.deltaY < 0;
+          var canScrollRight = strip.scrollLeft < (maxScroll - 1) && e.deltaY > 0;
+          if (canScrollLeft || canScrollRight) {
+            e.preventDefault();
+            strip.scrollBy({ left: e.deltaY * 1.2, behavior: 'smooth' });
+          }
+        }
+      }, { passive: false });
+    })();
 
     /* ════════════════ FADE-IN + STICKY BAR ════════════════ */
     (function () {
