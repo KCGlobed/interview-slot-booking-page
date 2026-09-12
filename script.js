@@ -751,6 +751,68 @@ document.querySelectorAll('.video-player-wrap').forEach(wrap => {
     }
 });
 
+/* ════════════════ PARENT VIDEOS SLIDER LOGIC ════════════════ */
+(function initParentVideosSlider() {
+    const grid = document.getElementById('parent-video-grid') || document.querySelector('section[aria-labelledby="parents-h2"] .video-grid');
+    const prevBtn = document.getElementById('parent-videos-prev');
+    const nextBtn = document.getElementById('parent-videos-next');
+    if (!grid) return;
+
+    function getScrollStep() {
+        const firstCard = grid.querySelector('.video-card');
+        if (firstCard) {
+            const gap = 18;
+            const cardsToScroll = window.innerWidth < 768 ? 1 : 2;
+            return (firstCard.offsetWidth + gap) * cardsToScroll;
+        }
+        return grid.clientWidth * 0.8;
+    }
+
+    function updateControls() {
+        if (!prevBtn && !nextBtn) return;
+        const maxScroll = grid.scrollWidth - grid.clientWidth;
+        if (maxScroll <= 4) {
+            if (prevBtn) { prevBtn.disabled = true; prevBtn.setAttribute('aria-disabled', 'true'); }
+            if (nextBtn) { nextBtn.disabled = true; nextBtn.setAttribute('aria-disabled', 'true'); }
+            return;
+        }
+        const atStart = grid.scrollLeft <= 4;
+        const atEnd = grid.scrollLeft >= maxScroll - 6;
+        if (prevBtn) { prevBtn.disabled = atStart; prevBtn.setAttribute('aria-disabled', String(atStart)); }
+        if (nextBtn) { nextBtn.disabled = atEnd; nextBtn.setAttribute('aria-disabled', String(atEnd)); }
+    }
+
+    if (prevBtn) {
+        prevBtn.addEventListener('click', function (e) {
+            e.preventDefault();
+            grid.scrollBy({ left: -getScrollStep(), behavior: 'smooth' });
+        });
+    }
+
+    if (nextBtn) {
+        nextBtn.addEventListener('click', function (e) {
+            e.preventDefault();
+            grid.scrollBy({ left: getScrollStep(), behavior: 'smooth' });
+        });
+    }
+
+    grid.addEventListener('scroll', updateControls, { passive: true });
+    window.addEventListener('resize', updateControls, { passive: true });
+    setTimeout(updateControls, 120);
+
+    grid.addEventListener('wheel', function (e) {
+        if (e.deltaY !== 0 && grid.scrollWidth > grid.clientWidth) {
+            const maxScroll = grid.scrollWidth - grid.clientWidth;
+            const canScrollLeft = grid.scrollLeft > 0 && e.deltaY < 0;
+            const canScrollRight = grid.scrollLeft < (maxScroll - 1) && e.deltaY > 0;
+            if (canScrollLeft || canScrollRight) {
+                e.preventDefault();
+                grid.scrollBy({ left: e.deltaY * 1.2, behavior: 'smooth' });
+            }
+        }
+    }, { passive: false });
+})();
+
 /* ════════════════ STUDENT VIDEOS SLIDER LOGIC ════════════════ */
 (function initStudentVideosSlider() {
     const grid = document.getElementById('student-video-grid') || document.querySelector('section[aria-labelledby="students-h2"] .video-grid');
