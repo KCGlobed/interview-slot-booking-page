@@ -4444,7 +4444,7 @@ body.modal-open {
     background: #FFFFFF;
     border: 1.5px solid rgba(81, 21, 124, 0.2);
     color: var(--purple, #51157C);
-    display: flex;
+    display: none;
     align-items: center;
     justify-content: center;
     cursor: pointer;
@@ -4498,6 +4498,7 @@ body.modal-open {
 
 .clip-strip {
     display: flex !important;
+    justify-content: center;
     gap: 20px;
     overflow-x: auto;
     scroll-behavior: smooth;
@@ -4578,9 +4579,11 @@ body.modal-open {
 
     .clip-strip {
         gap: 16px;
+        justify-content: flex-start;
     }
 
     .print-slider-btn {
+        display: flex;
         width: 40px;
         height: 40px;
     }
