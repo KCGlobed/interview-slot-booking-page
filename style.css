@@ -2306,6 +2306,106 @@ body.modal-open {
     overflow: hidden
 }
 
+/* ════════════════ SUBMISSION SUCCESS MODAL ════════════════ */
+#submission-success-modal .modal-card {
+    background: #ffffff;
+    max-width: 440px;
+    width: 100%;
+    border-radius: 20px;
+    box-shadow: 0 25px 50px -12px rgba(42, 11, 78, 0.28);
+    position: relative;
+    padding: 0;
+}
+
+#submission-modal-close {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: #F3F4F6;
+    color: #4B5563;
+    font-size: 22px;
+    line-height: 1;
+    font-weight: 700;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+    z-index: 10;
+}
+
+#submission-modal-close:hover {
+    background: #E5E7EB;
+    color: #111827;
+    transform: scale(1.08);
+}
+
+.submission-modal-body {
+    padding: 38px 26px 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.submission-modal-icon {
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    background: #EAF7EF;
+    color: #16A34A;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 34px;
+    font-weight: 800;
+    margin-bottom: 20px;
+    box-shadow: 0 0 0 8px #F0FDF4;
+    animation: iconPop 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
+}
+
+@keyframes iconPop {
+    from {
+        opacity: 0;
+        transform: scale(0.6);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.submission-modal-title {
+    font-family: var(--f-d, 'Sora', sans-serif);
+    font-size: 22px;
+    font-weight: 800;
+    color: #1B1030;
+    line-height: 1.3;
+    margin-bottom: 10px;
+}
+
+.submission-modal-desc {
+    font-family: var(--f-b, 'Figtree', sans-serif);
+    font-size: 15px;
+    color: #4A3A66;
+    line-height: 1.6;
+    margin-bottom: 24px;
+    max-width: 340px;
+}
+
+.submission-modal-btn {
+    width: 100%;
+    padding: 14px 20px;
+    font-size: 15.5px;
+    font-weight: 700;
+    border-radius: 12px;
+    cursor: pointer;
+}
+
 /* ════════════════ FADE ════════════════ */
 .fade-up {
     opacity: 0;
