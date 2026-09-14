@@ -184,6 +184,8 @@ h6 {
     animation: btn-glow 2.4s ease-in-out infinite
 }
 
+
+
 @media screen and (max-width: 660px) {
     .btn {
         font-size: 12px;
@@ -217,9 +219,24 @@ h6 {
 
 
 @media (max-width: 300px) {
-    .btn-lg {
-        padding: 12px 18px;
-        font-size: 12px
+    .nav .btn {
+        padding: 10px 14px;
+        font-size: 6px;
+    }
+
+    .stack-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 10px
+    }
+
+    .btn {
+        font-size: 5px;
+    }
+
+    
+    .mbar-in {
+        flex-direction: column;
     }
 }
 
