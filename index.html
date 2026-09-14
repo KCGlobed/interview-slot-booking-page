@@ -844,6 +844,74 @@
       font-family: var(--f-d)
     }
 
+    /* ── notice screen (step 0) ── */
+    .q-title b {
+      color: var(--purple)
+    }
+
+    .notice-list {
+      list-style: none;
+      counter-reset: nt;
+      display: flex;
+      flex-direction: column;
+      gap: 9px;
+      margin: 0 0 14px
+    }
+
+    .notice-list li {
+      position: relative;
+      padding-left: 32px;
+      font-size: 14px;
+      line-height: 1.5;
+      color: var(--ink-2)
+    }
+
+    .notice-list li b {
+      color: var(--ink)
+    }
+
+    .notice-list li::before {
+      counter-increment: nt;
+      content: counter(nt);
+      position: absolute;
+      left: 0;
+      top: 1px;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: var(--purple);
+      color: #fff;
+      font-family: var(--f-d);
+      font-size: 11px;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center
+    }
+
+    .notice-fin {
+      background: var(--amber-soft);
+      border: 1px solid rgba(199, 126, 20, .3);
+      border-left: 4px solid var(--amber);
+      border-radius: var(--r-s);
+      padding: 10px 13px;
+      font-size: 13.2px;
+      line-height: 1.5;
+      color: #6B4A0A;
+      margin-bottom: 16px
+    }
+
+    .notice-fin b {
+      font-family: var(--f-d);
+      color: #4a3200
+    }
+
+    .notice-cta {
+      width: 100%;
+      padding: 16px 18px;
+      font-size: 15px
+    }
+
     .opts {
       display: flex;
       flex-direction: column;
@@ -1752,7 +1820,8 @@
         margin-top: 30px;
       }
 
-      .seq li, .banner-footer {
+      .seq li,
+      .banner-footer {
         font-size: 12px;
         font-weight: 500;
       }
@@ -3360,7 +3429,8 @@
           <li>On-boarding with corporate</li>
         </ol>
 
-        <p class="banner-footer"> • Program Fee INR 9 Lc (Ex. GST) | 100% backed by education loan EMI starts after 1st salary</p>
+        <p class="banner-footer"> • Program Fee INR 9 Lc (Ex. GST) | 100% backed by education loan EMI starts after 1st
+          salary</p>
 
         <p class="banner-footer"> • GCC School Campus, DLF Cyber City, Gurugram (A Hub of GCC Organisations)</p>
       </div>
@@ -3518,15 +3588,6 @@
             </div>
           </div>
           <div class="video-card fade-up">
-            <div class="video-thumb" data-youtube-id="qnjBI1AN8uU">
-              <img src="https://img.youtube.com/vi/qnjBI1AN8uU/hqdefault.jpg" alt="Parent testimonial thumbnail"
-                loading="lazy">
-              <button class="play-btn" aria-label="Play Video">
-                ▶
-              </button>
-            </div>
-          </div>
-          <div class="video-card fade-up">
             <div class="video-thumb" data-youtube-id="5H6_uvQRGD4">
               <img src="https://img.youtube.com/vi/5H6_uvQRGD4/hqdefault.jpg" alt="Parent testimonial thumbnail"
                 loading="lazy">
@@ -3547,6 +3608,15 @@
           <div class="video-card fade-up">
             <div class="video-thumb" data-youtube-id="wBbDIcQZE6k">
               <img src="https://img.youtube.com/vi/wBbDIcQZE6k/hqdefault.jpg" alt="Parent testimonial thumbnail"
+                loading="lazy">
+              <button class="play-btn" aria-label="Play Video">
+                ▶
+              </button>
+            </div>
+          </div>
+          <div class="video-card fade-up">
+            <div class="video-thumb" data-youtube-id="qnjBI1AN8uU">
+              <img src="https://img.youtube.com/vi/qnjBI1AN8uU/hqdefault.jpg" alt="Parent testimonial thumbnail"
                 loading="lazy">
               <button class="play-btn" aria-label="Play Video">
                 ▶
@@ -3689,7 +3759,8 @@
             <div class="stars" aria-hidden="true">★★★★★</div>
             <p>My journey with GCC School has been an incredible experience. I’m proud to have received my pre-placement
               offer letter from Kreit & Chiu and excited to begin my professional journey.</p>
-            <div class="who">Sumukh Agarwal<small>B.Com · Sardar Bhagat Singh PG College, Kumaun University </small></div>
+            <div class="who">Sumukh Agarwal<small>B.Com · Sardar Bhagat Singh PG College, Kumaun University </small>
+            </div>
           </div>
           <div class="quote fade">
             <div class="stars" aria-hidden="true">★★★★★</div>
@@ -3860,7 +3931,7 @@
             </div>
             <figcaption>Punjab Kesari </figcaption>
           </figure>
-             <figure class="clip"
+          <figure class="clip"
             onclick="openLightbox('./images/print/Jagmarg, P-8, April 6 (1) (1).jpeg', 'Jagmarg newspaper clipping')"
             title="Click to enlarge">
             <div class="ph r-3x4" data-alt="Jagmarg newspaper clipping">
@@ -3985,7 +4056,7 @@
         }
 
         @media (min-width: 900px) {
-          
+
           .seq {
             margin: 30px 0px;
           }
@@ -4155,7 +4226,9 @@
         </div>
         <div class="txt">
           <h3>Take a Walk Through Our Campus at DLF Cyber City, Gurugram</h3>
-          <p>Explore GCC School’s classrooms, technology-enabled learning spaces and modern campus facilities. This is where selected candidates complete their 12-month AEUAP training—after securing a ₹10 LPA pre-placement offer through the company interview</p>
+          <p>Explore GCC School’s classrooms, technology-enabled learning spaces and modern campus facilities. This is
+            where selected candidates complete their 12-month AEUAP training—after securing a ₹10 LPA pre-placement
+            offer through the company interview</p>
           <div class="sec-cta" style="text-align:left;margin-top:18px">
             <a href="#apply" class="btn btn-purple go-apply">I want to be on this campus →</a>
             <div class="note">45-second form · No fee to apply · Callback within 2 hours</div>
@@ -4270,8 +4343,8 @@
       </div>
       <div class="stack-grid">
         <div class="scard fade">
-          <div class="ic"><img src="https://gccschool.com/_nuxt/AICPA_logo.FRMfnUEw.png"
-              alt="US CPA" loading="lazy"></div>
+          <div class="ic"><img src="https://gccschool.com/_nuxt/AICPA_logo.FRMfnUEw.png" alt="US CPA" loading="lazy">
+          </div>
           <h3>US CPA</h3>
           <p>Global chartered accountancy qualification</p>
         </div>
@@ -4340,7 +4413,7 @@
   </section>
 
   <!-- ════════════════ FAQ ════════════════ -->
-  <section class="sec" aria-labelledby="faq-h2">
+  <!-- <section class="sec" aria-labelledby="faq-h2">
     <div class="wrap">
       <div class="sec-head">
         <span class="eyebrow">Straight answers</span>
@@ -4412,7 +4485,7 @@
         </div>
       </div>
     </div>
-  </section>
+  </section> -->
 
   <!-- ════════════════ FINAL CTA SECTION (BATCH 2 HIRING DRIVE) ════════════════ -->
   <!-- <section class="final-sec" id="apply-bottom" aria-labelledby="final-h2">
@@ -4844,6 +4917,27 @@
           if (fill) fill.style.width = Math.round((Math.min(state.idx + 1, TOTAL) / TOTAL) * 100) + '%';
         }
 
+        /* Step 0 — notice the candidate must agree to before the questions start */
+        function renderNotice() {
+          if (progRow) progRow.style.visibility = 'hidden';
+          host.innerHTML = '<div class="step">'
+            + '<div class="q-kicker">Before you start · Please read</div>'
+            + '<div class="q-title">This hiring drive is for <b> B.Com/ BBA or M.Com/ MBA qualified</b> only.</div>'
+            + '<ol class="notice-list">'
+            + '<li><b>You go through the hiring drive</b> — a face-to-face interview with the hiring company.</li>'
+            + '<li><b>Selected candidates receive a ₹10 LPA Pre-Placement Offer letter</b> from the respective company.</li>'
+            + '<li><b>You then join the 1-year AEUAP program</b> — program fee ₹9 lakh + GST, payable after your offer letter.</li>'
+            + '</ol>'
+            + '<div class="notice-fin"><b>100% finance available</b> from banking partners · <b>EMI starts after 15 months</b></div>'
+            + '<button type="button" class="btn btn-amber notice-cta">I Agree &amp; want to proceed →</button>'
+            + '<div class="step-foot" style="justify-content:center"><span class="secure">🔒 Free · 60 sec</span></div></div>';
+          host.querySelector('.notice-cta').addEventListener('click', function () {
+            state.agreed = true; trk('NoticeAgreed', { content_name: CONFIG.DRIVE_LABEL });
+            if (progRow) progRow.style.visibility = 'visible';
+            renderChoice();
+          });
+        }
+
         function renderChoice() {
           var q = QUESTIONS[state.idx];
           var html = '<div class="step">'
@@ -4855,7 +4949,7 @@
             html += '<button type="button" class="opt" role="radio" aria-checked="false" data-i="' + i + '"><span class="ring" aria-hidden="true"></span><span>' + esc(o.v) + '</span></button>';
           });
           html += '</div><div class="step-foot">'
-            + (state.idx > 0 ? '<button type="button" class="back-lk back-btn">← Back</button>' : '<span></span>')
+            + '<button type="button" class="back-lk back-btn">← Back</button>'
             + '<span class="secure">🔒 Free · 60 sec</span></div></div>';
           host.innerHTML = html;
           setProg();
@@ -4882,7 +4976,7 @@
           }, 240);
         }
 
-        function goBack() { if (state.idx > 0) { state.idx--; renderChoice(); } }
+        function goBack() { if (state.idx > 0) { state.idx--; renderChoice(); } else { renderNotice(); } }
 
         function renderDQ(reason) {
           var m = DQ_MSG[reason];
@@ -5277,7 +5371,7 @@
           var bar = document.getElementById('mbar'); if (bar) bar.classList.remove('show'); window.__leadDone = true;
         }
 
-        renderChoice();
+        renderNotice();
       }
     })();
 
@@ -5962,5 +6056,4 @@
     </div>
   </div>
 </body>
-
 </html>
