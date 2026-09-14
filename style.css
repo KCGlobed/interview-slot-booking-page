@@ -125,6 +125,22 @@ h6 {
     text-align: center
 }
 
+.form-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 15px 30px;
+    border-radius: var(--r-sm);
+    font-family: var(--f-head);
+    font-weight: 800;
+    font-size: 15px;
+    letter-spacing: .01em;
+    transition: all .2s;
+    white-space: nowrap;
+    text-align: center
+}
+
 .btn:disabled {
     cursor: not-allowed;
     background: #D1D5DB;
@@ -207,7 +223,7 @@ h6 {
 
 @media (max-width: 400px) {
     .btn {
-        font-size: 7px;
+        font-size: 9px;
         padding: 6px 6px;
     }
 
@@ -234,7 +250,7 @@ h6 {
         font-size: 5px;
     }
 
-    
+
     .mbar-in {
         flex-direction: column;
     }
