@@ -4941,27 +4941,6 @@
           if (fill) fill.style.width = Math.round((Math.min(state.idx + 1, TOTAL) / TOTAL) * 100) + '%';
         }
 
-        /* Step 0 — notice the candidate must agree to before the questions start */
-        function renderNotice() {
-          if (progRow) progRow.style.visibility = 'hidden';
-          host.innerHTML = '<div class="step">'
-            + '<div class="q-kicker">Before you start · Please read</div>'
-            + '<div class="q-title">This hiring drive is for <b> B.Com/ BBA or M.Com/ MBA qualified</b> only.</div>'
-            + '<ol class="notice-list">'
-            + '<li><b>You go through the hiring drive</b> with our hiring partners within the GCC School’s campus.</li>'
-            + '<li><b>Selected candidates receive a ₹10 LPA Pre-Placement Offer</b> from the respective company.</li>'
-            + '<li><b>Enroll in 1-year AEUAP program</b> — program fee ₹9 lakh + GST, payable after your offer .</li>'
-            + '</ol>'
-            + '<div class="notice-fin"><b>100% finance available</b> from banking partners · <b>EMI starts after 15 months</b></div>'
-            + '<button type="button" class="sub-btn btn-amber notice-cta">I Agree &amp; want to proceed →</button>'
-            + '<div class="step-foot" style="justify-content:center"><span class="secure">🔒 Free · 60 sec</span></div></div>';
-          host.querySelector('.notice-cta').addEventListener('click', function () {
-            state.agreed = true; trk('NoticeAgreed', { content_name: CONFIG.DRIVE_LABEL });
-            if (progRow) progRow.style.visibility = 'visible';
-            renderChoice();
-          });
-        }
-
         function renderChoice() {
           var q = QUESTIONS[state.idx];
           var html = '<div class="step">'
@@ -4973,7 +4952,7 @@
             html += '<button type="button" class="opt" role="radio" aria-checked="false" data-i="' + i + '"><span class="ring" aria-hidden="true"></span><span>' + esc(o.v) + '</span></button>';
           });
           html += '</div><div class="step-foot">'
-            + '<button type="button" class="back-lk back-btn">← Back</button>'
+            + (state.idx > 0 ? '<button type="button" class="back-lk back-btn">← Back</button>' : '<span style="visibility:hidden"></span>')
             + '<span class="secure">🔒 Free · 60 sec</span></div></div>';
           host.innerHTML = html;
           setProg();
@@ -5000,7 +4979,7 @@
           }, 240);
         }
 
-        function goBack() { if (state.idx > 0) { state.idx--; renderChoice(); } else { renderNotice(); } }
+        function goBack() { if (state.idx > 0) { state.idx--; renderChoice(); } }
 
         function renderDQ(reason) {
           var m = DQ_MSG[reason];
@@ -5395,7 +5374,7 @@
           var bar = document.getElementById('mbar'); if (bar) bar.classList.remove('show'); window.__leadDone = true;
         }
 
-        renderNotice();
+        renderChoice();
       }
     })();
 
