@@ -1,8 +1,8 @@
-const VITE_API_BASE_URL = "https://gcc-backend-dev.gccschool.com";
-// const VITE_API_PROD_URL = "https://gcc-backend-prod.gccschool.com";
+// const VITE_API_BASE_URL = "https://gcc-backend-dev.gccschool.com";
+const VITE_API_PROD_URL = "https://gcc-backend-prod.gccschool.com";
 
-window.GCC_Base_url = VITE_API_BASE_URL;
-// window.GCC_Base_url = VITE_API_PROD_URL;
+// window.GCC_Base_url = VITE_API_BASE_URL;
+window.GCC_Base_url = VITE_API_PROD_URL;
 
 var TRACKING_KEYS = [
     'utm_medium',
