@@ -2,7 +2,6 @@
 <html lang="en">
 
 <head>
-  <script src="./state-city.js?v=2"></script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <meta name="theme-color" content="#2A0B4E">
@@ -17,6 +16,18 @@
 
 
   <!-- ════════════════ TRACKING (IDs preserved from live page) ════════════════ -->
+  <script>
+    /* Third-party tags are injected after window load so they don't compete with page rendering.
+       Their stubs/queues below are defined immediately, so no events are lost. */
+    function gccAfterLoad(fn) {
+      if (document.readyState === 'complete') setTimeout(fn, 0);
+      else window.addEventListener('load', function () { setTimeout(fn, 0); });
+    }
+    function gccLoadScript(src) {
+      gccAfterLoad(function () { var t = document.createElement('script'); t.async = true; t.src = src; document.head.appendChild(t); });
+    }
+  </script>
+
   <!-- Meta Pixel -->
   <script>
     !function (f, b, e, v, n, t, s) {
@@ -24,9 +35,7 @@
         n.callMethod ? n.callMethod.apply(n, arguments) : n.queue.push(arguments)
       };
       if (!f._fbq) f._fbq = n; n.push = n; n.loaded = !0; n.version = '2.0';
-      n.queue = []; t = b.createElement(e); t.async = !0;
-      t.src = v; s = b.getElementsByTagName(e)[0];
-      s.parentNode.insertBefore(t, s)
+      n.queue = []; gccLoadScript(v)
     }(window, document, 'script', 'https://connect.facebook.net/en_US/fbevents.js');
     fbq('init', '1308129784468579');
     fbq('track', 'PageView');
@@ -35,7 +44,7 @@
       src="https://www.facebook.com/tr?id=1308129784468579&ev=PageView&noscript=1" /></noscript>
 
   <!-- Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-B2ETHYM6MN"></script>
+  <script>gccLoadScript('https://www.googletagmanager.com/gtag/js?id=G-B2ETHYM6MN');</script>
   <script>window.dataLayer = window.dataLayer || [];
     function gtag() { dataLayer.push(arguments); }
     gtag('js', new Date());
@@ -46,23 +55,20 @@
       w[l] = w[l] || []; w[l].push({
         'gtm.start':
           new Date().getTime(), event: 'gtm.js'
-      }); var f = d.getElementsByTagName(s)[0],
-        j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
-          'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+      }); var dl = l != 'dataLayer' ? '&l=' + l : '';
+      gccLoadScript('https://www.googletagmanager.com/gtm.js?id=' + i + dl);
     })(window, document, 'script', 'dataLayer', 'GTM-5NVDGXLR');</script>
 
   <!-- Microsoft Clarity -->
   <script>(function (c, l, a, r, i, t, y) {
       c[a] = c[a] || function () { (c[a].q = c[a].q || []).push(arguments) };
-      t = l.createElement(r); t.async = 1; t.src = "https://www.clarity.ms/tag/" + i;
-      y = l.getElementsByTagName(r)[0]; y.parentNode.insertBefore(t, y);
+      gccLoadScript("https://www.clarity.ms/tag/" + i);
     })(window, document, "clarity", "script", "wtdnppatos");</script>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Figtree:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap"
-    rel="stylesheet">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Figtree:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Figtree:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap"></noscript>
 
   <style>
     /* ════════════════ TOKENS ════════════════ */
@@ -3874,7 +3880,7 @@
           href="https://www.business-standard.com/amp/content/press-releases-ani/gcc-school-and-kc-globed-host-round-table-meeting-on-impact-of-ai-on-gccs-building-the-future-workforce-126012901211_1.html"
           target="_blank" rel="noopener">
           <div class="ph r-16x9" data-media="news-1" data-kind="img" data-alt="News article 1 thumbnail">
-            <img src="./images/news/news_1.jpg" alt="news">
+            <img src="./images/news/news_1.jpg" alt="news" loading="lazy" decoding="async">
           </div>
           <div class="news-body">
             <div class="news-meta"><span class="news-pub">Business Standard</span><span>·</span><span>27/01/26</span>
@@ -3890,7 +3896,7 @@
           href="https://etedge-insights.com/trending/du-professors-back-gcc-school-as-a-game-changer-for-commerce-students/"
           target="_blank" rel="noopener">
           <div class="ph r-16x9" data-media="news-3" data-kind="img" data-alt="News article 3 thumbnail">
-            <img src="./images/news/news_2.jpeg" alt="news">
+            <img src="./images/news/news_2.jpeg" alt="news" loading="lazy" decoding="async">
           </div>
           <div class="news-body">
             <div class="news-meta"><span class="news-pub">ET Edge Insights</span><span>·</span><span>22/04/2026</span>
@@ -3905,7 +3911,7 @@
           href="https://www.cityairnews.com/content/gcc-school-brings-together-education-leaders-in-chandigarh-ambala-to-shape-the-future-of-finance-education#google_vignette"
           target="_blank" rel="noopener">
           <div class="ph r-16x9" data-media="news-3" data-kind="img" data-alt="News article 3 thumbnail">
-            <img src="./images/news/Media.jpeg" alt="news">
+            <img src="./images/news/Media.jpeg" alt="news" loading="lazy" decoding="async">
           </div>
           <div class="news-body">
             <div class="news-meta"><span class="news-pub">City Air News</span><span>·</span><span>22/04/2026</span>
@@ -4151,31 +4157,31 @@
         <div class="video-card fade-up">
           <div class="video-thumb-ig">
             <iframe src="https://www.instagram.com/reel/DZQO4pNBcBg/embed/?hidecaption=true" width="100%" height="100%"
-              frameborder="0" scrolling="no" allowtransparency="true"></iframe>
+              frameborder="0" scrolling="no" allowtransparency="true" loading="lazy"></iframe>
           </div>
         </div>
         <div class="video-card fade-up">
           <div class="video-thumb-ig">
             <iframe src="https://www.instagram.com/reel/DYXdh98OZxo/embed/?hidecaption=true" width="100%" height="100%"
-              frameborder="0" scrolling="no" allowtransparency="true"></iframe>
+              frameborder="0" scrolling="no" allowtransparency="true" loading="lazy"></iframe>
           </div>
         </div>
         <div class="video-card fade-up">
           <div class="video-thumb-ig">
             <iframe src="https://www.instagram.com/reel/DYwdj3ZuMTp/embed/?hidecaption=true" width="100%" height="100%"
-              frameborder="0" scrolling="no" allowtransparency="true"></iframe>
+              frameborder="0" scrolling="no" allowtransparency="true" loading="lazy"></iframe>
           </div>
         </div>
         <div class="video-card fade-up">
           <div class="video-thumb-ig">
             <iframe src="https://www.instagram.com/reel/DYNNiqtut3a/embed/?hidecaption=true" width="100%" height="100%"
-              frameborder="0" scrolling="no" allowtransparency="true"></iframe>
+              frameborder="0" scrolling="no" allowtransparency="true" loading="lazy"></iframe>
           </div>
         </div>
         <div class="video-card fade-up">
           <div class="video-thumb-ig">
             <iframe src="https://www.instagram.com/reel/DaPPmbsJxAl/embed/?hidecaption=true" width="100%" height="100%"
-              frameborder="0" scrolling="no" allowtransparency="true"></iframe>
+              frameborder="0" scrolling="no" allowtransparency="true" loading="lazy"></iframe>
           </div>
         </div>
       </div>
@@ -4236,7 +4242,7 @@
       <div class="proof-feature fade" style="margin-top:22px">
         <div class="ph video r-16x9" data-media="campus-video" data-kind="video"
           data-alt="Batch 1 students walking in the GCC School campus at DLF Cyber City">
-          <video width="320" height="240" controls>
+          <video width="320" height="240" controls preload="none" poster="./images/ClassRoomStudents/2.jpeg">
             <source src="https://storage.googleapis.com/gcc_prod_static_files_backend/static/videos/Campus%20Video.mp4"
               type="video/mp4">
             Your browser does not support the video tag.
@@ -4550,7 +4556,7 @@
   <footer class="foot">
     <div class="wrap">
       <div class="foot-top">
-        <img src="./images/gcc-logo.jpeg" alt="GCC School logo">
+        <img src="./images/gcc-logo.jpeg" alt="GCC School logo" loading="lazy" decoding="async">
         <div style="max-width:420px;line-height:1.65">9B, DLF Cyber City, Gurugram, Haryana.<br>AEUAP: US CPA · British
           Council · AI in Accounting · SAP FI CO · AICTE-approved PGCM by AIMA.
         </div>
@@ -4574,6 +4580,7 @@
 
   <datalist id="city-list"></datalist>
 
+  <script src="./state-city.js?v=2"></script>
   <script>
     /* ═══════════════════════════════════════════════════════════════
        CONFIG - edit this block before going live
