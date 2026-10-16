@@ -113,6 +113,19 @@ function getTrackingParams() {
     return params;
 }
 
+function getLeadTracking() {
+    var q = new URLSearchParams(window.location.search);
+    return {
+        utm_source: q.get('utm_source') || '',
+        utm_medium: q.get('utm_medium') || '',
+        utm_campaign: q.get('utm_campaign') || '',
+        utm_term: q.get('utm_term') || '',
+        utm_content: q.get('utm_content') || '',
+        landing_page: location.href,
+        referrer: document.referrer   // '' bhi bhejo - Direct ka signal hai
+    };
+}
+
 function populateFormUTMFields() {
     var params = getTrackingParams();
     var forms = document.querySelectorAll('form');
@@ -504,6 +517,7 @@ var DEADLINE = new Date('2026-08-31T23:59:59+05:30').getTime();
                 degree_stage: data.degree_stage || "",
                 fund_mode: data.fund_mode || "",
                 attend_from: data.attend_from || "",
+                ...getLeadTracking(),
                 ...getTrackingParams()
             };
 

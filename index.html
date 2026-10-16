@@ -4708,6 +4708,19 @@
       return p;
     }
 
+    function getLeadTracking() {
+      var q = new URLSearchParams(location.search);
+      return {
+        utm_source: q.get('utm_source') || '',
+        utm_medium: q.get('utm_medium') || '',
+        utm_campaign: q.get('utm_campaign') || '',
+        utm_term: q.get('utm_term') || '',
+        utm_content: q.get('utm_content') || '',
+        landing_page: location.href,
+        referrer: document.referrer   /* '' bhi bhejo - Direct ka signal hai */
+      };
+    }
+
     /* ════════════════ MEDIA HYDRATION (placeholders → real media) ════════════════ */
     (function () {
       function ytId(u) {
@@ -5353,7 +5366,8 @@
             utm_source: u.get('utm_source') || '', utm_medium: u.get('utm_medium') || '',
             utm_campaign: u.get('utm_campaign') || '', utm_content: u.get('utm_content') || '',
             utm_term: u.get('utm_term') || '', fbclid: u.get('fbclid') || '',
-            page_url: location.href, referrer: document.referrer || '',
+            page_url: location.href, landing_page: location.href,
+            referrer: document.referrer,
             ts_ist: new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' }),
             user_agent: navigator.userAgent
           };
@@ -5377,7 +5391,7 @@
             degree_stage: state.answers.status || "",
             fund_mode: state.answers.funding || "",
             attend_from: state.answers.attend || ""
-          }, getTrackingParams());
+          }, getLeadTracking(), getTrackingParams());
 
           function handleSubmissionSuccess() {
             if (subBtn) {
