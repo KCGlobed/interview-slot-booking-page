@@ -4708,6 +4708,19 @@
       return p;
     }
 
+    function getLeadTracking() {
+      var q = new URLSearchParams(location.search);
+      return {
+        utm_source: q.get('utm_source') || '',
+        utm_medium: q.get('utm_medium') || '',
+        utm_campaign: q.get('utm_campaign') || '',
+        utm_term: q.get('utm_term') || '',
+        utm_content: q.get('utm_content') || '',
+        landing_page: location.href,
+        referrer: document.referrer   /* '' bhi bhejo - Direct ka signal hai */
+      };
+    }
+
     /* ════════════════ MEDIA HYDRATION (placeholders → real media) ════════════════ */
     (function () {
       function ytId(u) {
@@ -5073,7 +5086,7 @@
             + '</div>'
             + '<span class="f-err e-phone">Enter a valid 10-digit Indian mobile number</span>'
             + '<div class="otp-wrap otp-section" style="display: none; margin-top: 4px;">'
-            + '<input class="f-in f-otp" type="text" placeholder="Enter 4-digit OTP" autocomplete="one-time-code" inputmode="numeric" maxlength="6" style="flex: 1; min-width: 0; -spacing: 0.08em; font-weight: 600;">'
+            + '<input class="f-in f-otp" type="text" placeholder="Enter 6-digit OTP" autocomplete="one-time-code" inputmode="numeric" maxlength="6" style="flex: 1; min-width: 0; -spacing: 0.08em; font-weight: 600;">'
             + '<button type="button" class="btn btn-otp-verify verify-otp-btn">Verify OTP</button>'
             + '</div>'
             + '<span class="f-err e-otp">Invalid OTP</span>'
@@ -5353,7 +5366,8 @@
             utm_source: u.get('utm_source') || '', utm_medium: u.get('utm_medium') || '',
             utm_campaign: u.get('utm_campaign') || '', utm_content: u.get('utm_content') || '',
             utm_term: u.get('utm_term') || '', fbclid: u.get('fbclid') || '',
-            page_url: location.href, referrer: document.referrer || '',
+            page_url: location.href, landing_page: location.href,
+            referrer: document.referrer,
             ts_ist: new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' }),
             user_agent: navigator.userAgent
           };
@@ -5377,7 +5391,7 @@
             degree_stage: state.answers.status || "",
             fund_mode: state.answers.funding || "",
             attend_from: state.answers.attend || ""
-          }, getTrackingParams());
+          }, getLeadTracking(), getTrackingParams());
 
           function handleSubmissionSuccess() {
             if (subBtn) {
