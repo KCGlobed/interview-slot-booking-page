@@ -1082,6 +1082,7 @@
       padding-left: 2px
     }
 
+    /* ---- OTP VERIFICATION STYLES DISABLED (keep for future use) ----
     .otp-wrap {
       display: flex;
       gap: 8px;
@@ -1161,6 +1162,7 @@
       border-radius: 6px;
       border: 1px solid rgba(22, 163, 74, 0.2);
     }
+    ---- end OTP styles ---- */
 
     /* ════════════════ SUBMISSION SUCCESS MODAL ════════════════ */
     #submission-success-modal {
@@ -4605,7 +4607,9 @@
       DRIVE_LABEL: 'AEUAP Batch Hiring Drive',        // shown in strip, form header, tracking
       SEATS_LEFT: '',                                   // e.g. '40'. Empty = seats line hidden (never fake this)
       WHATSAPP: '',                                     // e.g. '919876543210'. Empty = WhatsApp button hidden
+      /* ---- OTP VERIFICATION DISABLED (keep for future use) ----
       OTP_MODE: 'before',                                 // 'off' = no OTP gate · 'before' = OTP required before submit
+      ---- end OTP ---- */
       SOURCE_ID: 15,                                    // CRM source id (unchanged from live page)
       MAX_SLOTS_PER_DAY: 30,
       QUIZ_URL: ''                                      // Empty = open calendar popup to book interview slot directly on page
@@ -4970,7 +4974,7 @@
         var tickEl = card.querySelector('.prog-tick') || card.querySelector('#prog-tick');
         var progRow = card.querySelector('.prog-row') || card.querySelector('#prog-row');
 
-        var state = { idx: 0, answers: {}, score: 0, tags: [], started: false, qualifiedFired: false, submitted: false, isPhoneVerified: false };
+        var state = { idx: 0, answers: {}, score: 0, tags: [], started: false, qualifiedFired: false, submitted: false /* , isPhoneVerified: false  -- OTP verification disabled */ };
 
         function setProg() {
           if (tickEl) tickEl.textContent = 'STEP ' + pad2(Math.min(state.idx + 1, TOTAL)) + ' / ' + pad2(TOTAL);
@@ -5080,6 +5084,10 @@
             + '<form class="lead-form-dummy" onsubmit="return false;">'
             + '<div class="f-stack">'
             + '<input class="f-in f-name" type="text" placeholder="Full name" autocomplete="name"><span class="f-err e-name">Please enter your full name</span>'
+            + '<input class="f-in f-phone" type="tel" placeholder="WhatsApp / phone number" autocomplete="tel" inputmode="numeric" maxlength="14">'
+            + '<span class="f-err e-phone">Enter a valid 10-digit Indian mobile number</span>'
+            /* ---- OTP VERIFICATION UI DISABLED (keep for future use) ----
+               The standalone phone input above replaces the otp-wrap row below.
             + '<div class="otp-wrap">'
             + '<input class="f-in f-phone" type="tel" placeholder="WhatsApp / phone number" autocomplete="tel" inputmode="numeric" maxlength="14" style="flex: 1; min-width: 0;">'
             + '<button type="button" class="btn btn-otp-send send-otp-btn">Send OTP</button>'
@@ -5091,6 +5099,7 @@
             + '</div>'
             + '<span class="f-err e-otp">Invalid OTP</span>'
             + '<div class="otp-success-badge e-otp-success">✓ Phone number verified successfully</div>'
+               ---- end OTP UI ---- */
             + '<input class="f-in f-email" type="email" placeholder="Email address" autocomplete="email"><span class="f-err e-email">Enter a valid email</span>'
             + '<select class="f-in f-state" name="state" required><option value="" disabled selected>State</option></select><span class="f-err e-state">Please select your state</span>'
             + '<select class="f-in f-city" name="city" required><option value="" disabled selected>City</option></select><span class="f-err e-city">Please select your city</span>'
@@ -5158,6 +5167,7 @@
             });
           });
 
+          /* ---- OTP VERIFICATION LOGIC DISABLED (keep for future use) ----
           // OTP Logic
           state.isPhoneVerified = false;
           var sendOtpBtn = host.querySelector('.send-otp-btn');
@@ -5250,6 +5260,7 @@
               if (!state.isPhoneVerified) verifyOtpBtn.textContent = 'Verify';
             });
           }
+          ---- end OTP logic ---- */
 
           var fn = host.querySelector('.f-name');
           if (fn) fn.focus();
@@ -5301,9 +5312,11 @@
           } else if (!/^[6-9]\d{9}$/.test(phone)) {
             err('phone', true, 'Enter a valid 10-digit Indian mobile number');
             ok = false;
+            /* ---- OTP GATE DISABLED (keep for future use) ----
           } else if (CONFIG.OTP_MODE !== 'off' && !state.isPhoneVerified) {
             err('phone', true, 'Please verify your mobile number with OTP first.');
             ok = false;
+               ---- end OTP gate ---- */
           } else {
             err('phone', false);
           }
@@ -5403,8 +5416,10 @@
             if (nameInp) nameInp.value = '';
             if (phoneInp) {
               phoneInp.value = '';
+              /* ---- OTP disabled: phone is never locked, nothing to restore ----
               phoneInp.disabled = false;
               phoneInp.style.backgroundColor = '';
+                 ---- end OTP ---- */
             }
             if (emailInp) emailInp.value = '';
             if (stateInp) stateInp.value = '';
@@ -5412,9 +5427,11 @@
               cityInp.innerHTML = '<option value="" disabled selected>City</option>';
               cityInp.value = '';
             }
+            if (webInp) webInp.value = '';
+
+            /* ---- OTP VERIFICATION RESET DISABLED (keep for future use) ----
             var otpInp = host.querySelector('.f-otp');
             if (otpInp) otpInp.value = '';
-            if (webInp) webInp.value = '';
 
             // 2. Remove that green text box with phone number verified
             var eOtpSuccess = host.querySelector('.e-otp-success');
@@ -5434,11 +5451,12 @@
               verifyOtpBtn.textContent = 'Verify OTP';
               verifyOtpBtn.disabled = false;
             }
+            state.isPhoneVerified = false;
+               ---- end OTP reset ---- */
 
             // 4. Reset internal state flags & clear error states
-            state.isPhoneVerified = false;
             state.submitted = false;
-            ['name', 'phone', 'otp', 'email', 'state', 'city'].forEach(function (k) {
+            ['name', 'phone', /* 'otp', */ 'email', 'state', 'city'].forEach(function (k) {
               err(k, false);
             });
 
