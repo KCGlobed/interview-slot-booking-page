@@ -5167,6 +5167,84 @@
             });
           });
 
+          /* ---- ABANDONED-LEAD CAPTURE ----
+             Fires the moment name + a 10-digit mobile are both filled - the user
+             does not have to leave the field. Any country code / trunk prefix
+             (+91, 91, 0091, 0 ...) is dropped and only the last 10 digits are sent.
+             It fires a short moment after the last keystroke (see abSettleMs)
+             so a half-typed country code is never posted as the number.
+             Email is sent along only if it is already filled and valid.
+             The same name + email + phone combination is never posted twice. */
+          var abName = host.querySelector('.f-name');
+          var abPhone = host.querySelector('.f-phone');
+          var abTimer = null;
+
+          /* digits only, country code stripped -> last 10 digits */
+          function abNormPhone(raw) {
+            var d = (raw || '').replace(/\D/g, '');
+            return d.length > 10 ? d.slice(-10) : d;
+          }
+
+          /* true once the number is complete enough to post */
+          function abPhoneReady(raw) {
+            var d = (raw || '').replace(/\D/g, '');
+            /* a leading '+' means a country code is still being typed - wait for it */
+            if (/^\s*\+/.test(raw || '') && d.length <= 10) return false;
+            return /^[6-9]\d{9}$/.test(abNormPhone(raw));
+          }
+
+          function triggerAbandonment() {
+            if (abTimer) { clearTimeout(abTimer); abTimer = null; }
+            if (!abName || !abPhone || state.submitted) return;
+
+            var aName = abName.value.trim();
+            if (aName.length < 3 || !abPhoneReady(abPhone.value)) return;
+            var aPhone = abNormPhone(abPhone.value);         /* last 10 digits only */
+
+            var abEmailEl = host.querySelector('.f-email');
+            var aEmail = abEmailEl ? abEmailEl.value.trim() : '';
+            if (aEmail && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(aEmail)) aEmail = '';
+
+            /* Prevent duplicate calls for the same value */
+            var currentData = aName + '-' + aEmail + '-' + aPhone;
+            if (state.lastAbandonmentData === currentData) return;
+            state.lastAbandonmentData = currentData;
+
+            var abBaseUrl = window.GCC_Base_url || API_BASE;
+            fetch(abBaseUrl + '/api/career/createabondantform', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify(Object.assign({
+                full_name: aName,
+                email: aEmail,
+                phone: aPhone,
+                source: CONFIG.SOURCE_ID || 15,
+                source_form: 1
+              }, getLeadTracking()))
+            }).catch(function (e) { console.warn('[Abandonment] Error:', e); });
+          }
+
+          /* How long to wait after the last keystroke. A bare 10-digit value that
+             starts with '91' is ambiguous - it may be a real number (9198765432)
+             or a country code mid-type (919876543210) - so those get a longer
+             window; everything else fires almost immediately. */
+          function abSettleMs() {
+            var d = (abPhone ? abPhone.value : '').replace(/\D/g, '');
+            return (d.length === 10 && d.indexOf('91') === 0) ? 1500 : 400;
+          }
+
+          /* re-check once typing stops, so it fires without losing focus */
+          function abQueue() {
+            if (abTimer) clearTimeout(abTimer);
+            abTimer = setTimeout(triggerAbandonment, abSettleMs());
+          }
+
+          [abName, abPhone].forEach(function (inp) {
+            if (!inp) return;
+            inp.addEventListener('input', abQueue);
+            inp.addEventListener('blur', triggerAbandonment);   /* safety net */
+          });
+
           /* ---- OTP VERIFICATION LOGIC DISABLED (keep for future use) ----
           // OTP Logic
           state.isPhoneVerified = false;
