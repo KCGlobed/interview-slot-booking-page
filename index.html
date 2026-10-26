@@ -4977,11 +4977,12 @@
         var state = { idx: 0, answers: {}, score: 0, tags: [], started: false, qualifiedFired: false, submitted: false /* , isPhoneVerified: false  -- OTP verification disabled */ };
 
         function setProg() {
+          if (progRow) progRow.style.visibility = 'visible';
           if (tickEl) tickEl.textContent = 'STEP ' + pad2(Math.min(state.idx + 1, TOTAL)) + ' / ' + pad2(TOTAL);
           if (fill) fill.style.width = Math.round((Math.min(state.idx + 1, TOTAL) / TOTAL) * 100) + '%';
         }
 
-        /* Step 0 — notice the candidate must agree to before the questions start */
+        /* ---- NOTICE SCREEN (STEP 0) - DISABLED (Uncomment to re-enable) ----
         function renderNotice() {
           if (progRow) progRow.style.visibility = 'hidden';
           host.innerHTML = '<div class="step">'
@@ -5003,6 +5004,7 @@
             renderChoice();
           });
         }
+        ---- END NOTICE SCREEN ---- */
 
         function renderChoice() {
           var q = QUESTIONS[state.idx];
@@ -5015,7 +5017,8 @@
             html += '<button type="button" class="opt" role="radio" aria-checked="false" data-i="' + i + '"><span class="ring" aria-hidden="true"></span><span>' + esc(o.v) + '</span></button>';
           });
           html += '</div><div class="step-foot">'
-            + '<button type="button" class="back-lk back-btn">← Back</button>'
+            + (state.idx > 0 ? '<button type="button" class="back-lk back-btn">← Back</button>' : '<span></span>')
+            /* + '<button type="button" class="back-lk back-btn">← Back</button>' // Re-enable if notice screen is active */
             + '<span class="secure">🔒 Free · 60 sec</span></div></div>';
           host.innerHTML = html;
           setProg();
@@ -5043,7 +5046,12 @@
           }, 240);
         }
 
-        function goBack() { if (state.idx > 0) { state.idx--; renderChoice(); } else { renderNotice(); } }
+        function goBack() {
+          if (state.idx > 0) {
+            state.idx--;
+            renderChoice();
+          } /* else { renderNotice(); } // Re-enable if notice screen is active */
+        }
 
         /* Interstitial notice shown when a working professional is selected at the status step */
         function renderWorkingNotice() {
@@ -5567,8 +5575,14 @@
             + '<button type="button" class="sub-btn btn-amber thankyou-ok-btn" style="margin-top:18px">Got it</button></div>';
           var okBtn = host.querySelector('.thankyou-ok-btn');
           if (okBtn) okBtn.addEventListener('click', function () {
+            state.idx = 0;
+            state.answers = {};
+            state.score = 0;
+            state.tags = [];
+            state.started = false;
             if (progRow) progRow.style.visibility = 'visible';
-            renderNotice();
+            renderChoice();
+            // renderNotice(); // Re-enable if notice screen is active
           });
         }
 
@@ -5592,7 +5606,8 @@
           var bar = document.getElementById('mbar'); if (bar) bar.classList.remove('show'); window.__leadDone = true;
         }
 
-        renderNotice();
+        // renderNotice(); // Re-enable to show notice screen (step 0) first
+        renderChoice();
       }
     })();
 
