@@ -4725,6 +4725,16 @@
       };
     }
 
+    /* utm_medium -> program id sent with the lead. Matching is case-insensitive;
+       a missing or unrecognised medium falls back to 1 (AEUAP). utm_medium is
+       resolved the same way as the rest of the payload: current URL first, then
+       the 30-day stored value. */
+    var PROGRAM_BY_MEDIUM = { AEUAP: 1, AEUTP: 2, AEIAP: 3 };
+    function getProgramId() {
+      var m = getTrackingParams().utm_medium || '';
+      return PROGRAM_BY_MEDIUM[m.trim().toUpperCase()] || 1;
+    }
+
     /* ════════════════ MEDIA HYDRATION (placeholders → real media) ════════════════ */
     (function () {
       function ytId(u) {
@@ -5477,7 +5487,7 @@
             state: stateSel,
             city: city,
             source: CONFIG.SOURCE_ID || 15,
-            program: 1,
+            program: getProgramId(),
             degree: state.answers.education || "",
             age_range: state.answers.age_band || "",
             degree_stage: state.answers.status || "",
