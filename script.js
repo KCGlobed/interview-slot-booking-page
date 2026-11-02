@@ -157,7 +157,7 @@ if (document.readyState === 'loading') {
 /* ════════════════ CONFIG ════════════════
    Drive deadline drives every countdown on the page.
    Change DEADLINE to your real cut-off (local time). */
-var DEADLINE = new Date('2026-08-31T23:59:59+05:30').getTime();
+var DEADLINE = new Date('2026-11-07T23:59:59+05:30').getTime();
 
 /* ════════════════ COUNTDOWN ════════════════ */
 (function () {
@@ -204,7 +204,7 @@ var DEADLINE = new Date('2026-08-31T23:59:59+05:30').getTime();
     var activeSlotData = [];
     var activeFormElement = null;
     var activeSuccessElement = null;
-    var calendarCurrentDate = new Date(2026, 6, 1); // Start at June 2026
+    var calendarCurrentDate = new Date(2026, 11, 7); // Start at June 2026
     var selectedDateStr = null;
 
     var calModal = document.getElementById('calendar-modal');
@@ -292,7 +292,7 @@ var DEADLINE = new Date('2026-08-31T23:59:59+05:30').getTime();
 
             var isPast = cellDate < today;
 
-            var maxDate = new Date(2026, 7, 31); // August 31, 2026
+            var maxDate = new Date(2026, 11, 7); // August 31, 2026
             maxDate.setHours(0, 0, 0, 0);
             var isAfterMax = cellDate > maxDate;
 
