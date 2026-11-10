@@ -157,7 +157,7 @@ if (document.readyState === 'loading') {
 /* ════════════════ CONFIG ════════════════
    Drive deadline drives every countdown on the page.
    Change DEADLINE to your real cut-off (local time). */
-var DEADLINE = new Date('2026-11-07T23:59:59+05:30').getTime();
+var DEADLINE = new Date('2026-11-21T23:59:59+05:30').getTime();
 
 /* ════════════════ COUNTDOWN ════════════════ */
 (function () {
