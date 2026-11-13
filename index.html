@@ -5541,6 +5541,11 @@
 
             // 5. Show Thank You message inside the form (replaces step + fields)
             renderThankYou();
+
+            // 6. Redirect to thank-you page; short delay lets Pixel/GA/GTM beacons flush
+            setTimeout(function () {
+              window.location.href = 'thankyou.html?id=' + encodeURIComponent(leadId);
+            }, 600);
           }
 
           fetch(baseUrl + '/api/career/createdossiercustomform', {
@@ -5863,6 +5868,10 @@
         closeCalendarPopup();
         trk('Schedule', { content_name: CONFIG.DRIVE_LABEL, interview_date: ymd }, true);
         trk('SlotBooked', { interview_date: ymd });
+
+        // Redirect to thank-you page; short delay lets Pixel/GA/GTM beacons flush
+        var tyUrl = 'thankyou.html?id=' + encodeURIComponent(activeLeadAppId || '') + '&date=' + encodeURIComponent(dateStr || '');
+        setTimeout(function () { window.location.href = tyUrl; }, 600);
 
         if (activeDoneCallback) {
           activeDoneCallback(activeLeadAppId, '', dateStr);
