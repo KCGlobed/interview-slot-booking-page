@@ -5100,7 +5100,8 @@
             + '<input class="f-in f-name" type="text" placeholder="Full name" autocomplete="name"><span class="f-err e-name">Please enter your full name</span>'
             + '<div class="otp-wrap">'
             + '<input class="f-in f-phone" type="tel" placeholder="WhatsApp / phone number" autocomplete="tel" inputmode="numeric" maxlength="14" style="flex: 1; min-width: 0;">'
-            + '<button type="button" class="btn btn-otp-send send-otp-btn">Send OTP</button>'
+            // TEMP: Send OTP button disabled — submit allowed without OTP verification
+            // + '<button type="button" class="btn btn-otp-send send-otp-btn">Send OTP</button>'
             + '</div>'
             + '<span class="f-err e-phone">Enter a valid 10-digit Indian mobile number</span>'
             + '<div class="otp-wrap otp-section" style="display: none; margin-top: 4px;">'
@@ -5397,9 +5398,10 @@
           } else if (!/^[6-9]\d{9}$/.test(phone)) {
             err('phone', true, 'Enter a valid 10-digit Indian mobile number');
             ok = false;
-          } else if (CONFIG.OTP_MODE !== 'off' && !state.isPhoneVerified) {
-            err('phone', true, 'Please verify your mobile number with OTP first.');
-            ok = false;
+          // TEMP: OTP verification gate disabled — re-enable when SMS gateway is fixed
+          // } else if (CONFIG.OTP_MODE !== 'off' && !state.isPhoneVerified) {
+          //   err('phone', true, 'Please verify your mobile number with OTP first.');
+          //   ok = false;
           } else {
             err('phone', false);
           }
