@@ -3,6 +3,7 @@
 #   <title>, meta description, hero kicker, hero <h1>, hero offer line, hero CTA label.
 # Everything else stays byte-identical. Re-run after editing index.html:
 #   powershell -ExecutionPolicy Bypass -File landing-pages\build.ps1
+# It also copies style.css and state-city.js into index.html, so re-run it after editing those too.
 $ErrorActionPreference = 'Stop'
 $here = Split-Path -Parent $MyInvocation.MyCommand.Path
 $root = Split-Path -Parent $here
@@ -19,6 +20,23 @@ function Replace-Once([string]$text, [string]$pattern, [string]$value, [string]$
   return $rx.Replace($text, $eval, 1)
 }
 function Attr([string]$s) { return $s.Replace('&', '&amp;').Replace('"', '&quot;') }
+
+# Copy style.css and state-city.js into index.html (into the <style data-inline> / <script data-inline>
+# placeholders). The server gzips HTML but not .css/.js, and this also removes two render-blocking
+# requests. style.css and state-city.js stay the files to edit; re-run this script afterwards.
+function Inline-File([string]$text, [string]$tag, [string]$name) {
+  $body = [IO.File]::ReadAllText((Join-Path $root $name), $utf8).Trim()
+  if ($body -match "</$tag") { throw "$name contains </$tag and cannot be inlined" }
+  $p = '(<' + $tag + ' data-inline="' + [regex]::Escape($name) + '">).*?(</' + $tag + '>)'
+  return Replace-Once $text $p ("`r`n" + $body + "`r`n  ") "inline $name"
+}
+$inlined = Inline-File $src 'style' 'style.css'
+$inlined = Inline-File $inlined 'script' 'state-city.js'
+if ($inlined -ne $src) {
+  $src = $inlined
+  [IO.File]::WriteAllText((Join-Path $root 'index.html'), $src, $utf8)
+  Write-Host 'Updated the inlined style.css / state-city.js in index.html'
+}
 
 # Regions that are allowed to differ (used for both generating and verifying)
 $P_TITLE  = '(<title>).*?(</title>)'
