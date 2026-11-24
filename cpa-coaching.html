@@ -4510,7 +4510,7 @@
     <div class="wrap">
       <div class="final-grid">
         <div class="final-copy">
-          <div class="final-badge">Hiring closes in<span data-deadline-text>21ST NOVEMBER 2026</span></div>
+          <div class="final-badge">Hiring closes in<span data-deadline-text>30TH NOVEMBER 2026</span></div>
           <h2 class="final-title" id="final-h2">
             Batch 1 got hired.<br>
             <span class="hl-amber">Batch 2 is your turn.</span>
@@ -4530,7 +4530,7 @@
             <div class="app-card">
               <div class="app-head">
                 <div class="k"><span data-drive-label>AEUAP BATCH HIRING DRIVE · FREE APPLICATION</span></div>
-                <div class="t">4 quick steps · interview call within 24 hours</div>
+                <div class="t">Takes 30 seconds · interview call within 24 hours</div>
               </div>
               <div class="app-body">
                 <div class="prog prog-row">
@@ -4600,8 +4600,8 @@
     ═══════════════════════════════════════════════════════════════ */
     var CONFIG = {
       PROGRAM: 'AEUAP',
-      DEADLINE: '2026-11-21T23:59:59+05:30',           // drive close (IST) - also caps the interview calendar
-      DEADLINE_TEXT: '21st November 2026',               // human-readable close date
+      DEADLINE: '2026-11-30T23:59:59+05:30',           // drive close (IST) - also caps the interview calendar
+      DEADLINE_TEXT: '30th November 2026',               // human-readable close date
       DRIVE_LABEL: 'AEUAP Batch Hiring Drive',        // shown in strip, form header, tracking
       SEATS_LEFT: '',                                   // e.g. '40'. Empty = seats line hidden (never fake this)
       WHATSAPP: '',                                     // e.g. '919876543210'. Empty = WhatsApp button hidden
@@ -5120,11 +5120,13 @@
             + '<button type="button" class="form-btn btn-amber submit-btn" style="width:100%;margin-top:4px">Book Interview Slot →</button>'
             + '</div>'
             + '<p class="consent">By submitting, you agree to be contacted by GCC School about this drive via call, WhatsApp and email.</p>'
-            + '<div class="step-foot"><button type="button" class="back-lk back-btn">← Back</button><span class="secure">🔒 Your details stay private</span></div>'
+            + '<div class="step-foot" style="justify-content:center"><span class="secure">🔒 Your details stay private</span></div>'
             + '</form>'
             + '<div class="form-success-dummy" style="display:none; text-align:center; padding: 20px;"><div class="state-ic ok" style="margin: 0 auto 16px; width:64px; height:64px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:29px; background:var(--green); color:#fff;">✓</div><h3 style="font-size:21px;font-weight:800;color:var(--ink);margin-bottom:9px;">Application Submitted</h3><p style="font-size:14px;color:var(--ink-2);line-height:1.65;max-width:340px;margin:0 auto;"></p></div>'
             + '</div>';
-          host.innerHTML = html; setProg();
+          host.innerHTML = html;
+          if (progRow) progRow.style.display = 'none';
+          host.addEventListener('focusin', function () { if (!state.started) { state.started = true; trk('StartApplication', { content_name: CONFIG.DRIVE_LABEL }); } });
 
           var stateEl = host.querySelector('.f-state');
           var cityEl = host.querySelector('.f-city');
@@ -5581,8 +5583,7 @@
             state.tags = [];
             state.started = false;
             if (progRow) progRow.style.visibility = 'visible';
-            renderChoice();
-            // renderNotice(); // Re-enable if notice screen is active
+            renderContact();
           });
         }
 
@@ -5606,8 +5607,8 @@
           var bar = document.getElementById('mbar'); if (bar) bar.classList.remove('show'); window.__leadDone = true;
         }
 
-        // renderNotice(); // Re-enable to show notice screen (step 0) first
-        renderChoice();
+        // SINGLE-STEP FORM: quiz steps skipped, open directly on the contact form
+        renderContact();
       }
     })();
 
