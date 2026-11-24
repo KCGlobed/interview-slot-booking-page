@@ -10654,6 +10654,22 @@ window.STATE_CITY_DATA = {
       var appCards = document.querySelectorAll('.app-card');
       if (!appCards.length) return;
 
+      /* SINGLE-STEP MODE: visitors arriving with utm_source=google (Google Ads) skip the
+         quiz and get the contact form directly. Remembered for the browser session so a
+         reload or in-page navigation keeps the same form. Everyone else gets the multi-step form. */
+      var SINGLE_STEP = (function () {
+        var src = (new URLSearchParams(location.search).get('utm_source') || '').trim().toLowerCase();
+        try {
+          if (src) sessionStorage.setItem('gcc_single_step', src === 'google' ? '1' : '0');
+          return src ? src === 'google' : sessionStorage.getItem('gcc_single_step') === '1';
+        } catch (e) { return src === 'google'; }
+      })();
+      if (SINGLE_STEP) {
+        document.querySelectorAll('.app-head .t').forEach(function (t) {
+          if (/quick steps/i.test(t.textContent)) t.textContent = 'Takes 30 seconds · interview call within 24 hours';
+        });
+      }
+
       var QUESTIONS = [
         {
           id: 'education', kicker: 'Eligibility check 1 of 2', title: 'What is your highest education?',
@@ -10863,11 +10879,19 @@ window.STATE_CITY_DATA = {
             + '<button type="button" class="form-btn btn-amber submit-btn" style="width:100%;margin-top:4px">Book Interview Slot →</button>'
             + '</div>'
             + '<p class="consent">By submitting, you agree to be contacted by GCC School about this drive via call, WhatsApp and email.</p>'
-            + '<div class="step-foot"><button type="button" class="back-lk back-btn">← Back</button><span class="secure">🔒 Your details stay private</span></div>'
+            + (SINGLE_STEP
+              ? '<div class="step-foot" style="justify-content:center"><span class="secure">🔒 Your details stay private</span></div>'
+              : '<div class="step-foot"><button type="button" class="back-lk back-btn">← Back</button><span class="secure">🔒 Your details stay private</span></div>')
             + '</form>'
             + '<div class="form-success-dummy" style="display:none; text-align:center; padding: 20px;"><div class="state-ic ok" style="margin: 0 auto 16px; width:64px; height:64px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:29px; background:var(--green); color:#fff;">✓</div><h3 style="font-size:21px;font-weight:800;color:var(--ink);margin-bottom:9px;">Application Submitted</h3><p style="font-size:14px;color:var(--ink-2);line-height:1.65;max-width:340px;margin:0 auto;"></p></div>'
             + '</div>';
-          host.innerHTML = html; setProg();
+          host.innerHTML = html;
+          if (SINGLE_STEP) {
+            if (progRow) progRow.style.display = 'none';
+            host.addEventListener('focusin', function () { if (!state.started) { state.started = true; trk('StartApplication', { content_name: CONFIG.DRIVE_LABEL }); } });
+          } else {
+            setProg();
+          }
 
           var stateEl = host.querySelector('.f-state');
           var cityEl = host.querySelector('.f-city');
@@ -11324,7 +11348,7 @@ window.STATE_CITY_DATA = {
             state.tags = [];
             state.started = false;
             if (progRow) progRow.style.visibility = 'visible';
-            renderChoice();
+            SINGLE_STEP ? renderContact() : renderChoice();
             // renderNotice(); // Re-enable if notice screen is active
           });
         }
@@ -11350,7 +11374,7 @@ window.STATE_CITY_DATA = {
         }
 
         // renderNotice(); // Re-enable to show notice screen (step 0) first
-        renderChoice();
+        SINGLE_STEP ? renderContact() : renderChoice();
       }
     })();
 
