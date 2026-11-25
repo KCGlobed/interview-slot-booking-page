@@ -1,114 +1,99 @@
-name: Deploy Application
+name: Deploy to DigitalOcean
 
+# Runs alongside the AWS workflow (deploy.yml), which is left unchanged.
+# Runs on every push to the digitalocean-deploy branch, or by hand from the Actions tab
+# (the Run workflow button appears once this file is on the default branch).
+# Server setup this relies on: docs/deploy-static-digitalocean.md
 on:
+  workflow_dispatch:
   push:
     branches:
       - main
 
+concurrency:
+  group: deploy-digitalocean-get-hired
+  cancel-in-progress: false
+
+env:
+  APP_DIR: /var/www/apps/get-hired   # releases/ and the "current" symlink live here
+  KEEP_RELEASES: 5                   # older releases are deleted after a deploy
+
 jobs:
-
   deploy:
-
     runs-on: ubuntu-latest
 
     steps:
-
       ######################################################
-      # Checkout
+      # Checkout Repository (uses the built-in GITHUB_TOKEN)
       ######################################################
-
       - name: Checkout Repository
         uses: actions/checkout@v4
 
       ######################################################
-      # Setup Node
+      # Package the site (no build step: the files are served as they are)
       ######################################################
-
-      - name: Setup Node
-        if: hashFiles('package.json') != ''
-        uses: actions/setup-node@v4
-        with:
-          node-version: 22
-
-      ######################################################
-      # Install Dependencies
-      ######################################################
-
-      - name: Install Dependencies
-        if: hashFiles('package.json') != ''
-        run: npm ci
-
-      ######################################################
-      # Build React
-      ######################################################
-
-      - name: Build React
-        if: hashFiles('package.json') != ''
-        run: npm run build
-
-      ######################################################
-      # Package React
-      ######################################################
-
-      - name: Package React
-        if: hashFiles('package.json') != ''
+      - name: Package Site
         run: |
-          ARCHIVE="release_$(date +%Y%m%d_%H%M%S).tar.gz"
+          set -e
+          RELEASE="$(date +%Y%m%d_%H%M%S)"
+          ARCHIVE="release_${RELEASE}.tar.gz"
 
-          tar -czf "$ARCHIVE" \
-            -C dist \
+          # Left out: git data, editor settings, docs, and the landing-page generator
+          # and its keyword map, which are internal and not part of the site
+          tar -czf "$RUNNER_TEMP/$ARCHIVE" \
+            --exclude=./.git \
+            --exclude=./.github \
+            --exclude=./.vscode \
+            --exclude=./docs \
+            --exclude=./landing-pages \
+            --exclude=./landing-pages-map.csv \
+            --exclude='.DS_Store' \
             .
+          mv "$RUNNER_TEMP/$ARCHIVE" .
 
-          echo "ARCHIVE=$ARCHIVE" >> $GITHUB_ENV
-
-      ######################################################
-      # Package Static HTML
-      ######################################################
-
-      - name: Package Static HTML
-        if: hashFiles('package.json') == ''
-        run: |
-          ARCHIVE="release_$(date +%Y%m%d_%H%M%S).tar.gz"
-
-          TEMP_DIR=$(mktemp -d)
-
-          rsync -a \
-            --exclude=".git" \
-            --exclude=".github" \
-            ./ "$TEMP_DIR/"
-
-          tar -czf "$ARCHIVE" \
-            -C "$TEMP_DIR" \
-            .
-
-          rm -rf "$TEMP_DIR"
-
-          echo "ARCHIVE=$ARCHIVE" >> $GITHUB_ENV
+          echo "RELEASE=$RELEASE" >> "$GITHUB_ENV"
+          echo "ARCHIVE=$ARCHIVE" >> "$GITHUB_ENV"
+          ls -lh "$ARCHIVE"
 
       ######################################################
-      # Upload Package
+      # Upload Package to the Droplet
       ######################################################
-
       - name: Copy Package
         uses: appleboy/scp-action@v0.1.7
         with:
-          host: ${{ secrets.SERVER_HOST }}
-          username: ${{ secrets.SERVER_USER }}
-          key: ${{ secrets.SERVER_SSH_KEY }}
-          source: "${{ env.ARCHIVE }}"
-          target: "/var/www/apps/get-hired/releases"
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          password: ${{ secrets.SSH_PASSWORD }}
+          source: ${{ env.ARCHIVE }}
+          target: ${{ env.APP_DIR }}/uploads
 
       ######################################################
-      # Deploy
+      # Activate Release (atomic symlink switch)
       ######################################################
-
-      - name: Trigger Deployment
+      - name: Activate Release
         uses: appleboy/ssh-action@v1.2.2
         with:
-          host: ${{ secrets.SERVER_HOST }}
-          username: ${{ secrets.SERVER_USER }}
-          key: ${{ secrets.SERVER_SSH_KEY }}
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          password: ${{ secrets.SSH_PASSWORD }}
+          envs: APP_DIR,RELEASE,ARCHIVE,KEEP_RELEASES
           script: |
-            /opt/deploy-platform/scripts/deploy.sh \
-              "get-hired" \
-              "${{ env.ARCHIVE }}"
+            set -e
+            TARGET="$APP_DIR/releases/$RELEASE"
+
+            echo "Deploying release $RELEASE"
+            mkdir -p "$TARGET"
+            tar -xzf "$APP_DIR/uploads/$ARCHIVE" -C "$TARGET"
+            rm -f "$APP_DIR/uploads/$ARCHIVE"
+
+            test -f "$TARGET/index.html" || { echo "ERROR: index.html missing in release"; exit 1; }
+
+            # Switch traffic to the new release in one step
+            ln -sfn "$TARGET" "$APP_DIR/current.tmp"
+            mv -Tf "$APP_DIR/current.tmp" "$APP_DIR/current"
+
+            # Keep only the newest releases
+            cd "$APP_DIR/releases"
+            ls -1t | tail -n +$((KEEP_RELEASES + 1)) | xargs -r rm -rf
+
+            echo "Live: $(readlink -f "$APP_DIR/current")"
