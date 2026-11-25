@@ -3,6 +3,19 @@
 
 <head>
   <meta charset="UTF-8">
+  <script>
+    /* URL NORMALIZER — must stay the first script on the page.
+       Links written as /#hiring?utm_source=google put the parameters inside the #fragment,
+       where the browser, Pixel, GA and our lead form cannot see them. Rewrite them to the
+       standard /?utm_source=google#hiring before any tracking runs. */
+    (function () {
+      var h = location.hash || '', i = h.indexOf('?');
+      if (i < 0 || !window.history || !history.replaceState) return;
+      var frag = h.slice(0, i), extra = h.slice(i + 1);
+      var qs = location.search ? location.search + '&' + extra : '?' + extra;
+      history.replaceState(history.state, '', location.pathname + qs + frag);
+    })();
+  </script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <meta name="theme-color" content="#2A0B4E">
   <!-- Performance: open the font connections before the tracking scripts and inline CSS -->
@@ -8425,7 +8438,7 @@ body.modal-open {
   </section>
 
   <!-- ════════════════ HIRING COMPANIES ════════════════ -->
-  <section class="logo-band" aria-labelledby="co-h2">
+  <section id="hiring" class="logo-band" aria-labelledby="co-h2">
     <div class="wrap">
       <div class="logo-head">
         <h2 id="co-h2">Companies interviewing &amp; issuing pre-placement offer</h2>
@@ -8456,7 +8469,7 @@ body.modal-open {
   </section>
 
   <!-- ════════════════ PROOF: BATCH 1 Pre-placement job offer S ════════════════ -->
-  <section class="sec" aria-labelledby="proof-h2">
+  <section id="ppo-offers" class="sec" aria-labelledby="proof-h2">
     <div class="wrap">
       <div class="sec-head">
         <span class="eyebrow live">Founding batch · Pre-placement job offer</span>
@@ -9152,7 +9165,7 @@ body.modal-open {
   </section>
 
   <!-- ════════════════ CAMPUS ════════════════ -->
-  <section class="sec sec-alt" aria-labelledby="campus-h2">
+  <section id="campus" class="sec sec-alt" aria-labelledby="campus-h2">
     <div class="wrap">
       <div class="sec-head">
         <span class="eyebrow">Inside GCC School</span>
@@ -9313,7 +9326,7 @@ body.modal-open {
   </section> -->
 
   <!-- ════════════════ PROGRAM STACK ════════════════ -->
-  <section class="sec" aria-labelledby="stack-h2">
+  <section id="program-details" class="sec" aria-labelledby="stack-h2">
     <div class="wrap">
       <div class="sec-head">
         <span class="eyebrow">Inside AEUAP</span>
@@ -9356,7 +9369,7 @@ body.modal-open {
   </section>
 
   <!-- ════════════════ ELIGIBILITY ════════════════ -->
-  <section class="sec sec-alt" aria-labelledby="elig-h2" style="padding-top:48px;padding-bottom:48px">
+  <section id="eligibility" class="sec sec-alt" aria-labelledby="elig-h2" style="padding-top:48px;padding-bottom:48px">
     <div class="wrap">
       <div class="sec-head">
         <span class="eyebrow">Before you apply</span>
@@ -10654,15 +10667,22 @@ window.STATE_CITY_DATA = {
       var appCards = document.querySelectorAll('.app-card');
       if (!appCards.length) return;
 
-      /* SINGLE-STEP MODE: visitors arriving with utm_source=google (Google Ads) skip the
+      /* SINGLE-STEP MODE: visitors arriving with utm_source=google, or (with no utm_source)
+         a Google Ads click id (gclid / gbraid / wbraid), skip the
          quiz and get the contact form directly. Remembered for the browser session so a
          reload or in-page navigation keeps the same form. Everyone else gets the multi-step form. */
       var SINGLE_STEP = (function () {
-        var src = (new URLSearchParams(location.search).get('utm_source') || '').trim().toLowerCase();
+        var q = new URLSearchParams(location.search);
+        function get(k) { return (q.get(k) || '').trim().toLowerCase(); }
+        var src = get('utm_source');
+        var gClick = !!(get('gclid') || get('gbraid') || get('wbraid'));   /* Google Ads auto-tagging */
+        /* utm_source decides when present; otherwise a Google Ads click id means Google traffic */
+        var isGoogle = src ? src === 'google' : gClick;
+        var known = !!(src || gClick || get('fbclid'));
         try {
-          if (src) sessionStorage.setItem('gcc_single_step', src === 'google' ? '1' : '0');
-          return src ? src === 'google' : sessionStorage.getItem('gcc_single_step') === '1';
-        } catch (e) { return src === 'google'; }
+          if (known) sessionStorage.setItem('gcc_single_step', isGoogle ? '1' : '0');
+          return known ? isGoogle : sessionStorage.getItem('gcc_single_step') === '1';
+        } catch (e) { return isGoogle; }
       })();
       if (SINGLE_STEP) {
         document.querySelectorAll('.app-head .t').forEach(function (t) {
@@ -11662,6 +11682,23 @@ window.STATE_CITY_DATA = {
           activeSuccessElement.style.display = 'block';
         }
       }
+    })();
+
+    /* ════════════════ SITELINK ANCHORS (#hiring, #campus, #ppo-offers, #program-details, #eligibility) ════════════════
+       Lazy-loaded images above a section grow the page after the browser's first jump to the
+       anchor, which can leave the visitor short of the section. Re-align once the page has loaded. */
+    (function () {
+      var IDS = ['hiring', 'campus', 'ppo-offers', 'program-details', 'eligibility'];
+      var h = decodeURIComponent((location.hash || '').slice(1));
+      if (IDS.indexOf(h) < 0) return;
+      if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+      var userMoved = false;   /* stop re-aligning once the visitor scrolls on their own */
+      ['wheel', 'touchstart', 'keydown', 'mousedown'].forEach(function (ev) {
+        window.addEventListener(ev, function () { userMoved = true; }, { passive: true, once: true });
+      });
+      function go() { if (userMoved) return; var el = document.getElementById(h); if (el) el.scrollIntoView({ behavior: 'instant', block: 'start' }); }
+      go();
+      window.addEventListener('load', function () { go(); setTimeout(go, 700); setTimeout(go, 1600); });
     })();
 
     /* ════════════════ CTA LINKS → focus the form ════════════════ */
