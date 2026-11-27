@@ -10439,7 +10439,8 @@ window.STATE_CITY_DATA = {
     /* UTM / click-id persistence (30 days) - mirrors script.js on the live page */
     var TRACKING_KEYS = ['utm_medium', 'utm_source', 'utm_campaign', 'utm_content', 'utm_term', 'utm_id', 'fbc_id', 'utm_adname',
       'campaign_id', 'adset_id', 'fbclid', 'ad_source', 'ad_id', 'utm_adgroupid', 'utm_creativeid', 'utm_matchtype', 'utm_device',
-      'utm_network', 'utm_keyword', 'gad_source', 'gad_campaignid', 'gbraid', 'wbraid', 'gclid'];
+      'utm_network', 'utm_keyword', 'gad_source', 'gad_campaignid', 'gbraid', 'wbraid', 'gclid',
+      'utm_campaign_id', 'utm_adgroup', 'utm_adgroup_id'];
     (function initTracking() {
       var TTL = 30 * 864e5, TS = 'gcc_utm_timestamp', q = new URLSearchParams(location.search), incoming = {}, any = false;
       TRACKING_KEYS.forEach(function (k) { var v = q.get(k); if (v) { incoming[k] = v; any = true; } });
